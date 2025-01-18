@@ -28,7 +28,7 @@ class CHAT:
         pass
 
 class DATA:
-    """ Manage program data (username, date, quotes, etc... """
+    """ Manage program data (username, date, quotes, etc...) """
     def __init__(self):
         pass
 
