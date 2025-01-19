@@ -20,12 +20,14 @@ CHANGELOG:
 
 from datetime import date
 from random import randint
+from nltk.corpus import words
+import random
 
 
 class Games:
     """ Manages playable games """
     def __init__(self):
-        pass
+        self.playing = True
 
     class HiLo:
         """ Class to manage the HiLo game """
@@ -68,8 +70,40 @@ class Games:
     def quiz(self):
         pass
 
-    def hangman(self):
-        pass
+    class Hangman:
+        """ Class to manage the hangman game"""
+        @staticmethod
+        def choose_word():
+            """ Get words from eng dictionary """
+            word = random.choice(Data.english_dict)
+            return word.lower()
+
+        @staticmethod
+        def update_visible(visible: list[str], secret: str, c: str):
+            n = len(secret)
+
+        @staticmethod
+        def print_visible(visible: list[str]):
+            print(" ".join(visible))
+
+        @staticmethod
+        def got_it_right(visible: list[str], secret: str) -> bool:
+            return ''.join(visible) == secret
+
+        @staticmethod
+        def input_letter(prompt: str) -> str:
+            while True:
+                s = input(prompt)
+                if len(s) == 1 and s.isalpha():
+                    return s
+
+        @staticmethod
+        def end_game(visible: list[str], secret: str, attempts: int) -> str:
+            if Games.Hangman.got_it_right(visible, secret):
+                print(f"Congratulations! you guessed the secret in {attempts} '{secret}'!")
+            else:
+                print(f"Sorry, you surpassed the number of attempts. The secret was '{secret}'.")
+
 
     def rock_paper(self):
         pass
@@ -97,6 +131,7 @@ class Data:
     date = date.today()
     quotes = []
     quiz_questions = []
+    english_dict = words.words()
 
     def __init__(self):
         pass
@@ -110,6 +145,9 @@ class Data:
 class UI:
     """ Handles user interaction """
     def __init__(self):
+        pass
+
+    def interpreter(self):
         pass
 
     @staticmethod
