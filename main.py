@@ -19,16 +19,51 @@ CHANGELOG:
 """
 
 from datetime import date
+from random import randint
 
 
-class GAMES:
+class Games:
     """ Manages playable games """
     def __init__(self):
         pass
 
-    def hilo(self):
-        """ High-low game with AI or multiplayer mode """
-        pass
+    class HiLo:
+        """ Class to manage the HiLo game """
+        @staticmethod
+        def initial_request():
+            lo = int(input(f"Think about a number... "))
+            hi = int(input(f"Think about another another number... "))
+            return lo, hi
+
+        @staticmethod
+        def ask(guess: int):
+            attempt = input(f"My guess is {guess}. Is the secret number bigger (>), smaller (<) or equal (=) ? ")
+            return attempt
+
+        @staticmethod
+        def final_message(lo: int, hi: int, attempts: int, guess: int):
+            if lo > hi:
+                print("You're a cheater!")
+            else:
+                print(f"YAY! I won in {attempts} attempts! the secret number was {guess}!")
+
+        @staticmethod
+        def play_hilo_reverse(lo: int, hi: int):
+            Games.HiLo.initial_request()
+            attempts = 0
+            while lo <= hi:
+                guess = randint(lo, hi)
+                attempts += 1
+                response = Games.HiLo.ask(guess)
+                if response == "=":
+                    Games.HiLo.final_message(lo, hi, attempts, guess)
+                    break
+                elif response == ">":
+                    lo = guess + 1
+                elif response == "<":
+                    hi = guess - 1
+                else:
+                    print("Invalid input. Please use only '>', '<', or '='.")
 
     def quiz(self):
         pass
@@ -43,7 +78,7 @@ class GAMES:
         pass
 
 
-class CHAT:
+class Chat:
     """ AI chatbot """
     def __init__(self):
         pass
@@ -55,11 +90,13 @@ class CHAT:
         chat = input("Hello! How can I be of help?")
 
 
-class DATA:
+class Data:
     """ Manage program data (username, date, quotes, etc...) """
 
     # Variables shared by all methods
     date = date.today()
+    quotes = []
+    quiz_questions = []
 
     def __init__(self):
         pass
@@ -77,10 +114,10 @@ class UI:
 
     @staticmethod
     def main():
-        print("Welcome to Orpheus AI!")
-        games = GAMES()
-        chat = CHAT()
-        data = DATA()
+        print("Orpheus AI!")
+        games = Games()
+        chat = Chat()
+        data = Data()
         pass
 
 
