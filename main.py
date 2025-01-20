@@ -20,7 +20,6 @@ CHANGELOG:
 """
 
 from datetime import date
-from random import randint
 from nltk.corpus import words
 import random
 
@@ -69,7 +68,7 @@ class Games:
             attempts = 0
 
             while lo <= hi:
-                guess = randint(lo, hi)
+                guess = random.randint(lo, hi)
                 attempts += 1
                 response = Games.HiLo.ask(guess)
 
