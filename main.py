@@ -15,6 +15,7 @@ Comments:
 CHANGELOG:
 18/01/2025 Criação das classes GAMES, CHAT, DATA e UI
 19/01/2025 Implementação das funções dos jogos
+20/01/2025 Criação do jogo hangman e update em algumas classes
 ======================================================
 """
 
@@ -28,37 +29,52 @@ class Games:
     """ Manages playable games """
     def __init__(self):
         self.playing = True
+        self.ai_score = 0
+        self.player_score = 0
 
     class HiLo:
         """ Class to manage the HiLo game """
+        def __init__(self, games: "Games"):
+            self.games = games
+
         @staticmethod
         def initial_request():
+            """ Takes the range numbers as input from user about
+                RPre-condition: Hi > Lo"""
             lo = int(input(f"Think about a number... "))
-            hi = int(input(f"Think about another another number... "))
-            return lo, hi
+            hi = int(input(f"Think about another number... "))
+            if lo > hi:
+                print("The lower bound can't be greater than the higher bound!")
+            else:
+                return lo, hi
 
         @staticmethod
         def ask(guess: int):
             attempt = input(f"My guess is {guess}. Is the secret number bigger (>), smaller (<) or equal (=) ? ")
             return attempt
 
-        @staticmethod
-        def final_message(lo: int, hi: int, attempts: int, guess: int):
+        def final_message(self, lo, hi, attempts, guess):
             if lo > hi:
                 print("You're a cheater!")
+                self.games.player_score =- 1
+                print(f"Your score: {self.games.player_score}")
             else:
                 print(f"YAY! I won in {attempts} attempts! the secret number was {guess}!")
+                self.games.ai_score =+ 1
+                print(f"AI score: {self.games.ai_score}")
 
-        @staticmethod
-        def play_hilo_reverse(lo: int, hi: int):
-            Games.HiLo.initial_request()
+        def play_hilo_reverse(self):
+            """ Function to play high-low game"""
+            lo, hi = self.initial_request()
             attempts = 0
+
             while lo <= hi:
                 guess = randint(lo, hi)
                 attempts += 1
                 response = Games.HiLo.ask(guess)
+
                 if response == "=":
-                    Games.HiLo.final_message(lo, hi, attempts, guess)
+                    self.final_message(lo, hi, attempts, guess)
                     break
                 elif response == ">":
                     lo = guess + 1
@@ -67,11 +83,12 @@ class Games:
                 else:
                     print("Invalid input. Please use only '>', '<', or '='.")
 
-    def quiz(self):
-        pass
+    class Quiz:
+        print("ola")
 
     class Hangman:
         """ Class to manage the hangman game"""
+
         @staticmethod
         def choose_word():
             """ Get words from eng dictionary """
@@ -98,18 +115,46 @@ class Games:
                     return s
 
         @staticmethod
-        def end_game(visible: list[str], secret: str, attempts: int) -> str:
+        def end_game(visible: list[str], secret: str, attempts: int):
             if Games.Hangman.got_it_right(visible, secret):
                 print(f"Congratulations! you guessed the secret in {attempts} '{secret}'!")
             else:
                 print(f"Sorry, you surpassed the number of attempts. The secret was '{secret}'.")
 
+    class RPS:
+        """ Class to manage them game rock paper and scissors"""
 
-    def rock_paper(self):
-        pass
+        def __init__(self, games: "Games"):
+            self.games = games
 
-    def word_scramble(self):
-        pass
+        moves = ["Rock", "Paper", "Scissors"]
+
+        @staticmethod
+        def move():
+            return random.choice(Games.RPS.moves)
+
+        def rock_paper_scissors(self):
+            play = input("Rock, paper or scissors? ")
+            if play not in Games.RPS.moves:
+                print("Invalid move!")
+            else:
+                ai = Games.RPS.move()
+                print(f"AI played: {ai}")
+                if ai == play:
+                    print("It's a tie!")
+                elif (ai == "Rock" and play == "Paper") or \
+                        (ai == "Paper" and play == "Scissors") or \
+                        (ai == "Scissors" and play == "Rock"):
+                    print("You won!")
+                    self.games.player_score += 1
+                else:
+                    print("You lost!")
+                    self.games.ai_score += 1
+
+                print(f"Score: You {self.games.player_score} - {self.games.ai_score} AI")
+
+        class WordScramble:
+            print("oi")
 
 
 class Chat:
