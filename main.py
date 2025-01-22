@@ -306,16 +306,19 @@ class UI:
         Chat.typing_effect("Orpheus AI", delay=0.1 / 1.5)
 
         while True:
-            user_input = input(">")
+            user_input = input("> ")
+            user_input.lower()
             match user_input:
                 case "games":
                     Chat.typing_effect("Games", delay=0.1 / 1.5)
                 case "chat":
                     Chat.typing_effect("Chat", delay=0.1 / 1.5)
-                case "Exit":
+                case "exit":
+                    Chat.typing_effect("Thanks for using our AI.", delay=0.1 / 1.5)
                     break
                 case _:
-                    Chat.typing_effect("Unkown command.", delay=0.1 / 1.5)
+                    Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
-UI.main()
+Main_function = UI()
+Main_function.main()
 
