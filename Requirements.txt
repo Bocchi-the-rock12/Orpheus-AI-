@@ -1,2 +1,3 @@
 nltk
+nltk.corpus
 rich
