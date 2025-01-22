@@ -21,7 +21,7 @@ CHANGELOG:
 """
 
 from datetime import date
-from nltk.corpus import words
+import nltk
 import random
 import time
 from rich.console import Console
@@ -278,7 +278,11 @@ class Data:
         }
     }
 
-    english_dict = words.words()
+    try:
+        nltk.data.find('corpora/words.zip')
+    except LookupError:
+        print("Downloading NLTK words corpus...")
+        nltk.download('words')
 
     def __init__(self):
         pass
