@@ -291,21 +291,31 @@ class Data:
 
 class UI:
     """ Handles user interaction """
+
     def __init__(self):
-        pass
+        self.chat_instance = Chat()
+        self.games = Games()
+        self.chat = Chat()
+        self.data = Data()
 
     def interpreter(self):
         pass
 
-    @staticmethod
-    def main():
-        chat_instance = Chat()
-        games = Games()
-        chat = Chat()
-        data = Data()
-        Chat.typing_effect(Data.welcoming_message, delay=0.1/1.5)
-        Chat.typing_effect("Orpheus AI", delay=0.1/1.5)
+    def main(self):
+        Chat.typing_effect(self.data.welcoming_message, delay=0.1 / 1.5)
+        Chat.typing_effect("Orpheus AI", delay=0.1 / 1.5)
 
+        while True:
+            user_input = input(">")
+            match user_input:
+                case "games":
+                    Chat.typing_effect("Games", delay=0.1 / 1.5)
+                case "chat":
+                    Chat.typing_effect("Chat", delay=0.1 / 1.5)
+                case "Exit":
+                    break
+                case _:
+                    Chat.typing_effect("Unkown command.", delay=0.1 / 1.5)
 
 UI.main()
 
