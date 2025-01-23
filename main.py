@@ -94,7 +94,12 @@ class Games:
         @staticmethod
         def choose_word():
             """ Get a random word from the NLTK English words corpus """
-            pass
+            f = open("words.txt", mode="r", encoding="utf-8")
+            content = f.read()
+            words = []
+            for lines in content:
+                words.append(content)
+            return words
 
         @staticmethod
         def update_visible(visible: list[str], secret: str, c: str):
