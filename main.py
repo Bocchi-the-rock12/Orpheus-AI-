@@ -21,7 +21,6 @@ CHANGELOG:
 """
 
 from datetime import date
-import nltk
 import random
 import time
 from rich.console import Console
@@ -94,9 +93,8 @@ class Games:
 
         @staticmethod
         def choose_word():
-            """ Get words from eng dictionary """
-            word = random.choice(Data.english_dict)
-            return word.lower()
+            """ Get a random word from the NLTK English words corpus """
+            pass
 
         @staticmethod
         def update_visible(visible: list[str], secret: str, c: str):
@@ -278,12 +276,6 @@ class Data:
         }
     }
 
-    try:
-        nltk.data.find('corpora/words.zip')
-    except LookupError:
-        print("Downloading NLTK words corpus...")
-        nltk.download('words')
-
     def __init__(self):
         pass
 
@@ -307,7 +299,6 @@ class UI:
 
     def main(self):
         Chat.typing_effect(self.data.welcoming_message, delay=0.1 / 1.5)
-        Chat.typing_effect("Orpheus AI", delay=0.1 / 1.5)
 
         while True:
             user_input = input("> ")
