@@ -17,6 +17,7 @@ CHANGELOG:
 19/01/2025 Implementação das funções dos jogos
 20/01/2025 Criação do jogo hangman e update em algumas classes
 22/01/2025 Adicionada a função para efeitos de texto
+24/01/2025 Modificado o jogo da forca e criadas funções para interpretar comandos
 ======================================================
 """
 
@@ -41,13 +42,14 @@ class Games:
         @staticmethod
         def initial_request():
             """ Takes the range numbers as input from user about
-                Pre-condition: Hi > Lo"""
-            lo = int(input(f"Think about a number... "))
-            hi = int(input(f"Think about another number... "))
-            if lo > hi:
-                Chat.typing_effect("The lower bound can't be greater than the higher bound!", delay=0.2)
-            else:
-                return lo, hi
+                Pre-condition: Hi > Lo """
+            while True:
+                lo = int(input(f"Think about a number... "))
+                hi = int(input(f"Think about another number... "))
+                if lo > hi:
+                    Chat.typing_effect("The lower bound can't be greater than the higher bound!", delay=0.2)
+                else:
+                    return lo, hi
 
         @staticmethod
         def ask(guess: int):
@@ -90,20 +92,21 @@ class Games:
 
     class Hangman:
         """ Class to manage the hangman game"""
-
         @staticmethod
         def choose_word():
-            """ Get a random word from the NLTK English words corpus """
-            f = open("words.txt", mode="r", encoding="utf-8")
-            content = f.read()
+            """ Get a random word from the word file """
             words = []
-            for lines in content:
-                words.append(content)
-            return words
+            with open("words.txt", mode="r", encoding="utf-8") as f:
+                content = f.readlines()
+            for line in content:
+                words.append(line.strip())
+            return random.choice(words)
 
         @staticmethod
         def update_visible(visible: list[str], secret: str, c: str):
-            n = len(secret)
+            for i in range(len(secret)):
+                if secret[i] == c:
+                    visible[i] = c
 
         @staticmethod
         def print_visible(visible: list[str]):
@@ -126,6 +129,45 @@ class Games:
                 Chat.typing_effect(f"Congratulations! You guessed the secret in {attempts} attempts: '{secret}'!", delay=0.2)
             else:
                 Chat.typing_effect(f"Sorry, you surpassed the number of attempts. The secret was '{secret}'.", delay=0.2)
+
+        @staticmethod
+        def interaction(secret: str, max_attempts: int):
+            """ Main game loop """
+            visible = ['_'] * len(secret)
+            guessed_letters = []
+            Games.Hangman.print_visible(visible)
+            attempts_used = 1
+            while max_attempts > attempts_used:
+                letter = Games.Hangman.input_letter("Insert a letter: ")
+
+                # Checks if the letter was already guessed
+                if letter in guessed_letters:
+                    Chat.typing_effect(f"You already guessed the letter {letter}!", delay=0.1 / 1.5)
+                    continue
+
+                guessed_letters.append(letter)
+
+                # Confirms if the letter is in the secret
+                if letter not in secret:
+                    Chat.typing_effect(f"The letter {letter} is not in the secret.", delay=0.1 / 1.5)
+                    attempts_used += 1
+                    Chat.typing_effect(f"Attempts used: {attempts_used}", delay=0.1 / 1.5)
+                else:
+                    Chat.typing_effect(f"The letter {letter} is in the secret.", delay=0.1 / 1.5)
+                    Games.Hangman.update_visible(visible, secret, letter)
+                    Chat.typing_effect(f"Attempts used: {attempts_used}", delay=0.1 / 1.5)
+
+                Games.Hangman.print_visible(visible)
+
+                if Games.Hangman.got_it_right(visible, secret):  # If the word is fully revealed
+                    break
+
+            Games.Hangman.end_game(visible, secret, attempts_used)  # End the game with a result
+
+        @staticmethod
+        def play_hangman():
+            MAX_ATTEMPTS = 11
+            Games.Hangman.interaction(Games.Hangman.choose_word(), MAX_ATTEMPTS)
 
     class RPS:
         """ Class to manage the game rock paper and scissors"""
@@ -159,21 +201,20 @@ class Games:
                 Chat.typing_effect(f"Score: You {self.games.player_score} - {self.games.ai_score} AI", delay=0.2)
 
 
-
 class Chat:
     """ AI chatbot """
     def __init__(self):
         self.chating = True
 
     @staticmethod
-    def typing_effect(text, delay=0.1):
+    def typing_effect(text: str, delay: float = 0.1):
         console = Console()
-        rich_text = Text(text)
-        for char in rich_text:
-            console.print(char, end="")  # Make sure flush is used with `Console.print()`
+
+        for char in text:
+            console.print(char, end="")
             time.sleep(delay)
 
-        console.print()  # Move to the next line after typing is done
+        console.print()
 
     @staticmethod
     def chat():
@@ -284,41 +325,97 @@ class Data:
     def __init__(self):
         pass
 
-    def user_data(self):
-        pass
-
-    def game_data(self):
-        pass
 
 class UI:
     """ Handles user interaction """
-
     def __init__(self):
         self.chat_instance = Chat()
         self.games = Games()
         self.chat = Chat()
         self.data = Data()
 
-    def interpreter(self):
-        pass
-
-    def main(self):
-        Chat.typing_effect(self.data.welcoming_message, delay=0.1 / 1.5)
+    def games_commands(self):
+        """ This handles game command choices """
+        Chat.typing_effect("Open a game:", delay=0.1 / 1.5)
+        Chat.typing_effect("- High-low", delay=0.1 / 1.5)
+        Chat.typing_effect("- Hangman", delay=0.1 / 1.5)
+        Chat.typing_effect("- Rock, paper or scissors", delay=0.1 / 1.5)
 
         while True:
-            user_input = input("> ")
-            user_input.lower()
-            match user_input:
+            game_choice = UI.input_command()
+            if game_choice not in ["high-low", "hangman", "rock, paper or scissors"]:
+                Chat.typing_effect(f"Sorry, we don't have {game_choice} available yet.", delay=0.1 / 1.5)
+            else:
+                match game_choice:
+                    case "high-low":
+                        hilo_game = Games.HiLo(self.games)
+                        self.games.playing = True
+                        while self.games.playing:
+                            hilo_game.play_hilo_reverse()
+                        self.games.playing = False
+
+                    case "hangman":
+                        hangman_game = Games.Hangman()
+                        self.games.playing = True
+                        while self.games.playing:
+                            hangman_game.play_hangman()
+                        self.games.playing = False
+
+                    case "rock, paper or scissors":
+                        rps_game = Games.RPS(self.games)
+                        self.games.playing = True
+                        while self.games.playing:
+                            rps_game.rock_paper_scissors()
+                        self.games.playing = False
+
+    def chat_commands(self):
+        """ Placeholder for chat commands if needed in the future """
+        pass
+
+    @staticmethod
+    def command_help():
+        """ Display the available commands to the user """
+        Chat.typing_effect("Available commands:", delay=0.1 / 1.5)
+        Chat.typing_effect("- Games, for playing our available games", delay=0.1 / 1.5)
+        Chat.typing_effect("- Chat, to interact with our AI", delay=0.1 / 1.5)
+        Chat.typing_effect("- Daily quote, to get your daily love quote (Note: only available for the wife)",
+                           delay=0.1 / 1.5)
+        Chat.typing_effect("- Exit, to leave the application", delay=0.15)
+
+    def interpreter(self):
+        """ Command interpreter for controlling the flow of the app """
+        while True:
+            command = UI.input_command()  # Get user command
+            match command:
                 case "games":
-                    Chat.typing_effect("Games", delay=0.1 / 1.5)
+                    self.games_commands()  # Call to handle game selection
                 case "chat":
-                    Chat.typing_effect("Chat", delay=0.1 / 1.5)
+                    self.chat_commands()  # Placeholder for future chat functionality
                 case "exit":
                     Chat.typing_effect("Thanks for using our AI.", delay=0.1 / 1.5)
                     break
+                case "help":
+                    self.command_help()  # Display available commands
                 case _:
                     Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
-Main_function = UI()
-Main_function.main()
+    @staticmethod
+    def input_command():
+        """ Get and process user input command """
+        command = input("> ").lower()
+        return command
+
+    def main(self):
+        """ Main entry point for starting the app """
+        name = input("Insert your name: ").lower()
+        if name == "shivali" or name == "shivali thakur" or name == "shivali vinodkumar thakur":
+            Chat.typing_effect(Data.welcoming_message, delay=0.1 / 1.5)
+        Chat.typing_effect("Type help for command list.", delay=0.1 / 1.5)
+        self.interpreter()  # Start the interaction loop
+
+
+# Run the UI
+if __name__ == "__main__":
+    ui_instance = UI()  # Create an instance of UI
+    ui_instance.main()  # Start the main function
 
