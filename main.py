@@ -25,7 +25,7 @@ from datetime import date
 import random
 import time
 from rich.console import Console
-from rich.text import Text
+
 
 class Games:
     """ Manages playable games """
