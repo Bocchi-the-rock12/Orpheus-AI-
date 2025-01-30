@@ -44,6 +44,8 @@ class Games:
             """ Takes the range numbers as input from user about
                 Pre-condition: Hi > Lo """
             while True:
+                Chat.typing_effect("I want you to think about a number... Keep it to yourself", delay=0.2)
+                Chat.typing_effect("Now, I need you to give me an interval where that number is located", delay=0.2)
                 lo = int(input(f"Think about a number... "))
                 hi = int(input(f"Think about another number... "))
                 if lo > hi:
@@ -86,9 +88,88 @@ class Games:
                 else:
                     Chat.typing_effect("Invalid input. Please use only '>', '<', or '='.", delay=0.2)
 
+
     class LoveQuiz:
-        def quiz(self):
-            pass
+        """ Class to manage the love quiz """
+        def __init__(self, games: "Games"):
+            self.games = games
+            self.letter_answers = ["A", "B", "C", "D"]
+
+        @staticmethod
+        def questions():
+            questions = []
+
+            # Store questions (dictionary keys) on list
+            for keys in Data.quiz_game:
+                questions.append(keys)
+            return questions
+
+        @staticmethod
+        def get_questions(questions):
+            return random.choice(questions)
+
+        @staticmethod
+        def ask_questions(question):
+            options_list = Data.quiz_game[question]["options"]
+            Chat.typing_effect("Choose your answer from the options below:", delay=0.1 / 1.5)
+            for i in range(4):
+                Chat.typing_effect(f"{chr(65 + i)}: {options_list[i]}", delay=0.1 / 1.5)
+
+        @staticmethod
+        def options():
+            options = []
+            for key in Data.quiz_game:
+                for option in Data.quiz_game[key]["options"]:
+                    options.append(option)
+            return options
+
+        @staticmethod
+        def answers():
+            answers = []
+            for key in Data.quiz_game:
+                for answer in [Data.quiz_game[key]["answer"]]:
+                    answers.append(answer)
+            return answers
+
+        def game(self):
+            questions = self.questions()  # List of questions
+            options = self.options()  # List of options for each question (e.g., ['Neetlank', 'McDonalds', 'Pizzahut', 'Any restaurant works'])
+            text_answers = self.answers()  # Correct answers (e.g., 'Neetlank', 'Pizza', etc.)
+
+            Chat.typing_effect("Welcome to the ultimate love quiz!", delay=0.1 / 1.5)
+            Chat.typing_effect(
+                "This game was designed entirely by Afonso, and serves as a gift for his beautiful wife.",
+                delay=0.1 / 1.5)
+            Chat.typing_effect("Let the game begin...", delay=0.1 / 1.5)
+
+            while True:
+                question_chosen = self.get_questions(questions)  # Randomly selects a question
+                Chat.typing_effect(f"{question_chosen}", delay=0.1 / 1.5)
+                Games.LoveQuiz.ask_questions(question_chosen)
+
+                correct_text_answer = text_answers[questions.index(question_chosen)]  # Correct answer text
+                correct_answer_index = options.index(correct_text_answer)  # Get index of the correct answer
+                correct_answer = self.letter_answers[correct_answer_index]  # Map to 'A', 'B', 'C', 'D'
+
+                while True:
+                    answer = input("> ").upper().strip()  # Make sure to convert user input to uppercase
+
+                    # Check if the answer is valid (one of the letter options A, B, C, D)
+                    if answer not in self.letter_answers:
+                        Chat.typing_effect("Invalid input. Please choose a valid option.", delay=0.1 / 1.5)
+                    else:
+                        # Comparison between the answer given and the correct answer
+                        if answer == correct_answer:
+                            Chat.typing_effect("DING DING DING! You are correct.", delay=0.1 / 1.5)
+                            self.games.player_score += 1
+                            Chat.typing_effect(f"Current score: {self.games.player_score}", delay=0.1 / 1.5)
+                        else:
+                            Chat.typing_effect(f"Sorry, the correct answer was {correct_answer}", delay=0.1 / 1.5)
+                        break
+
+                if not UI.game_replay():
+                    Chat.typing_effect("Thanks for playing! Goodbye!", delay=0.1 / 1.5)
+                    return
 
     class Hangman:
         """ Class to manage the hangman game"""
@@ -170,35 +251,39 @@ class Games:
             Games.Hangman.interaction(Games.Hangman.choose_word(), MAX_ATTEMPTS)
 
     class RPS:
-        """ Class to manage the game rock paper and scissors"""
+        """ Class to manage the game rock paper and scissors """
         def __init__(self, games: "Games"):
             self.games = games
 
-        moves = ["Rock", "Paper", "Scissors"]
+        moves = ["rock", "paper", "scissors"]
 
         @staticmethod
         def move():
             return random.choice(Games.RPS.moves)
 
         def rock_paper_scissors(self):
-            play = input("Rock, paper or scissors? ")
-            if play not in Games.RPS.moves:
-                Chat.typing_effect("Invalid move!", delay=0.2)
-            else:
-                ai = Games.RPS.move()
-                Chat.typing_effect(f"AI played: {ai}", delay=0.2)
-                if ai == play:
-                    Chat.typing_effect("It's a tie!", delay=0.2)
-                elif (ai == "Rock" and play == "Paper") or \
-                        (ai == "Paper" and play == "Scissors") or \
-                        (ai == "Scissors" and play == "Rock"):
-                    Chat.typing_effect("You won!", delay=0.2)
-                    self.games.player_score += 1
+            while True:
+                play = input("Rock, paper or scissors? ").strip().lower()
+                if play not in Games.RPS.moves:
+                    Chat.typing_effect("Invalid move!", delay=0.2)
+                    continue  # Ask again for a valid move
                 else:
-                    Chat.typing_effect("You lost!", delay=0.2)
-                    self.games.ai_score += 1
+                    ai = Games.RPS.move().lower()  # Ensure AI's move is lowercase
+                    Chat.typing_effect(f"AI played: {ai}", delay=0.2)
 
-                Chat.typing_effect(f"Score: You {self.games.player_score} - {self.games.ai_score} AI", delay=0.2)
+                    if ai == play:
+                        Chat.typing_effect("It's a tie!", delay=0.2)
+                        break
+                    elif (ai == "rock" and play == "paper") or (ai == "paper" and play == "scissors") or (
+                            ai == "scissors" and play == "rock"):
+                        Chat.typing_effect("You won!", delay=0.2)
+                        self.games.player_score += 1
+                        break
+                    else:
+                        Chat.typing_effect("You lost!", delay=0.2)
+                        self.games.ai_score += 1
+                        Chat.typing_effect(f"Score: You {self.games.player_score} - {self.games.ai_score} AI", delay=0.2)
+                        break
 
 
 class Chat:
@@ -284,7 +369,7 @@ class Data:
             "options": ["Peacocks", "Orcas", "Butterflies", "Cats"],
             "answer": "Peacocks"
         },
-        "What's Shivali's favorite color?": {
+        "What's Afonso's favorite color?": {
             "options": ["Purple", "Red", "Yellow", "Green"],
             "answer": "Purple"
         },
@@ -292,8 +377,8 @@ class Data:
             "options": ["Reading", "Sleeping", "Painting", "Dancing"],
             "answer": "Sleeping"
         },
-        "What food is Shivali's favorite Italian cuisine?": {
-            "options": ["Neetlank", "Pizza", "Pasta", "Lasagna"],
+        "What food is Shivali's favorite restaurant?": {
+            "options": ["Neetlank", "Mc Donalds", "Pizzahut", "Any restaurant works"],
             "answer": "Neetlank"
         },
         "How does Shivali like her food?": {
@@ -334,39 +419,56 @@ class UI:
         self.chat = Chat()
         self.data = Data()
 
+    @staticmethod
+    def game_replay():
+        while True:
+            message = input("Would you like to continue playing? Y/N ").strip().lower()
+            if message == "y":
+                return True
+            elif message == "n":
+                return False
+            else:
+                print("Invalid input!")
+
     def games_commands(self):
         """ This handles game command choices """
-        Chat.typing_effect("Open a game:", delay=0.1 / 1.5)
-        Chat.typing_effect("- High-low", delay=0.1 / 1.5)
-        Chat.typing_effect("- Hangman", delay=0.1 / 1.5)
-        Chat.typing_effect("- Rock, paper or scissors", delay=0.1 / 1.5)
+        while True:  # This keeps the game selection menu looping
+            Chat.typing_effect("Open a game:", delay=0.1 / 1.5)
+            Chat.typing_effect("- High-low", delay=0.1 / 1.5)
+            Chat.typing_effect("- Hangman", delay=0.1 / 1.5)
+            Chat.typing_effect("- Rock, paper or scissors", delay=0.1 / 1.5)
+            Chat.typing_effect("- Love quiz", delay=0.1 / 1.5)
+            Chat.typing_effect("- Exit, to leave game menu", delay=0.1 / 1.5)
 
-        while True:
+
             game_choice = UI.input_command()
-            if game_choice not in ["high-low", "hangman", "rock, paper or scissors"]:
+
+            # Checks if user wants to quit the game menu
+            if game_choice == "exit":
+                return
+
+            # Checks for valid input
+            if game_choice not in ["high-low", "hangman", "rock, paper or scissors", "love quiz"]:
                 Chat.typing_effect(f"Sorry, we don't have {game_choice} available yet.", delay=0.1 / 1.5)
-            else:
-                match game_choice:
-                    case "high-low":
-                        hilo_game = Games.HiLo(self.games)
-                        self.games.playing = True
-                        while self.games.playing:
-                            hilo_game.play_hilo_reverse()
-                        self.games.playing = False
+                continue  # Go back to the game selection menu
 
-                    case "hangman":
-                        hangman_game = Games.Hangman()
-                        self.games.playing = True
-                        while self.games.playing:
-                            hangman_game.play_hangman()
-                        self.games.playing = False
+            # Play the selected game
+            if game_choice == "high-low":
+                hilo_game = Games.HiLo(self.games)
+                hilo_game.play_hilo_reverse()
+            elif game_choice == "hangman":
+                hangman_game = Games.Hangman()
+                hangman_game.play_hangman()
+            elif game_choice == "rock, paper or scissors":
+                rps_game = Games.RPS(self.games)
+                rps_game.rock_paper_scissors()
+            elif game_choice == "love quiz":
+                love_quiz = Games.LoveQuiz(self.games)
+                love_quiz.game()
 
-                    case "rock, paper or scissors":
-                        rps_game = Games.RPS(self.games)
-                        self.games.playing = True
-                        while self.games.playing:
-                            rps_game.rock_paper_scissors()
-                        self.games.playing = False
+            # Ask the user if they want to play another game
+            if not self.game_replay():
+                return
 
     def chat_commands(self):
         """ Placeholder for chat commands if needed in the future """
@@ -388,21 +490,21 @@ class UI:
             command = UI.input_command()  # Get user command
             match command:
                 case "games":
-                    self.games_commands()  # Call to handle game selection
+                    self.games_commands()
                 case "chat":
-                    self.chat_commands()  # Placeholder for future chat functionality
+                    self.chat_commands()
                 case "exit":
                     Chat.typing_effect("Thanks for using our AI.", delay=0.1 / 1.5)
                     break
                 case "help":
-                    self.command_help()  # Display available commands
+                    self.command_help()
                 case _:
                     Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
     @staticmethod
     def input_command():
         """ Get and process user input command """
-        command = input("> ").lower()
+        command = input("> ").lower().strip()
         return command
 
     def main(self):
@@ -410,12 +512,11 @@ class UI:
         name = input("Insert your name: ").lower()
         if name == "shivali" or name == "shivali thakur" or name == "shivali vinodkumar thakur":
             Chat.typing_effect(Data.welcoming_message, delay=0.1 / 1.5)
-        Chat.typing_effect("Type help for command list.", delay=0.1 / 1.5)
-        self.interpreter()  # Start the interaction loop
+        Chat.typing_effect("Type Help for command list.", delay=0.1 / 1.5)
+        self.interpreter()
 
 
-# Run the UI
 if __name__ == "__main__":
-    ui_instance = UI()  # Create an instance of UI
-    ui_instance.main()  # Start the main function
+    ui_instance = UI()
+    ui_instance.main()
 
