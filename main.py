@@ -44,12 +44,12 @@ class Games:
             """ Takes the range numbers as input from user about
                 Pre-condition: Hi > Lo """
             while True:
-                Chat.typing_effect("I want you to think about a number... Keep it to yourself", delay=0.2)
-                Chat.typing_effect("Now, I need you to give me an interval where that number is located", delay=0.2)
+                Chat.typing_effect("I want you to think about a number... Keep it to yourself", delay=0.1 / 1.5)
+                Chat.typing_effect("Now, I need you to give me an interval where that number is located", delay=0.1 / 1.5)
                 lo = int(input(f"Think about a number... "))
                 hi = int(input(f"Think about another number... "))
                 if lo > hi:
-                    Chat.typing_effect("The lower bound can't be greater than the higher bound!", delay=0.2)
+                    Chat.typing_effect("The lower bound can't be greater than the higher bound!", delay=0.1 / 1.5)
                 else:
                     return lo, hi
 
@@ -80,7 +80,7 @@ class Games:
 
                 if response == "=":
                     self.final_message(lo, hi, attempts, guess)
-                    break
+                    return  # Exit after winning
                 elif response == ">":
                     lo = guess + 1
                 elif response == "<":
@@ -88,7 +88,13 @@ class Games:
                 else:
                     Chat.typing_effect("Invalid input. Please use only '>', '<', or '='.", delay=0.2)
 
-    import random
+                # Check if cheating occurred DURING gameplay
+                if lo > hi:
+                    Chat.typing_effect("You're a cheater!", delay=0.2)
+                    self.games.player_score -= 1
+                    Chat.typing_effect(f"Your score: {self.games.player_score}", delay=0.2)
+                    return # Exit the game if cheating is detected
+
 
     class LoveQuiz:
         """ Class to manage the love quiz """
@@ -165,6 +171,9 @@ class Games:
 
     class Hangman:
         """ Class to manage the hangman game"""
+        def __init__(self, games: "Games"):
+            self.games = games
+
         @staticmethod
         def choose_word():
             """ Get a random word from the word file """
@@ -183,7 +192,7 @@ class Games:
 
         @staticmethod
         def print_visible(visible: list[str]):
-            Chat.typing_effect(" ".join(visible), delay=0.2)
+            Chat.typing_effect(" ".join(visible), delay=0.1 / 1.5)
 
         @staticmethod
         def got_it_right(visible: list[str], secret: str) -> bool:
@@ -193,15 +202,15 @@ class Games:
         def input_letter(prompt: str) -> str:
             while True:
                 s = input(prompt)
-                if len(s) == 1 and s.isalpha():
+                if len(s) == 1 and (s.isalpha() or s == "-"):
                     return s
 
         @staticmethod
         def end_game(visible: list[str], secret: str, attempts: int):
             if Games.Hangman.got_it_right(visible, secret):
-                Chat.typing_effect(f"Congratulations! You guessed the secret in {attempts} attempts: '{secret}'!", delay=0.2)
+                Chat.typing_effect(f"Congratulations! You guessed the secret in {attempts} attempts: '{secret}'!", delay=0.1 / 1.5)
             else:
-                Chat.typing_effect(f"Sorry, you surpassed the number of attempts. The secret was '{secret}'.", delay=0.2)
+                Chat.typing_effect(f"Sorry, you surpassed the number of attempts. The secret was '{secret}'.", delay=0.1 / 1.5)
 
         @staticmethod
         def interaction(secret: str, max_attempts: int):
@@ -209,7 +218,7 @@ class Games:
             visible = ['_'] * len(secret)
             guessed_letters = []
             Games.Hangman.print_visible(visible)
-            attempts_used = 1
+            attempts_used = 0
             while max_attempts > attempts_used:
                 letter = Games.Hangman.input_letter("Insert a letter: ")
 
@@ -239,7 +248,7 @@ class Games:
 
         @staticmethod
         def play_hangman():
-            MAX_ATTEMPTS = 11
+            MAX_ATTEMPTS = 10
             Games.Hangman.interaction(Games.Hangman.choose_word(), MAX_ATTEMPTS)
 
     class RPS:
@@ -306,7 +315,7 @@ class Data:
     date = date.today()
     quotes = ["I love you so much amor", "I'm so glad to have you", "I hope you enjoy this gift <3"]
     welcoming_message = "Hi baby, if you’re reading this then it means you already received the gift. I just want to say that I love you a lot, and I did this with the best of intentions and love for you. Amo-te muito amor <3"
-    quiz_game= {
+    quiz_game = {
         "What was the date we confessed to each other?": {
             "options": ["14/02/2024", "10/03/2024", "25/12/2023", "01/06/2024"],
             "answer": "10/03/2024"
@@ -370,7 +379,7 @@ class Data:
             "answer": "Sleeping"
         },
         "What food is Shivali's favorite restaurant?": {
-            "options": ["Neetlank", "Mc Donalds", "Pizzahut", "Any restaurant works"],
+            "options": ["Neetlank", "McDonald's", "Pizzahut", "Any restaurant works"],
             "answer": "Neetlank"
         },
         "How does Shivali like her food?": {
@@ -393,14 +402,70 @@ class Data:
             "options": ["Fallout 4", "GTA V", "Genshin Impact", "Pokémon"],
             "answer": "Fallout 4"
         },
-        "What does Afonso loves more about Shivali?": {
+        "What does Afonso love more about Shivali?": {
             "options": ["Her kindness", "Her cuteness", "Her intelligence", "Everything above and more"],
             "answer": "Everything above and more"
-        }
-    }
+        },
+        "Where did we first meet?": {
+            "options": ["In school", "Online, specifically on Instagram", "At a restaurant", "At the mall"],
+            "answer": "Online, specifically on Instagram"
+        },
+        "What is Afonso's dream job?": {
+            "options": ["Research in Mathematics", "Working at a supermarket", "Janitor", "Working at a physics lab"],
+            "answer": "Research in Mathematics"
+        },
+        "Who takes longer to get ready?": {
+            "options": ["Afonso", "Shivali", "We both take time", "We're both fast"],
+            "answer": "We're both fast"
+        },
+        "Who's more likely to fall asleep while we're talking at night?": {
+            "options": ["Afonso", "Shivali"],
+            "answer": "Afonso"
+        },
+        "Who's more likely to say 'I'm hungry' first?": {
+            "options": ["Afonso", "Shivali", "Both of us"],
+            "answer": "Afonso"
+        },
+        "What's a skill Afonso would like us to learn together?": {
+            "options": ["Cooking", "Dancing", "Painting", "Learning a new language"],
+            "answer": "Cooking"
+        },
+        "Who loses things more often?": {
+            "options": ["Afonso", "Shivali"],
+            "answer": "Afonso"
+        },
+        "What's Shivali's favorite weather?": {
+            "options": ["Sunny", "Rain", "Cloudy", "Windy"],
+            "answer": "Rain"
+        },
 
-    def __init__(self):
-        pass
+        "What is the smallest unit of matter?": {
+            "options": ["Atom", "Molecule", "Quark", "Electron"],
+            "answer": "Quark"
+        },
+        "What is the chemical symbol for gold?": {
+            "options": ["Go", "Au", "Ag", "Pt"],
+            "answer": "Au"
+        },
+        "Which planet in our solar system has the most moons?": {
+            "options": ["Jupiter", "Saturn", "Neptune", "Mars"],
+            "answer": "Saturn"
+        },
+        "What gas do plants absorb from the atmosphere?": {
+            "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+            "answer": "Carbon Dioxide"
+        },
+        "Which part of the human body contains the most bones?": {
+            "options": ["Legs", "Arms", "Hands", "Feet"],
+            "answer": "Hands"
+        },
+        "What is the unit for how?": {
+            "options": ["Legs", "Arms", "Hands", "Feet"],
+            "answer": "Hands"
+        },    "What is the unit of specific heat capacity in the SI system?": {
+        "options": ["J/kg·°C", "J/g·°C", "J/mol·°C", "J/m²·°C"],
+        "answer": "J/kg·°C"}
+    }
 
 
 class UI:
@@ -446,19 +511,21 @@ class UI:
             if game_choice == "high-low":
                 hilo_game = Games.HiLo(self.games)
                 hilo_game.play_hilo_reverse()
+                if not self.game_replay():
+                    return
             elif game_choice == "hangman":
-                hangman_game = Games.Hangman()
+                hangman_game = Games.Hangman
                 hangman_game.play_hangman()
+                if not self.game_replay():
+                    return
             elif game_choice == "rock, paper or scissors":
                 rps_game = Games.RPS(self.games)
                 rps_game.rock_paper_scissors()
+                if not self.game_replay():
+                    return
             elif game_choice == "love quiz":
                 love_quiz = Games.LoveQuiz(self.games)
                 love_quiz.game()
-
-            # Ask the user if they want to play another game
-            if not self.game_replay():
-                return
 
     def chat_commands(self):
         """ Placeholder for chat commands if needed in the future """
@@ -472,7 +539,7 @@ class UI:
         Chat.typing_effect("- Chat, to interact with our AI", delay=0.1 / 1.5)
         Chat.typing_effect("- Daily quote, to get your daily love quote (Note: only available for the wife)",
                            delay=0.1 / 1.5)
-        Chat.typing_effect("- Exit, to leave the application", delay=0.15)
+        Chat.typing_effect("- Exit, to leave the application", delay=0.1 / 1.5)
 
     def interpreter(self):
         """ Command interpreter for controlling the flow of the app """
@@ -509,4 +576,3 @@ class UI:
 if __name__ == "__main__":
     ui_instance = UI()
     ui_instance.main()
-
