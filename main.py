@@ -18,6 +18,7 @@ CHANGELOG:
 20/01/2025 Criação do jogo hangman e update em algumas classes
 22/01/2025 Adicionada a função para efeitos de texto
 24/01/2025 Modificado o jogo da forca e criadas funções para interpretar comandos
+1/02/2025 Implementada a função de love quote
 ======================================================
 """
 
@@ -307,6 +308,15 @@ class Chat:
         """ Receive chat input from user """
         input("Hello! How can I be of help?")
 
+    @staticmethod
+    def daily_love_quotes():
+        today_date = date.today()  # Get today's date
+
+        if Data.last_checked_date != today_date:
+            Data.last_quote = random.choice(Data.quotes)
+            Data.last_checked_date = today_date
+        return Chat.typing_effect(Data.last_quote, delay= 0.1 / 1.5)
+
 
 class Data:
     """ Manage program data (username, date, quotes, etc...) """
@@ -314,6 +324,8 @@ class Data:
     # Variables shared by all methods
     date = date.today()
     quotes = ["I love you so much amor", "I'm so glad to have you", "I hope you enjoy this gift <3"]
+    last_checked_date = None  # Store last date in memory
+    last_quote = None  # Store last shown quote in memory
     welcoming_message = "Hi baby, if you’re reading this then it means you already received the gift. I just want to say that I love you a lot, and I did this with the best of intentions and love for you. Amo-te muito amor <3"
     quiz_game = {
         "What was the date we confessed to each other?": {
@@ -532,6 +544,10 @@ class UI:
         pass
 
     @staticmethod
+    def daily_quote_command():
+        Chat.daily_love_quotes()
+
+    @staticmethod
     def command_help():
         """ Display the available commands to the user """
         Chat.typing_effect("Available commands:", delay=0.1 / 1.5)
@@ -555,6 +571,8 @@ class UI:
                     break
                 case "help":
                     self.command_help()
+                case "daily quote":
+                    Chat.daily_love_quotes()
                 case _:
                     Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
