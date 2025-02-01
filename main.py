@@ -88,77 +88,68 @@ class Games:
                 else:
                     Chat.typing_effect("Invalid input. Please use only '>', '<', or '='.", delay=0.2)
 
+    import random
 
     class LoveQuiz:
         """ Class to manage the love quiz """
+
         def __init__(self, games: "Games"):
             self.games = games
-            self.letter_answers = ["A", "B", "C", "D"]
 
         @staticmethod
         def questions():
             questions = []
-
-            # Store questions (dictionary keys) on list
-            for keys in Data.quiz_game:
-                questions.append(keys)
+            for key in Data.quiz_game:
+                questions.append(key)
             return questions
 
         @staticmethod
-        def get_questions(questions):
+        def get_question(questions):
             return random.choice(questions)
 
         @staticmethod
-        def ask_questions(question):
+        def ask_question(question):
             options_list = Data.quiz_game[question]["options"]
             Chat.typing_effect("Choose your answer from the options below:", delay=0.1 / 1.5)
-            for i in range(4):
-                Chat.typing_effect(f"{chr(65 + i)}: {options_list[i]}", delay=0.1 / 1.5)
 
-        @staticmethod
-        def options():
-            options = []
-            for key in Data.quiz_game:
-                for option in Data.quiz_game[key]["options"]:
-                    options.append(option)
-            return options
+            for i in range(len(options_list)):
+                Chat.typing_effect(f"{chr(65 + i)}: {options_list[i]}", delay=0.1 / 1.5)
 
         @staticmethod
         def answers():
             answers = []
-            for key in Data.quiz_game:
-                for answer in [Data.quiz_game[key]["answer"]]:
-                    answers.append(answer)
+            for key in Data.quiz_game:  # Manually retrieve each answer
+                answer = Data.quiz_game[key]["answer"]
+                answers.append(answer)
             return answers
 
         def game(self):
-            questions = self.questions()  # List of questions
-            options = self.options()  # List of options for each question (e.g., ['Neetlank', 'McDonalds', 'Pizzahut', 'Any restaurant works'])
-            text_answers = self.answers()  # Correct answers (e.g., 'Neetlank', 'Pizza', etc.)
+            questions = self.questions()
+            text_answers = self.answers()
 
             Chat.typing_effect("Welcome to the ultimate love quiz!", delay=0.1 / 1.5)
             Chat.typing_effect(
                 "This game was designed entirely by Afonso, and serves as a gift for his beautiful wife.",
-                delay=0.1 / 1.5)
+                delay=0.1 / 1.5
+            )
             Chat.typing_effect("Let the game begin...", delay=0.1 / 1.5)
 
             while True:
-                question_chosen = self.get_questions(questions)  # Randomly selects a question
+                question_chosen = self.get_question(questions)
                 Chat.typing_effect(f"{question_chosen}", delay=0.1 / 1.5)
-                Games.LoveQuiz.ask_questions(question_chosen)
+                self.ask_question(question_chosen)
 
-                correct_text_answer = text_answers[questions.index(question_chosen)]  # Correct answer text
-                correct_answer_index = options.index(correct_text_answer)  # Get index of the correct answer
-                correct_answer = self.letter_answers[correct_answer_index]  # Map to 'A', 'B', 'C', 'D'
+                # Manually get the correct answer
+                correct_text_answer = text_answers[questions.index(question_chosen)]
+                correct_answer_index = Data.quiz_game[question_chosen]["options"].index(correct_text_answer)
+                correct_answer = chr(65 + correct_answer_index)
 
                 while True:
-                    answer = input("> ").upper().strip()  # Make sure to convert user input to uppercase
+                    answer = input("> ").upper().strip()
 
-                    # Check if the answer is valid (one of the letter options A, B, C, D)
-                    if answer not in self.letter_answers:
+                    if answer not in ["A", "B", "C", "D"]:
                         Chat.typing_effect("Invalid input. Please choose a valid option.", delay=0.1 / 1.5)
                     else:
-                        # Comparison between the answer given and the correct answer
                         if answer == correct_answer:
                             Chat.typing_effect("DING DING DING! You are correct.", delay=0.1 / 1.5)
                             self.games.player_score += 1
@@ -167,9 +158,10 @@ class Games:
                             Chat.typing_effect(f"Sorry, the correct answer was {correct_answer}", delay=0.1 / 1.5)
                         break
 
+                # Checks if user wants to play again
                 if not UI.game_replay():
-                    Chat.typing_effect("Thanks for playing! Goodbye!", delay=0.1 / 1.5)
                     return
+
 
     class Hangman:
         """ Class to manage the hangman game"""
@@ -438,8 +430,6 @@ class UI:
             Chat.typing_effect("- Hangman", delay=0.1 / 1.5)
             Chat.typing_effect("- Rock, paper or scissors", delay=0.1 / 1.5)
             Chat.typing_effect("- Love quiz", delay=0.1 / 1.5)
-            Chat.typing_effect("- Exit, to leave game menu", delay=0.1 / 1.5)
-
 
             game_choice = UI.input_command()
 
