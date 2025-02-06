@@ -577,6 +577,13 @@ class UI:
                     Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
     @staticmethod
+    def is_wife(name):
+        if name in ["shivali", "shivali thakur", "shivali vinodkumar thakur"]:
+            return True
+        else:
+            return False
+          
+    @staticmethod
     def input_command():
         """ Get and process user input command """
         command = input("> ").lower().strip()
