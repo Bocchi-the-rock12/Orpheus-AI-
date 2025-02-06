@@ -524,7 +524,7 @@ class UI:
             # Checks for valid input
             if game_choice not in ["high-low", "hangman", "rock, paper or scissors", "love quiz"]:
                 Chat.typing_effect(f"Sorry, we don't have {game_choice} available yet.", delay=0.1 / 1.5)
-                continue  # Go back to the game selection menu
+                continue
 
             # Play the selected game
             if game_choice == "high-low":
