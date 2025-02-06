@@ -89,7 +89,7 @@ class Games:
                 else:
                     Chat.typing_effect("Invalid input. Please use only '>', '<', or '='.", delay=0.2)
 
-                # Check if cheating occurred DURING gameplay
+                # Check if cheating occurred during gameplay
                 if lo > hi:
                     Chat.typing_effect("You're a cheater!", delay=0.2)
                     self.games.player_score -= 1
@@ -99,7 +99,6 @@ class Games:
 
     class LoveQuiz:
         """ Class to manage the love quiz """
-
         def __init__(self, games: "Games"):
             self.games = games
 
@@ -125,7 +124,7 @@ class Games:
         @staticmethod
         def answers():
             answers = []
-            for key in Data.quiz_game:  # Manually retrieve each answer
+            for key in Data.quiz_game:
                 answer = Data.quiz_game[key]["answer"]
                 answers.append(answer)
             return answers
@@ -323,6 +322,7 @@ class Data:
 
     # Variables shared by all methods
     date = date.today()
+    username = str
     quotes = ["I love you so much amor", "I'm so glad to have you", "I hope you enjoy this gift <3"]
     last_checked_date = None  # Store last date in memory
     last_quote = None  # Store last shown quote in memory
@@ -479,6 +479,13 @@ class Data:
         "answer": "J/kg·°C"}
     }
 
+    @staticmethod
+    def is_wife(name):
+        if name in ["shivali", "shivali thakur", "shivali vinodkumar thakur"]:
+            return True
+        else:
+            return False
+
 
 class UI:
     """ Handles user interaction """
@@ -539,9 +546,10 @@ class UI:
                 love_quiz = Games.LoveQuiz(self.games)
                 love_quiz.game()
 
-    def chat_commands(self):
+    @staticmethod
+    def chat_commands():
         """ Placeholder for chat commands if needed in the future """
-        pass
+        user_input = UI.input_command()
 
     @staticmethod
     def daily_quote_command():
@@ -572,16 +580,13 @@ class UI:
                 case "help":
                     self.command_help()
                 case "daily quote":
-                    Chat.daily_love_quotes()
+                    if Data.is_wife(Data.username):
+                        Chat.daily_love_quotes()
+                    else:
+                        Chat.typing_effect("ERROR! Invalid credentials.", delay=0.1 / 1.5)
                 case _:
                     Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
-    @staticmethod
-    def is_wife(name):
-        if name in ["shivali", "shivali thakur", "shivali vinodkumar thakur"]:
-            return True
-        else:
-            return False
           
     @staticmethod
     def input_command():
@@ -591,12 +596,11 @@ class UI:
 
     def main(self):
         """ Main entry point for starting the app """
-        name = input("Insert your name: ").lower()
-        if name == "shivali" or name == "shivali thakur" or name == "shivali vinodkumar thakur":
+        Data.username = input("Insert your name: ").lower().strip()
+        if Data.is_wife(Data.username):
             Chat.typing_effect(Data.welcoming_message, delay=0.1 / 1.5)
         Chat.typing_effect("Type Help for command list.", delay=0.1 / 1.5)
         self.interpreter()
-
 
 if __name__ == "__main__":
     ui_instance = UI()
