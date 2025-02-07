@@ -192,7 +192,7 @@ class Games:
 
         @staticmethod
         def print_visible(visible: list[str]):
-            Chat.typing_effect(" ".join(visible), delay=0.1 / 1.5)
+            Chat.typing_effect(" ".join(visible), delaygit commit -m "Reorganized project structure for Flask"=0.1 / 1.5)
 
         @staticmethod
         def got_it_right(visible: list[str], secret: str) -> bool:
