@@ -20,6 +20,17 @@ CHANGELOG:
 24/01/2025 Modificado o jogo da forca e criadas funções para interpretar comandos
 1/02/2025 Implementada a função de love quote
 ======================================================
+
+Citations:
+@inproceedings{Henderson2019,
+    author      = {Matthew Henderson and Pawe{\l} Budzianowski and I{\~{n}}igo Casanueva and Sam Coope and Daniela Gerz and Girish Kumar and Nikola Mrk{\v{s}}i\'c and Georgios Spithourakis and Pei-Hao Su and Ivan Vulic and Tsung-Hsien Wen},
+    title       = {A Repository of Conversational Datasets},
+    year        = {2019},
+    month       = {jul},
+    note        = {Data available at github.com/PolyAI-LDN/conversational-datasets},
+    url         = {https://arxiv.org/abs/1904.06472},
+    booktitle   = {Proceedings of the Workshop on {NLP} for Conversational {AI}},
+}
 """
 
 from datetime import date
@@ -587,7 +598,6 @@ class UI:
                 case _:
                     Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
-          
     @staticmethod
     def input_command():
         """ Get and process user input command """
