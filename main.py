@@ -189,7 +189,7 @@ class Games:
         def choose_word():
             """ Get a random word from the word file """
             words = []
-            with open("words.txt", mode="r", encoding="utf-8") as f:
+            with open("dataset/English Dictionary/words.txt", mode="r", encoding="utf-8") as f:
                 content = f.readlines()
             for line in content:
                 words.append(line.strip())
