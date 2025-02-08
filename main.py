@@ -37,6 +37,7 @@ from datetime import date
 import random
 import time
 from rich.console import Console
+import openai
 
 
 class Games:
