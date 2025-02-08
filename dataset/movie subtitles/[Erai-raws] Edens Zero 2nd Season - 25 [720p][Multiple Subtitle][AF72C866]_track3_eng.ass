@@ -1,0 +1,398 @@
+﻿[Script Info]
+Title: [Erai-raws] English (US)
+ScaledBorderAndShadow: yes
+
+Original Translation: <Not specified>
+Original Editing: <Not specified>
+Original Timing: 
+Synch Point: 
+Script Updated By: 
+Update Details: 
+ScriptType: v4.00+
+Collisions: Normal
+PlayResX: 640
+PlayResY: 360
+Timer: 0.0000
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,Strikeout,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Default,Arial,20,&H00FFFFFF,&H0000FFFF,&H00000000,&H7F404040,-1,0,0,0,100,100,0,0,1,2,1,2,0020,0020,0022,0
+Style: OS,Arial,18,&H00FFFFFF,&H0000FFFF,&H00000000,&H7F404040,-1,0,0,0,100,100,0,0,1,2,1,8,0001,0001,0015,0
+Style: Italics,Arial,20,&H00FFFFFF,&H0000FFFF,&H00000000,&H7F404040,-1,-1,0,0,100,100,0,0,1,2,1,2,0020,0020,0022,0
+Style: On Top,Arial,20,&H00FFFFFF,&H0000FFFF,&H00000000,&H7F404040,-1,0,0,0,100,100,0,0,1,2,1,8,0020,0020,0022,0
+Style: DefaultLow,Arial,20,&H00FFFFFF,&H0000FFFF,&H00000000,&H7F404040,-1,0,0,0,100,100,0,0,1,2,1,2,0020,0020,0010,0
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+
+Dialogue: 0,0:00:15.14,0:00:16.51,Default,,0000,0000,0000,,Go for it, Rebecca!\n
+Dialogue: 0,0:00:16.89,0:00:17.80,Default,,0000,0000,0000,,Okay!\n
+Dialogue: 0,0:00:18.22,0:00:21.85,Default,,0000,0000,0000,,Get the hell off of this planet!\n
+Dialogue: 0,0:00:22.52,0:00:23.44,Default,,0000,0000,0000,,Take this!\n
+Dialogue: 0,0:00:26.23,0:00:28.48,Default,,0000,0000,0000,,-Don't give up!\n-Shoot!\n
+Dialogue: 0,0:00:28.94,0:00:31.53,Default,,0000,0000,0000,,I won't let you get past me!\n
+Dialogue: 0,0:00:32.11,0:00:33.90,Default,,0000,0000,0000,,We'll kill you instead!\n
+Dialogue: 0,0:00:41.87,0:00:43.12,Default,,0000,0000,0000,,Air force?\n
+Dialogue: 0,0:00:43.37,0:00:45.37,Default,,0000,0000,0000,,They'll be a big hassle.\n
+Dialogue: 0,0:00:45.67,0:00:46.54,Default,,0000,0000,0000,,Leave it up to me!\n
+Dialogue: 0,0:01:04.31,0:01:06.35,Default,,0000,0000,0000,,Drop them and wash them away.\n
+Dialogue: 0,0:01:06.73,0:01:08.69,Default,,0000,0000,0000,,It's like flushing a toilet!\n
+Dialogue: 0,0:01:08.86,0:01:10.61,Default,,0000,0000,0000,,You're so funny!\n
+Dialogue: 0,0:01:10.77,0:01:12.82,Default,,0000,0000,0000,,He's insulting you.\n
+Dialogue: 0,0:02:44.49,0:02:47.87,Default,,0000,0000,0000,,PRELUDE TO THE AOI WAR\n
+Dialogue: 0,0:02:52.33,0:02:53.84,Default,,0000,0000,0000,,It's a large ship!\n
+Dialogue: 0,0:02:54.46,0:02:55.96,Default,,0000,0000,0000,,I've confirmed numerous missiles!\n
+Dialogue: 0,0:02:57.51,0:02:59.22,Default,,0000,0000,0000,,Are they trying to burn down this city?\n
+Dialogue: 0,0:02:59.38,0:03:00.55,Default,,0000,0000,0000,,This is bad!\n
+Dialogue: 0,0:03:01.34,0:03:02.22,Default,,0000,0000,0000,,I'll go!\n
+Dialogue: 0,0:03:06.47,0:03:07.52,Default,,0000,0000,0000,,He grabbed it!\n
+Dialogue: 0,0:03:09.27,0:03:10.77,Default,,0000,0000,0000,,He threw it!\n
+Dialogue: 0,0:03:14.52,0:03:17.23,Default,,0000,0000,0000,,Wow, your boss is amazing.\n
+Dialogue: 0,0:03:17.40,0:03:19.74,Default,,0000,0000,0000,,Yeah, he's the strongest!\n
+Dialogue: 0,0:03:20.20,0:03:22.11,Default,,0000,0000,0000,,I'm surprised too.\n
+Dialogue: 0,0:03:22.61,0:03:24.95,Default,,0000,0000,0000,,Rebecca, you're able to fight, huh?\n
+Dialogue: 0,0:03:25.12,0:03:26.49,Default,,0000,0000,0000,,Just a little.\n
+Dialogue: 0,0:03:27.91,0:03:29.62,Default,,0000,0000,0000,,I like you even more now!\n
+Dialogue: 0,0:03:29.79,0:03:32.04,Default,,0000,0000,0000,,Boss! Enemy reinforcements\nin the West Ward!\n
+Dialogue: 0,0:03:32.96,0:03:33.63,Default,,0000,0000,0000,,What?\n
+Dialogue: 0,0:03:34.17,0:03:37.67,Default,,0000,0000,0000,,This is not good. There are no\nfighters in the West Ward.\n
+Dialogue: 0,0:03:37.84,0:03:39.01,Default,,0000,0000,0000,,Let's go.\n
+Dialogue: 0,0:03:39.55,0:03:41.93,Default,,0000,0000,0000,,No, it's too far from here.\n
+Dialogue: 0,0:03:42.47,0:03:45.47,Default,,0000,0000,0000,,What should we do?\nMy mom lives in that area.\n
+Dialogue: 0,0:03:49.52,0:03:51.48,Default,,0000,0000,0000,,I altered it to run faster!\n
+Dialogue: 0,0:03:52.02,0:03:52.73,Default,,0000,0000,0000,,Weisz!\n
+Dialogue: 0,0:03:53.90,0:03:54.73,Default,,0000,0000,0000,,You getting in?\n
+Dialogue: 0,0:04:02.53,0:04:03.53,Default,,0000,0000,0000,,Those kids...\n
+Dialogue: 0,0:04:06.83,0:04:08.87,Default,,0000,0000,0000,,Enemies are approaching us from above!\n
+Dialogue: 0,0:04:10.37,0:04:11.91,Default,,0000,0000,0000,,There are so many of them!\n
+Dialogue: 0,0:04:17.29,0:04:18.38,Default,,0000,0000,0000,,They exploded!\n
+Dialogue: 0,0:04:18.80,0:04:19.50,Default,,0000,0000,0000,,That's...\n
+Dialogue: 0,0:04:20.67,0:04:22.13,Default,,0000,0000,0000,,It's Jinn and Kleene!\n
+Dialogue: 0,0:04:22.63,0:04:24.01,Default,,0000,0000,0000,,We'll take down the air force.\n
+Dialogue: 0,0:04:24.47,0:04:25.64,Default,,0000,0000,0000,,That's right!\n
+Dialogue: 0,0:04:26.09,0:04:27.72,Default,,0000,0000,0000,,Moscoy!\n
+Dialogue: 0,0:04:29.01,0:04:30.47,Default,,0000,0000,0000,,Screw Moscoy!\n
+Dialogue: 0,0:04:31.52,0:04:32.23,Default,,0000,0000,0000,,Moscoy!\n
+Dialogue: 0,0:04:39.19,0:04:41.32,Default,,0000,0000,0000,,This is Edens Zero.\nWe've got you covered!\n
+Dialogue: 0,0:04:41.82,0:04:43.78,Default,,0000,0000,0000,,We'll make way for the Lord Demon King.\n
+Dialogue: 0,0:04:44.20,0:04:46.41,Default,,0000,0000,0000,,That's right! Go!\n
+Dialogue: 0,0:04:46.99,0:04:48.49,Default,,0000,0000,0000,,Thanks for your help everyone!\n
+Dialogue: 0,0:04:54.04,0:04:56.79,Default,,0000,0000,0000,,Everyone on this planet is a rebel!\n
+Dialogue: 0,0:04:57.00,0:04:58.92,Default,,0000,0000,0000,,Kill them!\n
+Dialogue: 0,0:05:04.13,0:05:04.67,Default,,0000,0000,0000,,Orc,\n
+Dialogue: 0,0:05:05.51,0:05:08.30,Default,,0000,0000,0000,,the Maelstrom is set in place.\n
+Dialogue: 0,0:05:08.85,0:05:09.80,Default,,0000,0000,0000,,And the East Ward?\n
+Dialogue: 0,0:05:10.56,0:05:14.56,Default,,0000,0000,0000,,There's strong opposition from the rebel\narmy, so it hasn't been set up yet.\n
+Dialogue: 0,0:05:15.73,0:05:18.61,Default,,0000,0000,0000,,Those idiots are getting in the way\nof the great purge.\n
+Dialogue: 0,0:05:20.02,0:05:21.07,Default,,0000,0000,0000,,But that's fine.\n
+Dialogue: 0,0:05:22.44,0:05:24.32,Default,,0000,0000,0000,,This alone is enough.\n
+Dialogue: 0,0:05:25.45,0:05:29.41,Default,,0000,0000,0000,,It's the super concentrated\nEther particle bomb, the Maelstrom.\n
+Dialogue: 0,0:05:30.62,0:05:34.95,Default,,0000,0000,0000,,In the name of Poseidon Nero, I swear\nthat this will blow up half this planet.\n
+Dialogue: 0,0:05:35.71,0:05:38.58,Default,,0000,0000,0000,,Orc, the rebel army has entered\nthe West Ward!\n
+Dialogue: 0,0:05:40.38,0:05:41.96,Default,,0000,0000,0000,,That's...\n
+Dialogue: 0,0:05:42.84,0:05:44.09,Default,,0000,0000,0000,,He's not the rebel army!\n
+Dialogue: 0,0:05:44.76,0:05:45.55,Default,,0000,0000,0000,,He's that kid...\n
+Dialogue: 0,0:05:46.34,0:05:47.43,Default,,0000,0000,0000,,Why is he here?\n
+Dialogue: 0,0:05:49.43,0:05:50.80,Default,,0000,0000,0000,,Blow away, little brat!\n
+Dialogue: 0,0:05:52.60,0:05:54.81,Default,,0000,0000,0000,,-Take that!\n-Wait!\n
+Dialogue: 0,0:06:17.08,0:06:19.96,Default,,0000,0000,0000,,-She sliced...\n-The armored car!\n
+Dialogue: 0,0:06:20.13,0:06:21.00,Default,,0000,0000,0000,,Shoot!\n
+Dialogue: 0,0:06:25.51,0:06:26.72,Default,,0000,0000,0000,,Leopard Claw Frenzy!\n
+Dialogue: 0,0:06:29.30,0:06:32.14,Default,,0000,0000,0000,,Watch out, watch out!\nThis car is equipped with a minigun!\n
+Dialogue: 0,0:06:35.97,0:06:37.02,Default,,0000,0000,0000,,How persistent.\n
+Dialogue: 0,0:06:37.73,0:06:39.14,Default,,0000,0000,0000,,Take this!\n
+Dialogue: 0,0:06:46.61,0:06:47.74,Default,,0000,0000,0000,,That's the last one.\n
+Dialogue: 0,0:06:48.24,0:06:48.99,Default,,0000,0000,0000,,What a breeze.\n
+Dialogue: 0,0:06:50.24,0:06:51.32,Default,,0000,0000,0000,,That's it.\n
+Dialogue: 0,0:06:55.20,0:06:58.58,Default,,0000,0000,0000,,Master, I detect a high Ether signal\naround your two o'clock.\n
+Dialogue: 0,0:07:00.00,0:07:01.96,Default,,0000,0000,0000,,{\i1}Lord Demon King, can you hear me?\n
+Dialogue: 0,0:07:02.42,0:07:05.63,Default,,0000,0000,0000,,There is a large bomb\ninstalled somewhere near you.\n
+Dialogue: 0,0:07:05.84,0:07:06.42,Default,,0000,0000,0000,,{\i1}A bomb?\n
+Dialogue: 0,0:07:06.84,0:07:11.13,Default,,0000,0000,0000,,It's a nasty one! It's powerful enough\nto blow away half this planet!\n
+Dialogue: 0,0:07:11.93,0:07:13.97,Default,,0000,0000,0000,,-We have to stop it!\n{\i1}-I'll help!\n
+Dialogue: 0,0:07:14.47,0:07:16.89,Default,,0000,0000,0000,,I sent the map to Pino,\nso head there right now!\n
+Dialogue: 0,0:07:17.35,0:07:19.27,Default,,0000,0000,0000,,-Roger!\n-That way!\n
+Dialogue: 0,0:07:23.40,0:07:26.40,Default,,0000,0000,0000,,Orc! Few from the rebel army\nare headed this way!\n
+Dialogue: 0,0:07:26.94,0:07:30.11,Default,,0000,0000,0000,,It's those brats again!\nMake sure to stop them!\n
+Dialogue: 0,0:07:30.70,0:07:32.36,Default,,0000,0000,0000,,Master, we can see it now!\n
+Dialogue: 0,0:07:33.03,0:07:34.57,Default,,0000,0000,0000,,Is it that tower?\n
+Dialogue: 0,0:07:37.79,0:07:39.41,Default,,0000,0000,0000,,More and more keep on appearing!\n
+Dialogue: 0,0:07:41.87,0:07:44.67,Default,,0000,0000,0000,,-I just need to destroy that?\n{\i1}-No!\n
+Dialogue: 0,0:07:45.09,0:07:47.96,Default,,0000,0000,0000,,{\i1}If you apply too much outer force,\nit might explode!\n
+Dialogue: 0,0:07:48.71,0:07:52.84,Default,,0000,0000,0000,,Place Pino near the tower.\nI'll use the network to stop it.\n
+Dialogue: 0,0:07:53.26,0:07:54.89,Default,,0000,0000,0000,,-Got it!\n-Master!\n
+Dialogue: 0,0:07:55.93,0:07:57.22,Default,,0000,0000,0000,,Riddle them with bullets!\n
+Dialogue: 0,0:08:00.39,0:08:00.98,Default,,0000,0000,0000,,Homura!\n
+Dialogue: 0,0:08:01.69,0:08:02.73,Default,,0000,0000,0000,,Go, Shiki!\n
+Dialogue: 0,0:08:03.10,0:08:04.31,Default,,0000,0000,0000,,We won't let you!\n
+Dialogue: 0,0:08:05.06,0:08:05.56,Default,,0000,0000,0000,,Weisz!\n
+Dialogue: 0,0:08:06.36,0:08:07.15,Default,,0000,0000,0000,,Turn around!\n
+Dialogue: 0,0:08:07.61,0:08:08.36,Default,,0000,0000,0000,,Sure thing!\n
+Dialogue: 0,0:08:11.19,0:08:13.20,Default,,0000,0000,0000,,Shiki, leave things here to us!\n
+Dialogue: 0,0:08:13.70,0:08:14.32,Default,,0000,0000,0000,,Okay!\n
+Dialogue: 0,0:08:16.83,0:08:18.08,Default,,0000,0000,0000,,You...\n
+Dialogue: 0,0:08:18.24,0:08:20.33,Default,,0000,0000,0000,,You're the one I met in Foresta!\n
+Dialogue: 0,0:08:20.70,0:08:24.04,Default,,0000,0000,0000,,Are you planning to disturb\nmy purging mission once again?\n
+Dialogue: 0,0:08:24.71,0:08:27.54,Default,,0000,0000,0000,,Well, I'm not the same person I was\nback then.\n
+Dialogue: 0,0:08:28.04,0:08:31.92,Default,,0000,0000,0000,,As an O-Tech, I can update\nmy abilities by retrofitting body parts!\n
+Dialogue: 0,0:08:32.09,0:08:34.22,Default,,0000,0000,0000,,He's much stronger\nthan the last time I saw him.\n
+Dialogue: 0,0:08:34.38,0:08:36.05,Default,,0000,0000,0000,,Please be careful, Master!\n
+Dialogue: 0,0:08:36.47,0:08:38.97,Default,,0000,0000,0000,,In the name of Poseidon Nero,\n
+Dialogue: 0,0:08:39.39,0:08:42.35,Default,,0000,0000,0000,,I will purge you along\nwith this entire planet!\n
+Dialogue: 0,0:08:42.93,0:08:43.77,Default,,0000,0000,0000,,Whoa!\n
+Dialogue: 0,0:08:45.27,0:08:46.73,Default,,0000,0000,0000,,That's some power!\n
+Dialogue: 0,0:08:47.73,0:08:51.99,Default,,0000,0000,0000,,I can already see the moment\nyou will blow into pieces!\n
+Dialogue: 0,0:08:54.28,0:08:54.90,Default,,0000,0000,0000,,But...\n
+Dialogue: 0,0:08:55.57,0:08:57.12,Default,,0000,0000,0000,,What?\n
+Dialogue: 0,0:08:57.91,0:08:59.87,Default,,0000,0000,0000,,I'm not the same person I was\nback then either.\n
+Dialogue: 0,0:09:03.46,0:09:07.79,Default,,0000,0000,0000,,It's a completely different gravity\nfrom before...\n
+Dialogue: 0,0:09:08.34,0:09:09.67,Default,,0000,0000,0000,,-Pino!\n-Yes, sir!\n
+Dialogue: 0,0:09:12.38,0:09:13.76,Default,,0000,0000,0000,,Connection is set.\n
+Dialogue: 0,0:09:15.01,0:09:17.51,Default,,0000,0000,0000,,I've received the data. Hacking now.\n
+Dialogue: 0,0:09:18.39,0:09:21.64,Default,,0000,0000,0000,,You bastard... I can't fail my mission\n
+Dialogue: 0,0:09:22.35,0:09:23.85,Default,,0000,0000,0000,,for the second time!\n
+Dialogue: 0,0:09:24.14,0:09:28.36,Default,,0000,0000,0000,,Please stop, Orc.\nIf you press that now...\n
+Dialogue: 0,0:09:28.94,0:09:32.86,Default,,0000,0000,0000,,In the name of Poseidon Nero...\n
+Dialogue: 0,0:09:38.20,0:09:38.82,Default,,0000,0000,0000,,Oh no.\n
+Dialogue: 0,0:09:39.37,0:09:40.83,Default,,0000,0000,0000,,{\i1}The bomb has been activated.\n
+Dialogue: 0,0:09:41.74,0:09:42.74,Default,,0000,0000,0000,,That's...\n
+Dialogue: 0,0:09:43.08,0:09:44.37,Default,,0000,0000,0000,,It's the West Ward.\n
+Dialogue: 0,0:09:44.54,0:09:45.46,Default,,0000,0000,0000,,What?\n
+Dialogue: 0,0:09:45.62,0:09:47.25,Default,,0000,0000,0000,,That doesn't look good.\n
+Dialogue: 0,0:09:48.21,0:09:50.46,Default,,0000,0000,0000,,-Pino, get away from there!\n-Master!\n
+Dialogue: 0,0:10:02.97,0:10:04.06,Default,,0000,0000,0000,,Master!\n
+Dialogue: 0,0:10:04.52,0:10:06.89,Default,,0000,0000,0000,,-He's...\n-Stop it! It's too reckless!\n
+Dialogue: 0,0:10:07.31,0:10:10.11,Default,,0000,0000,0000,,-Shiki!\n-What is he planning to do?\n
+Dialogue: 0,0:10:13.69,0:10:14.53,Default,,0000,0000,0000,,What the hell?\n
+Dialogue: 0,0:10:15.11,0:10:17.49,Default,,0000,0000,0000,,Isn't that Laguna's friend?\n
+Dialogue: 0,0:10:18.07,0:10:20.20,Default,,0000,0000,0000,,You idiot! Let go of that thing!\n
+Dialogue: 0,0:10:20.45,0:10:23.79,Default,,0000,0000,0000,,Even if you're Demon King,\nthat bomb will definitely...\n
+Dialogue: 0,0:10:24.29,0:10:24.95,Default,,0000,0000,0000,,Please!\n
+Dialogue: 0,0:10:25.54,0:10:26.41,Default,,0000,0000,0000,,Make it in time...\n
+Dialogue: 0,0:10:27.79,0:10:28.37,Default,,0000,0000,0000,,Shiki!\n
+Dialogue: 0,0:10:29.21,0:10:31.08,Default,,0000,0000,0000,,No!\n
+Dialogue: 0,0:10:50.65,0:10:51.81,Default,,0000,0000,0000,,Master...\n
+Dialogue: 0,0:10:56.15,0:10:57.07,Default,,0000,0000,0000,,Shiki.\n
+Dialogue: 0,0:10:58.19,0:10:59.11,Default,,0000,0000,0000,,No way...\n
+Dialogue: 0,0:11:01.99,0:11:02.70,Default,,0000,0000,0000,,Oh?\n
+Dialogue: 0,0:11:03.28,0:11:06.24,Default,,0000,0000,0000,,Look. Something's falling.\n
+Dialogue: 0,0:11:09.12,0:11:10.87,Default,,0000,0000,0000,,Master!\n
+Dialogue: 0,0:11:12.83,0:11:14.17,Default,,0000,0000,0000,,That was close!\n
+Dialogue: 0,0:11:15.00,0:11:17.84,Default,,0000,0000,0000,,I threw it somewhere far away.\n
+Dialogue: 0,0:11:19.09,0:11:19.88,Default,,0000,0000,0000,,Oh geez.\n
+Dialogue: 0,0:11:21.26,0:11:23.22,Default,,0000,0000,0000,,I wasn't worried at all.\n
+Dialogue: 0,0:11:23.64,0:11:25.06,Default,,0000,0000,0000,,We believed in you.\n
+Dialogue: 0,0:11:27.52,0:11:30.23,Default,,0000,0000,0000,,I was able to reduce\nthe power of the bomb.\n
+Dialogue: 0,0:11:30.39,0:11:33.65,Default,,0000,0000,0000,,You reduced it by 90%.\nGood work, Hermit.\n
+Dialogue: 0,0:11:33.94,0:11:36.23,Default,,0000,0000,0000,,That made me nervous.\n
+Dialogue: 0,0:11:36.82,0:11:38.57,Default,,0000,0000,0000,,Enemies have been cleared out.\n
+Dialogue: 0,0:11:39.36,0:11:40.45,Default,,0000,0000,0000,,{\i1}It's perfect.\n
+Dialogue: 0,0:11:41.15,0:11:42.91,Default,,0000,0000,0000,,We did it, Brother.\n
+Dialogue: 0,0:11:44.07,0:11:45.95,Default,,0000,0000,0000,,Moscoy Parade!\n
+Dialogue: 0,0:11:53.21,0:11:54.67,Default,,0000,0000,0000,,Edens Zero?\n
+Dialogue: 0,0:11:55.38,0:11:58.30,Default,,0000,0000,0000,,Edens Zero, as in Demon King's\nbattleship?\n
+Dialogue: 0,0:11:58.88,0:12:00.97,Default,,0000,0000,0000,,You guys are the ones who beat Drakken,\n
+Dialogue: 0,0:12:01.51,0:12:04.68,Default,,0000,0000,0000,,one of Oración Seis Galáctica?\n
+Dialogue: 0,0:12:05.43,0:12:09.43,Default,,0000,0000,0000,,I'm impressed that you know.\nThat information isn't public.\n
+Dialogue: 0,0:12:09.81,0:12:12.02,Default,,0000,0000,0000,,Rebecca, you took down Drakken?\n
+Dialogue: 0,0:12:12.19,0:12:15.15,Default,,0000,0000,0000,,It wasn't exactly me.\n
+Dialogue: 0,0:12:15.86,0:12:19.36,Default,,0000,0000,0000,,In a sense, it's all thanks to\nRebecca's power.\n
+Dialogue: 0,0:12:20.11,0:12:22.36,Default,,0000,0000,0000,,Boss, if you team up with them,\nyou can win\n
+Dialogue: 0,0:12:22.90,0:12:23.70,Default,,0000,0000,0000,,against Nero.\n
+Dialogue: 0,0:12:26.20,0:12:27.08,Default,,0000,0000,0000,,That kid!\n
+Dialogue: 0,0:12:27.62,0:12:30.04,Default,,0000,0000,0000,,I'm so glad he was okay.\n
+Dialogue: 0,0:12:30.45,0:12:31.91,Default,,0000,0000,0000,,Stay still.\n
+Dialogue: 0,0:12:32.16,0:12:34.21,Default,,0000,0000,0000,,The empire cuts ties with all prisoners.\n
+Dialogue: 0,0:12:34.58,0:12:36.54,Default,,0000,0000,0000,,We won't be of any use to you now.\n
+Dialogue: 0,0:12:36.88,0:12:39.88,Default,,0000,0000,0000,,But we still won't kill you.\n
+Dialogue: 0,0:12:40.05,0:12:41.92,Default,,0000,0000,0000,,We'll let you go\nonce this battle is over.\n
+Dialogue: 0,0:12:42.55,0:12:44.84,Default,,0000,0000,0000,,Once the battle... is over?\n
+Dialogue: 0,0:12:45.47,0:12:47.89,Default,,0000,0000,0000,,You really think you can win\nagainst the Empire?\n
+Dialogue: 0,0:12:48.51,0:12:49.68,Default,,0000,0000,0000,,You're insane.\n
+Dialogue: 0,0:12:52.35,0:12:54.98,Default,,0000,0000,0000,,How many of our comrades died?\n
+Dialogue: 0,0:12:55.60,0:12:56.77,Default,,0000,0000,0000,,Sixteen!\n
+Dialogue: 0,0:12:57.23,0:12:58.61,Default,,0000,0000,0000,,Sixteen of our\n
+Dialogue: 0,0:12:59.40,0:13:02.82,Default,,0000,0000,0000,,comrades were killed by these bastards.\n
+Dialogue: 0,0:13:03.28,0:13:05.74,Default,,0000,0000,0000,,We lost a lot on our side too!\n
+Dialogue: 0,0:13:05.91,0:13:07.45,Default,,0000,0000,0000,,You idiot! Don't provoke him!\n
+Dialogue: 0,0:13:08.49,0:13:10.20,Default,,0000,0000,0000,,We're all on the same boat!\n
+Dialogue: 0,0:13:13.04,0:13:14.37,Default,,0000,0000,0000,,You're right.\n
+Dialogue: 0,0:13:15.25,0:13:18.34,Default,,0000,0000,0000,,There's no good side or bad side\nto a war.\n
+Dialogue: 0,0:13:19.17,0:13:21.63,Default,,0000,0000,0000,,It's just a clash of will\nthat produces death.\n
+Dialogue: 0,0:13:22.76,0:13:25.84,Default,,0000,0000,0000,,But even so, we can't stop as long as\n
+Dialogue: 0,0:13:26.51,0:13:28.26,Default,,0000,0000,0000,,the Empire keeps extending its reign.\n
+Dialogue: 0,0:13:29.51,0:13:33.60,Default,,0000,0000,0000,,Because each time they do,\nmillions and tens of millions die,\n
+Dialogue: 0,0:13:33.85,0:13:35.23,Default,,0000,0000,0000,,and we lose our freedom.\n
+Dialogue: 0,0:13:36.19,0:13:40.23,Default,,0000,0000,0000,,The reign brought upon heavy taxes,\noppression, and censorship.\n
+Dialogue: 0,0:13:40.77,0:13:43.69,Default,,0000,0000,0000,,They wreak havoc in the Aoi Sea\nas they please.\n
+Dialogue: 0,0:13:44.65,0:13:46.74,Default,,0000,0000,0000,,I hate the Empire!\n
+Dialogue: 0,0:13:48.49,0:13:51.58,Default,,0000,0000,0000,,I hate the Empire,\nbut I don't hate you people.\n
+Dialogue: 0,0:13:52.29,0:13:53.37,Default,,0000,0000,0000,,That's why\n
+Dialogue: 0,0:13:53.62,0:13:57.08,Default,,0000,0000,0000,,when this war ends,\nlet's have a drink together\n
+Dialogue: 0,0:13:57.42,0:13:59.96,Default,,0000,0000,0000,,and watch a B-Cube concert.\n
+Dialogue: 0,0:14:06.47,0:14:08.01,Default,,0000,0000,0000,,He's a big man.\n
+Dialogue: 0,0:14:08.30,0:14:09.84,Default,,0000,0000,0000,,Yes, obviously.\n
+Dialogue: 0,0:14:10.55,0:14:13.06,Default,,0000,0000,0000,,No, I'm referring to his heart.\n
+Dialogue: 0,0:14:13.47,0:14:16.02,Default,,0000,0000,0000,,In that case, Master is big too!\n
+Dialogue: 0,0:14:16.60,0:14:18.52,Default,,0000,0000,0000,,We're all friends!\n
+Dialogue: 0,0:14:18.69,0:14:19.52,Default,,0000,0000,0000,,Hey!\n
+Dialogue: 0,0:14:19.69,0:14:21.06,Default,,0000,0000,0000,,What the hell?\n
+Dialogue: 0,0:14:21.23,0:14:22.02,Default,,0000,0000,0000,,He sure is.\n
+Dialogue: 0,0:14:23.11,0:14:25.44,Default,,0000,0000,0000,,{\an8}PLANET NERO 66\n
+Dialogue: 0,0:14:25.86,0:14:30.20,Default,,0000,0000,0000,,I'm so bored. There's still three days\nuntil high tide.\n
+Dialogue: 0,0:14:30.70,0:14:34.37,Default,,0000,0000,0000,,If you're so bored, spend more time\nwith me, Prince Shura.\n
+Dialogue: 0,0:14:34.54,0:14:37.66,Default,,0000,0000,0000,,No fair. He's mine tonight.\n
+Dialogue: 0,0:14:38.29,0:14:40.71,Default,,0000,0000,0000,,Fabiano should've come too.\n
+Dialogue: 0,0:14:41.04,0:14:42.67,Default,,0000,0000,0000,,We don't need that old man.\n
+Dialogue: 0,0:14:43.38,0:14:45.05,Default,,0000,0000,0000,,He's the former Oceans after all.\n
+Dialogue: 0,0:14:45.38,0:14:49.43,Default,,0000,0000,0000,,It's understandable that he can't agree\nwith the newer generation like us.\n
+Dialogue: 0,0:14:50.05,0:14:52.43,Default,,0000,0000,0000,,Callum, you should join us for a swim!\n
+Dialogue: 0,0:14:52.80,0:14:53.89,Default,,0000,0000,0000,,Not interested.\n
+Dialogue: 0,0:14:55.06,0:14:58.10,Default,,0000,0000,0000,,Shura, are you sure that Ziggy\nis really going to come?\n
+Dialogue: 0,0:14:58.56,0:15:02.23,Default,,0000,0000,0000,,What he wants is the All-Link System,\nand it's right here.\n
+Dialogue: 0,0:15:02.86,0:15:04.32,Default,,0000,0000,0000,,He'll definitely come here.\n
+Dialogue: 0,0:15:05.19,0:15:08.74,Default,,0000,0000,0000,,Prince Shura, we have uninvited guests\nto deal with first.\n
+Dialogue: 0,0:15:11.16,0:15:14.78,Default,,0000,0000,0000,,{\i1}The government army is headed towards\nNero 66.\n
+Dialogue: 0,0:15:15.37,0:15:17.12,Default,,0000,0000,0000,,{\i1}This is an unexpected opportunity.\n
+Dialogue: 0,0:15:17.95,0:15:21.08,Default,,0000,0000,0000,,{\i1}Once the government army arrives,\nthere will be a shootout.\n
+Dialogue: 0,0:15:21.54,0:15:24.34,Default,,0000,0000,0000,,{\i1}We'll pass through their defense\nand get inside.\n
+Dialogue: 0,0:15:24.75,0:15:25.30,Default,,0000,0000,0000,,Okay.\n
+Dialogue: 0,0:15:25.84,0:15:29.42,Default,,0000,0000,0000,,{\i1}We will take down Shura,\nand destroy the All-Link System.\n
+Dialogue: 0,0:15:30.01,0:15:32.09,Default,,0000,0000,0000,,{\i1}Will you come with us?\n
+Dialogue: 0,0:15:32.39,0:15:33.14,Default,,0000,0000,0000,,Yeah.\n
+Dialogue: 0,0:15:33.72,0:15:34.97,Default,,0000,0000,0000,,Let's fight together.\n
+Dialogue: 0,0:15:35.47,0:15:38.77,Default,,0000,0000,0000,,In order to save Aoi Cosmos\nand the androids!\n
+Dialogue: 0,0:15:44.61,0:15:46.65,Default,,0000,0000,0000,,{\i1}-You bastard!\n{\i0}-Ibaraki.\n
+Dialogue: 0,0:15:47.28,0:15:49.65,Default,,0000,0000,0000,,{\i1}How've you been?\n
+Dialogue: 0,0:15:50.90,0:15:52.78,Default,,0000,0000,0000,,{\i1}About Boss...\n
+Dialogue: 0,0:15:53.87,0:15:55.95,Default,,0000,0000,0000,,{\i1}I'll team up with Edens Zero.\n
+Dialogue: 0,0:15:56.20,0:15:59.25,Default,,0000,0000,0000,,{\i1}But Laguna,\nyou're a whole different story.\n
+Dialogue: 0,0:15:59.87,0:16:03.79,Default,,0000,0000,0000,,{\i1}You betrayed our organization,\nso I don't see you as a comrade.\n
+Dialogue: 0,0:16:04.21,0:16:06.04,Default,,0000,0000,0000,,{\i1}He says that,\n
+Dialogue: 0,0:16:06.75,0:16:09.05,Default,,0000,0000,0000,,{\i1}but inside, he's not that mad.\n
+Dialogue: 0,0:16:09.34,0:16:11.88,Default,,0000,0000,0000,,You aimed a gun at me\nthe moment you saw me.\n
+Dialogue: 0,0:16:12.38,0:16:16.14,Default,,0000,0000,0000,,{\i1}If I really wanted to kill you,\nI would've shot you already.\n
+Dialogue: 0,0:16:16.60,0:16:18.77,Default,,0000,0000,0000,,{\i1}Boss has to save face\nin front of his men...\n
+Dialogue: 0,0:16:18.93,0:16:21.56,Default,,0000,0000,0000,,I know. Plus,\n
+Dialogue: 0,0:16:22.06,0:16:25.31,Default,,0000,0000,0000,,it's true that I left the organization.\n
+Dialogue: 0,0:16:25.69,0:16:28.27,Default,,0000,0000,0000,,{\i1}But you came back!\n
+Dialogue: 0,0:16:28.57,0:16:31.03,Default,,0000,0000,0000,,{\i1}In order to fight against Nero!\n
+Dialogue: 0,0:16:31.49,0:16:33.86,Default,,0000,0000,0000,,You never change, Ibaraki.\n
+Dialogue: 0,0:16:34.36,0:16:36.03,Default,,0000,0000,0000,,Everyone's doing well.\n
+Dialogue: 0,0:16:37.08,0:16:38.83,Default,,0000,0000,0000,,{\i1}By the way, I've noticed that...\n
+Dialogue: 0,0:16:39.54,0:16:41.20,Default,,0000,0000,0000,,I haven't seen Princess.\n
+Dialogue: 0,0:16:43.25,0:16:44.21,Default,,0000,0000,0000,,Don't tell me!\n
+Dialogue: 0,0:16:45.21,0:16:46.29,Default,,0000,0000,0000,,{\i1}Dammit.\n
+Dialogue: 0,0:16:46.96,0:16:49.50,Default,,0000,0000,0000,,She went to rescue some friends\nthat got caught,\n
+Dialogue: 0,0:16:50.21,0:16:51.76,Default,,0000,0000,0000,,but Shura killed her.\n
+Dialogue: 0,0:16:52.92,0:16:56.72,Default,,0000,0000,0000,,{\i1}It was so bad that Princess's\nbeautiful face was unrecognizable.\n
+Dialogue: 0,0:17:00.10,0:17:02.23,Default,,0000,0000,0000,,{\i1}That Shura is a psycho!\n
+Dialogue: 0,0:17:02.98,0:17:05.44,Default,,0000,0000,0000,,This is a battle to avenge her death!\n
+Dialogue: 0,0:17:05.90,0:17:07.65,Default,,0000,0000,0000,,Let's defeat him, Laguna!\n
+Dialogue: 0,0:17:08.69,0:17:09.36,Default,,0000,0000,0000,,Yeah.\n
+Dialogue: 0,0:17:10.19,0:17:12.28,Default,,0000,0000,0000,,Rebel army, and Princess...\n
+Dialogue: 0,0:17:12.82,0:17:17.24,Default,,0000,0000,0000,,Is this like some fantasy story where\nshe's the princess of a ruined country?\n
+Dialogue: 0,0:17:17.74,0:17:21.75,Default,,0000,0000,0000,,She's the daughter of the former leader.\nShe was bright and strong-minded.\n
+Dialogue: 0,0:17:22.29,0:17:25.04,Default,,0000,0000,0000,,After her father died,\nshe continued to support\n
+Dialogue: 0,0:17:25.33,0:17:28.42,Default,,0000,0000,0000,,the organization with\nthe current boss, Goodwin.\n
+Dialogue: 0,0:17:29.17,0:17:31.55,Default,,0000,0000,0000,,You lost a great member.\n
+Dialogue: 0,0:17:32.42,0:17:33.67,Default,,0000,0000,0000,,It's none of your business.\n
+Dialogue: 0,0:17:34.92,0:17:35.68,Default,,0000,0000,0000,,Wait.\n
+Dialogue: 0,0:17:36.05,0:17:39.05,Default,,0000,0000,0000,,Was taking down Nero\nyour objective all along?\n
+Dialogue: 0,0:17:39.72,0:17:43.68,Default,,0000,0000,0000,,That's why you got close with Drakken\nwho was also in Oración Seis Galáctica.\n
+Dialogue: 0,0:17:44.06,0:17:46.10,Default,,0000,0000,0000,,Then you approached us.\n
+Dialogue: 0,0:17:46.64,0:17:48.90,Default,,0000,0000,0000,,Witch is the one who invited me.\n
+Dialogue: 0,0:17:49.11,0:17:51.86,Default,,0000,0000,0000,,You were planning to contact us\neven if Witch didn't invite you.\n
+Dialogue: 0,0:17:52.57,0:17:55.78,Default,,0000,0000,0000,,Or maybe it would've been Elsie?\nEither way,\n
+Dialogue: 0,0:17:56.20,0:17:59.70,Default,,0000,0000,0000,,you've been searching for organizations\nthat can take down Nero.\n
+Dialogue: 0,0:18:00.62,0:18:02.62,Default,,0000,0000,0000,,You should join the government instead.\n
+Dialogue: 0,0:18:03.12,0:18:04.83,Default,,0000,0000,0000,,I might have, if I had education.\n
+Dialogue: 0,0:18:08.08,0:18:11.38,Default,,0000,0000,0000,,Don't drag us into\nyour personal vendetta.\n
+Dialogue: 0,0:18:11.54,0:18:14.34,Default,,0000,0000,0000,,Even if I wasn't here,\nShiki would've joined the fight.\n
+Dialogue: 0,0:18:15.55,0:18:17.59,Default,,0000,0000,0000,,If any of my crew\n
+Dialogue: 0,0:18:17.93,0:18:20.64,Default,,0000,0000,0000,,happens to die during this battle,\n
+Dialogue: 0,0:18:21.10,0:18:23.06,Default,,0000,0000,0000,,I will kill you!\n
+Dialogue: 0,0:18:25.48,0:18:26.39,Default,,0000,0000,0000,,Couchpo.\n
+Dialogue: 0,0:18:26.73,0:18:29.40,Default,,0000,0000,0000,,Wow, Rebecca! Looking good!\n
+Dialogue: 0,0:18:29.90,0:18:32.11,Default,,0000,0000,0000,,You look ready for battle!\n
+Dialogue: 0,0:18:32.48,0:18:34.32,Default,,0000,0000,0000,,Now's your last chance to get off.\n
+Dialogue: 0,0:18:34.90,0:18:37.36,Default,,0000,0000,0000,,This ship will soon enter battle mode.\n
+Dialogue: 0,0:18:37.70,0:18:40.03,Default,,0000,0000,0000,,Why are you telling me to go?\n
+Dialogue: 0,0:18:40.20,0:18:42.49,Default,,0000,0000,0000,,We're friends!\n
+Dialogue: 0,0:18:42.66,0:18:43.33,Default,,0000,0000,0000,,But...\n
+Dialogue: 0,0:18:43.66,0:18:47.62,Default,,0000,0000,0000,,Of course, I can't fight\nlike Shiki and the rest,\n
+Dialogue: 0,0:18:48.25,0:18:52.13,Default,,0000,0000,0000,,but I can protect this kitchen\nand the smiles this place provides.\n
+Dialogue: 0,0:18:52.46,0:18:54.75,Default,,0000,0000,0000,,You just said that you can't fight.\n
+Dialogue: 0,0:18:54.92,0:18:58.93,Default,,0000,0000,0000,,If it's to protect my food,\nI might awaken some kind of power!\n
+Dialogue: 0,0:18:59.09,0:19:01.09,Default,,0000,0000,0000,,What kind of situation is that?\n
+Dialogue: 0,0:19:01.43,0:19:05.18,Default,,0000,0000,0000,,Being on a ship together,\nmeans living together.\n
+Dialogue: 0,0:19:05.81,0:19:08.35,Default,,0000,0000,0000,,I chose this ship myself.\n
+Dialogue: 0,0:19:08.56,0:19:12.40,Default,,0000,0000,0000,,Getting off whenever\nthings get dangerous\n
+Dialogue: 0,0:19:12.69,0:19:15.11,Default,,0000,0000,0000,,isn't exactly living together\nwith all of you.\n
+Dialogue: 0,0:19:15.90,0:19:16.99,Default,,0000,0000,0000,,Couchpo.\n
+Dialogue: 0,0:19:17.74,0:19:20.82,Default,,0000,0000,0000,,{\i1}This ship will soon enter\nthe battle zone.\n
+Dialogue: 0,0:19:21.28,0:19:23.83,Default,,0000,0000,0000,,{\i1}All members please gather at\nthe wheelhouse.\n
+Dialogue: 0,0:19:24.16,0:19:25.95,Default,,0000,0000,0000,,All right, let's go!\n
+Dialogue: 0,0:19:27.33,0:19:30.21,Default,,0000,0000,0000,,Once this battle is over,\nlet's all eat together!\n
+Dialogue: 0,0:19:31.33,0:19:31.88,Default,,0000,0000,0000,,Yeah!\n
+Dialogue: 0,0:19:32.83,0:19:37.17,Default,,0000,0000,0000,,Currently, the government army\nand Shura's army are engaged in battle.\n
+Dialogue: 0,0:19:38.13,0:19:39.80,Default,,0000,0000,0000,,We will go past that,\n
+Dialogue: 0,0:19:40.34,0:19:44.43,Default,,0000,0000,0000,,and enter the planet.\nYet, there are no clear paths.\n
+Dialogue: 0,0:19:45.22,0:19:47.02,Default,,0000,0000,0000,,We will not be able to avoid a fight.\n
+Dialogue: 0,0:19:47.47,0:19:48.81,Default,,0000,0000,0000,,{\i1}We'll cause a diversion.\n
+Dialogue: 0,0:19:49.60,0:19:53.02,Default,,0000,0000,0000,,{\i1}With Edens Zero's speed,\nyou can get past the diversion.\n
+Dialogue: 0,0:19:55.23,0:19:55.77,Default,,0000,0000,0000,,Master.\n
+Dialogue: 0,0:19:56.36,0:19:57.44,Default,,0000,0000,0000,,What's the matter?\n
+Dialogue: 0,0:19:57.90,0:20:00.78,Default,,0000,0000,0000,,Those lights... are they explosions?\n
+Dialogue: 0,0:20:01.45,0:20:05.24,Default,,0000,0000,0000,,I wonder if people are dying,\nevery time there's a flash.\n
+Dialogue: 0,0:20:07.74,0:20:12.04,Default,,0000,0000,0000,,People are killing each other,\nwhen they can possibly become friends.\n
+Dialogue: 0,0:20:12.67,0:20:13.46,Default,,0000,0000,0000,,Shiki.\n
+Dialogue: 0,0:20:13.75,0:20:16.38,Default,,0000,0000,0000,,You're a nice guy. But...\n
+Dialogue: 0,0:20:16.88,0:20:17.46,Default,,0000,0000,0000,,I know.\n
+Dialogue: 0,0:20:18.92,0:20:19.80,Default,,0000,0000,0000,,We'll move forward.\n
+Dialogue: 0,0:20:20.59,0:20:24.59,Default,,0000,0000,0000,,We'll take down Shura, and end this war.\n
+Dialogue: 0,0:20:27.01,0:20:29.39,Default,,0000,0000,0000,,The ocean above and below\nare close to each other.\n
+Dialogue: 0,0:20:29.60,0:20:31.39,Default,,0000,0000,0000,,It's almost high tide.\n
+Dialogue: 0,0:20:31.85,0:20:32.56,Default,,0000,0000,0000,,Moscoy.\n
+Dialogue: 0,0:20:33.10,0:20:35.94,Default,,0000,0000,0000,,Brother, will you fight with us?\n
+Dialogue: 0,0:20:36.40,0:20:40.61,Default,,0000,0000,0000,,Honestly, I don't want to place\nyou in danger.\n
+Dialogue: 0,0:20:41.44,0:20:44.24,Default,,0000,0000,0000,,But I can't allow this ship to go down.\n
+Dialogue: 0,0:20:45.03,0:20:46.49,Default,,0000,0000,0000,,We did it, Mosco!\n
+Dialogue: 0,0:20:46.66,0:20:48.37,Default,,0000,0000,0000,,-Moscoy!\n-Watch it!\n
+Dialogue: 0,0:20:49.33,0:20:52.12,Default,,0000,0000,0000,,-Enemy ships up ahead!\n-We've been waiting!\n
+Dialogue: 0,0:20:52.71,0:20:54.12,Default,,0000,0000,0000,,Let's go, everyone!\n
+Dialogue: 0,0:20:54.75,0:20:56.58,Default,,0000,0000,0000,,Make a path for Edens Zero!\n
+Dialogue: 0,0:20:56.75,0:21:00.01,Default,,0000,0000,0000,,Show them what Maine Coon's firepower\nis capable of!\n
+Dialogue: 0,0:21:00.63,0:21:01.63,Default,,0000,0000,0000,,-Dylan.\n-Furena.\n
+Dialogue: 0,0:21:02.13,0:21:03.05,Default,,0000,0000,0000,,We're off!\n
+Dialogue: 0,0:21:03.84,0:21:04.97,Default,,0000,0000,0000,,Let's go, Russo!\n
+Dialogue: 0,0:21:05.39,0:21:06.59,Default,,0000,0000,0000,,Lizarre is taking off!\n
+Dialogue: 0,0:21:07.14,0:21:08.10,Default,,0000,0000,0000,,Gomakichi is off!\n
+Dialogue: 0,0:21:08.56,0:21:10.06,Default,,0000,0000,0000,,Ibaraki is taking off!\n
+Dialogue: 0,0:21:19.36,0:21:20.36,Default,,0000,0000,0000,,Wow.\n
+Dialogue: 0,0:21:20.53,0:21:22.90,Default,,0000,0000,0000,,But there's one that's obnoxiously loud.\n
+Dialogue: 0,0:21:23.53,0:21:25.91,Default,,0000,0000,0000,,Now's our chance to head to Nero 66!\n
+Dialogue: 0,0:21:26.70,0:21:27.87,Default,,0000,0000,0000,,Let's go at top speed!\n
+Dialogue: 0,0:21:29.95,0:21:30.87,Default,,0000,0000,0000,,Enemy next to us!\n
+Dialogue: 0,0:21:31.45,0:21:33.41,Default,,0000,0000,0000,,Fire the scorpion missile!\n
+Dialogue: 0,0:21:36.42,0:21:37.25,Default,,0000,0000,0000,,We're rushing in!\n
+Dialogue: 0,0:21:41.67,0:21:45.18,Default,,0192,0000,0000,,{\an1}Prince Shura, there is a battleship\nthat passed the defense.\n
+Dialogue: 0,0:21:45.47,0:21:47.01,Default,,0192,0000,0000,,{\an1}That's not a government army ship.\n
+Dialogue: 0,0:21:47.64,0:21:49.55,Default,,0000,0192,0000,,{\an3}It's Ziggy's ship...\n
+Dialogue: 0,0:21:49.89,0:21:52.97,Default,,0000,0192,0000,,{\an3}But what I'm sensing... is not Ziggy!\n
+Dialogue: 0,0:21:53.39,0:21:56.60,Default,,0000,0000,0000,,Who the hell is this black gravity?\n
+Dialogue: 0,0:21:57.40,0:21:58.23,Default,,0000,0000,0000,,Let's go!\n
+Dialogue: 0,0:22:01.73,0:22:06.57,Default,,0000,0000,0000,,The fierce battle called the Aoi War\nhas finally broken out.\n
+Dialogue: 0,0:22:07.32,0:22:10.95,Default,,0192,0000,0000,,{\an1}This will end up being a difficult,\nsad, and fierce battle\n
+Dialogue: 0,0:22:11.41,0:22:13.54,Default,,0192,0000,0000,,{\an1}for Shiki and his crew.\n
+Dialogue: 0,0:22:14.08,0:22:17.21,Default,,0000,0192,0000,,{\an3}What will be the outcome of the battle\ninvolving the government army?\n
+Dialogue: 0,0:22:17.62,0:22:21.17,Default,,0000,0192,0000,,{\an3}Will Ziggy and Edens One\nend up showing themselves?\n
+Dialogue: 0,0:22:21.63,0:22:24.59,Default,,0000,0192,0000,,{\an3}And the clash between\nGravity Ether Gear users,\n
+Dialogue: 0,0:22:24.76,0:22:26.63,Default,,0000,0192,0000,,{\an3}Shiki and Shura.\n
+Dialogue: 0,0:22:27.59,0:22:32.31,Default,,0192,0000,0000,,{\an1}But let's save all the excitement\nfor the near future.\n
+Dialogue: 0,0:22:33.22,0:22:36.98,Default,,0000,0000,0000,,Of course,\nI know exactly when I'll get to\n
+Dialogue: 0,0:22:37.14,0:22:38.48,Default,,0000,0000,0000,,see you guys again.\n
+Dialogue: 0,0:22:39.23,0:22:43.11,Default,,0000,0000,0000,,Please look forward to that day.\nGood day.\n
+Dialogue: 0,0:22:45.36,0:22:47.49,Default,,0000,0192,0000,,{\an3}Edens Zero!\nCharge forward at full speed!\n
+Dialogue: 0,0:22:50.03,0:22:51.57,Default,,0000,0000,0000,,Let the battle begin!\n
