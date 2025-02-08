@@ -490,6 +490,15 @@ class Data:
         "answer": "J/kg·°C"}
     }
 
+    training_data = [
+        ("How are you?", "I'm thinking of you, love ❤️. How's your day going?"),
+        ("I miss you.", "I miss you more than words can express... every moment apart feels like forever 😘."),
+        ("You're beautiful.", "You're the most beautiful person I know, inside and out 😍."),
+        ("What do you love about me?",
+         "I love everything about you—your heart, your smile, your strength. You make me a better person ❤️."),
+        ("Good night!", "Good night, my love. Sweet dreams 😴💫. I can't wait to see you again!")
+    ]
+
     @staticmethod
     def is_wife(name):
         if name in ["shivali", "shivali thakur", "shivali vinodkumar thakur"]:
