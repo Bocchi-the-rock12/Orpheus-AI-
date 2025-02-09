@@ -36,6 +36,7 @@ Citations:
 from datetime import date
 import random
 import time
+from openai import OpenAI
 from rich.console import Console
 import openai
 
@@ -317,7 +318,9 @@ class Chat:
     @staticmethod
     def chat():
         """ Receive chat input from user """
-        input("Hello! How can I be of help?")
+        API = OpenAI(api_key="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")
+        responses = API.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "Assistant", "content": "bananas", }])
+
 
     @staticmethod
     def daily_love_quotes():
@@ -336,8 +339,8 @@ class Data:
     date = date.today()
     username = str
     quotes = ["I love you so much amor", "I'm so glad to have you", "I hope you enjoy this gift <3"]
-    last_checked_date = None  # Store last date in memory
-    last_quote = None  # Store last shown quote in memory
+    last_checked_date = None
+    last_quote = None
     welcoming_message = "Hi baby, if you’re reading this then it means you already received the gift. I just want to say that I love you a lot, and I did this with the best of intentions and love for you. Amo-te muito amor <3"
     quiz_game = {
         "What was the date we confessed to each other?": {
@@ -491,21 +494,16 @@ class Data:
         "answer": "J/kg·°C"}
     }
 
-    training_data = [
-        ("How are you?", "I'm thinking of you, love ❤️. How's your day going?"),
-        ("I miss you.", "I miss you more than words can express... every moment apart feels like forever 😘."),
-        ("You're beautiful.", "You're the most beautiful person I know, inside and out 😍."),
-        ("What do you love about me?",
-         "I love everything about you—your heart, your smile, your strength. You make me a better person ❤️."),
-        ("Good night!", "Good night, my love. Sweet dreams 😴💫. I can't wait to see you again!")
-    ]
+    training_data = ["A:\College\Orpheus-AI-\dataset\Subtitle Database\Edens Zero 2nd Season - Subtitles_subtitles.json",
+                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\Edens Zero 2nd Season - Subtitles_subtitles.json",
+                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\Ladykillers (2004) sub_subtitles.json",
+                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\Perfect match sub_subtitles.json",
+                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\personal database.json",
+                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\Titanic (1997).DVD.NonHI.pcc.en.PRMNT_subtitles.json"]
 
     @staticmethod
     def is_wife(name):
-        if name in ["shivali", "shivali thakur", "shivali vinodkumar thakur"]:
-            return True
-        else:
-            return False
+        return name in ["shivali", "shivali thakur", "shivali vinodkumar thakur"]
 
 
 class UI:

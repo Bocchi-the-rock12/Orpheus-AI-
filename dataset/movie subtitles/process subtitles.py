@@ -72,4 +72,4 @@ def save_subtitles_as_json(input_filename, output_dir):
 
 # Save subtitles in different files
 save_subtitles_as_json("A:\\College\\Orpheus-AI-\\dataset\\movie subtitles\\Titanic (1997).DVD.NonHI.pcc.en.PRMNT.ass",
-              "A:\\College\\Orpheus-AI-\\dataset\\movie subtitles")
+              "A:\\College\Orpheus-AI-\\dataset\\Subtitle Database")
