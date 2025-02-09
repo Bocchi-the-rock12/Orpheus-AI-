@@ -406,8 +406,8 @@ class Data:
             "answer": "Sleeping"
         },
         "What food is Shivali's favorite restaurant?": {
-            "options": ["Neetlank", "McDonald's", "Pizzahut", "Any restaurant works"],
-            "answer": "Neetlank"
+            "options": ["Neelkanth", "McDonald's", "Pizzahut", "Any restaurant works"],
+            "answer": "Neelkanth"
         },
         "How does Shivali like her food?": {
             "options": ["With spices and tasty", "Mild and savory", "Sweet and sour", "Spicy but not too hot"],
