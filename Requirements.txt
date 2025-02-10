@@ -1,4 +1,5 @@
 rich
 flask
-pandas
-openai
+chatterbot
+spacy
+en_core_web_sm

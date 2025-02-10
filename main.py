@@ -8,7 +8,8 @@ AUTHORS IDENTIFICATION
   - Afonso Ferreira
 
 Comments:
--
+- The AI in this project was made using the chatterbot library, none of the AI code was designed by me nor do I own it.
+- The database comes from subtitles which are from existing movies and were used for educational purposes
 ------------------------------------------------------
 
 ======================================================
@@ -20,25 +21,15 @@ CHANGELOG:
 24/01/2025 Modificado o jogo da forca e criadas funções para interpretar comandos
 1/02/2025 Implementada a função de love quote
 ======================================================
-
-Citations:
-@inproceedings{Henderson2019,
-    author      = {Matthew Henderson and Pawe{\l} Budzianowski and I{\~{n}}igo Casanueva and Sam Coope and Daniela Gerz and Girish Kumar and Nikola Mrk{\v{s}}i\'c and Georgios Spithourakis and Pei-Hao Su and Ivan Vulic and Tsung-Hsien Wen},
-    title       = {A Repository of Conversational Datasets},
-    year        = {2019},
-    month       = {jul},
-    note        = {Data available at github.com/PolyAI-LDN/conversational-datasets},
-    url         = {https://arxiv.org/abs/1904.06472},
-    booktitle   = {Proceedings of the Workshop on {NLP} for Conversational {AI}},
-}
 """
 
-from datetime import date
-import random
 import time
-from openai import OpenAI
+import random
+import json
+from datetime import date
 from rich.console import Console
-import openai
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
 
 class Games:
@@ -296,45 +287,70 @@ class Games:
                     else:
                         Chat.typing_effect("You lost!", delay=0.2)
                         self.games.ai_score += 1
-                        Chat.typing_effect(f"Score: You {self.games.player_score} - {self.games.ai_score} AI", delay=0.2)
+                        Chat.typing_effect(f"Score: You {self.games.player_score} - {self.games.ai_score} AI", delay=0.1 / 1.5)
                         break
 
 
 class Chat:
-    """ AI chatbot """
-    def __init__(self):
-        self.chating = True
+    # Create and train AI model
+    chatbot = ChatBot(
+        'Orpheus AI',
+        storage_adapter='chatterbot.storage.SQLStorageAdapter',
+        logic_adapters=[
+            'chatterbot.logic.BestMatch',
+            'chatterbot.logic.MathematicalEvaluation',
+            'chatterbot.logic.TimeLogicAdapter',
+        ], database_uri=r"A:\College\Orpheus-AI-\dataset\Training data\combined_data.json")
+
+    trainer = ChatterBotCorpusTrainer(chatbot)
+    trainer.train("chatterbot.corpus.english")
+
+    @staticmethod
+    def get_ai_response(user_input: str):
+        """ Get AI response based on user input using ChatterBot module """
+        response = Chat.chatbot.get_response(user_input)
+        Chat.typing_effect(str(response))
+
+    @staticmethod
+    def ai_chat(user_input: str):
+        """ AI response """
+        Chat.get_ai_response(user_input)
+
+    @staticmethod
+    def train_from_files(file_paths):
+        """ Train the model with data from multiple files """
+        data = Data.load_data_from_files(file_paths)
+
+        # Prepare the data for training ChatterBot
+        formatted_data = [{'input': item['Input'], 'output': item['Output']} for item in data]
+
+        # Train the chatbot with the loaded data
+        trainer = ChatterBotCorpusTrainer(Chat.chatbot)
+        trainer.train(formatted_data)
 
     @staticmethod
     def typing_effect(text: str, delay: float = 0.1):
+        """ Typing effect for text """
         console = Console()
-
         for char in text:
             console.print(char, end="")
             time.sleep(delay)
-
         console.print()
 
     @staticmethod
-    def chat():
-        """ Receive chat input from user """
-        API = OpenAI(api_key="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")
-        responses = API.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "Assistant", "content": "bananas", }])
-
-
-    @staticmethod
     def daily_love_quotes():
-        today_date = date.today()  # Get today's date
+        today_date = date.today()
 
+        # Change the quote daily
         if Data.last_checked_date != today_date:
             Data.last_quote = random.choice(Data.quotes)
             Data.last_checked_date = today_date
-        return Chat.typing_effect(Data.last_quote, delay= 0.1 / 1.5)
+
+        return Chat.typing_effect(Data.last_quote, delay=0.1 / 1.5)
 
 
 class Data:
     """ Manage program data (username, date, quotes, etc...) """
-
     # Variables shared by all methods
     date = date.today()
     username = str
@@ -494,16 +510,19 @@ class Data:
         "answer": "J/kg·°C"}
     }
 
-    training_data = ["A:\College\Orpheus-AI-\dataset\Subtitle Database\Edens Zero 2nd Season - Subtitles_subtitles.json",
-                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\Edens Zero 2nd Season - Subtitles_subtitles.json",
-                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\Ladykillers (2004) sub_subtitles.json",
-                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\Perfect match sub_subtitles.json",
-                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\personal database.json",
-                     "A:\College\Orpheus-AI-\dataset\Subtitle Database\Titanic (1997).DVD.NonHI.pcc.en.PRMNT_subtitles.json"]
-
     @staticmethod
     def is_wife(name):
         return name in ["shivali", "shivali thakur", "shivali vinodkumar thakur"]
+
+    @staticmethod
+    def load_data_from_files(file_paths):
+        """ Method to load data from multiple JSON subtitle files """
+        all_data = []
+        for file_path in file_paths:
+            with open(file_path, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+                all_data.extend(data)
+        return all_data
 
 
 class UI:
@@ -567,8 +586,12 @@ class UI:
 
     @staticmethod
     def chat_commands():
-        """ Placeholder for chat commands if needed in the future """
-        user_input = UI.input_command()
+        """ AI chat commans """
+        while True:
+            user_input = UI.input_command()
+            Chat.ai_chat(user_input)
+            if user_input == "exit":
+                return
 
     @staticmethod
     def daily_quote_command():
@@ -587,7 +610,7 @@ class UI:
     def interpreter(self):
         """ Command interpreter for controlling the flow of the app """
         while True:
-            command = UI.input_command()  # Get user command
+            command = UI.input_command()
             match command:
                 case "games":
                     self.games_commands()
