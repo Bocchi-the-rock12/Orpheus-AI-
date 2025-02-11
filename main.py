@@ -23,13 +23,10 @@ CHANGELOG:
 ======================================================
 """
 
-import json
 import time
 import random
 from datetime import date
 from rich.console import Console
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer, ListTrainer
 
 
 class Games:
@@ -292,77 +289,6 @@ class Games:
 
 
 class Chat:
-    def __init__(self, training_files=None, memory_file="memory.json"):
-        # Initialize the chatbot once using SQLite
-        self.chatbot = ChatBot(
-            'MovieChatBot',
-            storage_adapter='chatterbot.storage.SQLStorageAdapter',
-            database_uri='sqlite:///A:/College/Orpheus-AI-/dataset/Training data/chatbot_database.db',
-            logic_adapters=[
-                'chatterbot.logic.BestMatch',
-                'chatterbot.logic.MathematicalEvaluation'
-                # Removed TimeLogicAdapter to avoid default time responses.
-            ]
-        )
-        self.memory_file = memory_file
-        self.memory = self.load_memory()
-        self.model_trained = False
-        if training_files:
-            self.train_from_files(training_files)
-            self.model_trained = True
-
-    def load_memory(self):
-        try:
-            with open(self.memory_file, 'r', encoding='utf-8') as file:
-                return json.load(file)
-        except FileNotFoundError:
-            return {}
-
-    def save_memory(self):
-        with open(self.memory_file, 'w', encoding='utf-8') as file:
-            json.dump(self.memory, file)
-
-    def update_memory(self, key, value):
-        self.memory[key] = value
-        self.save_memory()
-
-    def chat(self, message):
-        # Process special commands for memory updating:
-        if "my name is" in message.lower():
-            name = message.split("my name is")[-1].strip()
-            self.update_memory("name", name)
-            return f"Got it! I'll remember your name as {name}."
-        if "what's my name" in message.lower():
-            name = self.memory.get("name", None)
-            if name:
-                return f"Your name is {name}."
-            else:
-                return "I don't know your name yet!"
-
-        # If the model isn't trained, warn the user.
-        if not self.model_trained:
-            return "The model is not trained yet. Please train the model first."
-
-        # Get response from the trained chatbot
-        response = self.chatbot.get_response(message)
-        return str(response)
-
-    def train_from_files(self, file_paths):
-        """Train the model with data from multiple JSON files.
-           Each file should contain an array of objects with "Input" and "Output" keys."""
-        data = []
-        for file_path in file_paths:
-            with open(file_path, 'r', encoding='utf-8') as file:
-                data.extend(json.load(file))
-        # Format the data as a flat list of alternating inputs and outputs.
-        formatted_data = []
-        for item in data:
-            formatted_data.append(item["Input"])
-            formatted_data.append(item["Output"])
-        trainer = ListTrainer(self.chatbot)
-        trainer.train(formatted_data)
-        self.model_trained = True
-
     @staticmethod
     def typing_effect(text, delay=0.1):
         console = Console()
@@ -371,14 +297,10 @@ class Chat:
             time.sleep(delay)
         console.print()
 
-    def daily_love_quotes(self, quotes):
-        """Display a daily love quote. 'quotes' should be a list of strings."""
-        today_date = date.today()
-        if self.memory.get("last_checked_date") != str(today_date):
-            self.memory["last_quote"] = random.choice(quotes)
-            self.memory["last_checked_date"] = str(today_date)
-            self.save_memory()
-        self.typing_effect(self.memory["last_quote"], delay=0.1 / 1.5)
+    @staticmethod
+    def daily_love_quotes():
+        """Display the daily love quote. """
+        pass
 
 
 class Data:
@@ -546,16 +468,6 @@ class Data:
     def is_wife(name):
         return name in ["shivali", "shivali thakur", "shivali vinodkumar thakur"]
 
-    @staticmethod
-    def load_data_from_files(file_paths):
-        """ Method to load data from multiple JSON subtitle files """
-        all_data = []
-        for file_path in file_paths:
-            with open(file_path, 'r', encoding='utf-8') as file:
-                data = json.load(file)
-                all_data.extend(data)
-        return all_data
-
 
 class UI:
     """ Handles user interaction """
@@ -619,19 +531,7 @@ class UI:
     @staticmethod
     def chat_commands():
         """ AI chat commands """
-        training_files = [
-            r"A:\College\Orpheus-AI-\dataset\Subtitle Database\Contigo en el futuro 2025 1080p WEBRip x264 AAC5.1 [YTS.MX]_subtitles.json",
-            r"A:\College\Orpheus-AI-\dataset\Subtitle Database\Edens Zero 2nd Season - Subtitles_subtitles.json",
-            r"A:\College\Orpheus-AI-\dataset\Subtitle Database\Perfect match sub_subtitles.json",
-            r"A:\College\Orpheus-AI-\dataset\Subtitle Database\personal database.json"
-        ]
-        chat_instance = Chat(training_files=training_files)
-        while True:
-            user_input = UI.input_command()
-            if user_input.lower() == "exit":
-                break
-            response = chat_instance.chat(user_input)
-            Chat.typing_effect(response, delay=0.1 / 1.5)
+        pass
 
     @staticmethod
     def daily_quote_command():
