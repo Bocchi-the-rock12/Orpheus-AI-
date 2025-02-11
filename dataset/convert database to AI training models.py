@@ -1,30 +1,24 @@
 import json
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
-files = [
-    r"A:\College\Orpheus-AI-\dataset\Subtitle Database\Contigo en el futuro 2025 1080p WEBRip x264 AAC5.1 [YTS.MX]_subtitles.json",
-    r"A:\College\Orpheus-AI-\dataset\Subtitle Database\Edens Zero 2nd Season - Subtitles_subtitles.json",
-    r"A:\College\Orpheus-AI-\dataset\Subtitle Database\Perfect match sub_subtitles.json",
-    r"A:\College\Orpheus-AI-\dataset\Subtitle Database\personal database.json",
-    r"A:\College\Orpheus-AI-\dataset\Subtitle Database\Titanic (1997).DVD.NonHI.pcc.en.PRMNT_subtitles.json"
-]
+chatbot = ChatBot(
+    'ChatBot',
+    storage_adapter='chatterbot.storage.SQLStorageAdapter',
+    database_uri='sqlite:///A:/College/Orpheus-AI-/dataset/Training data/chatbot_database.db',
+    logic_adapters=[
+        'chatterbot.logic.BestMatch',
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.TimeLogicAdapter'
+    ]
+)
 
-combined_data = []
+trainer = ChatterBotCorpusTrainer(chatbot)
 
-for file_path in files:
-    with open(file_path, 'r', encoding='utf-8') as file:
-        data = json.load(file)
+# Load your own custom data
+with open('A:/College/Orpheus-AI-/dataset/Training data/combined_data.json') as json_file:
+    training_data = json.load(json_file)
+    for entry in training_data:
+        chatbot.train([entry])  # Train each entry (a dictionary with 'Input' and 'Output' keys)
 
-        for item in data:
-            combined_data.append({
-                "Input": item.get("Input"),
-                "Output": item.get("Output")
-            })
-
-output_file_path = r"A:\College\Orpheus-AI-\dataset\Training data\combined_data.json"
-
-
-with open(output_file_path, 'w', encoding='utf-8') as output_file:
-    json.dump(combined_data, output_file, ensure_ascii=False, indent=4)
-
-print(f"Data successfully combined and saved to {output_file_path}")
 
