@@ -295,7 +295,7 @@ class Games:
 
 class Chat:
     def __init__(self):
-        with open("A:/College/Orpheus-AI-/dataset/Subtitle Database/personal database.json", "r") as file:
+        with open("/dataset/Database/personal database.json", "r") as file:
             self.personal_database = json.load(file)
 
         # Example pre-made Rasa database
@@ -351,7 +351,7 @@ class Response(Action):
         return "action_respond_from_database"
 
     def __init__(self):
-        with open("A:/College/Orpheus-AI-/dataset/Subtitle Database/personal database.json", "r") as file:
+        with open("/dataset/Database/personal database.json", "r") as file:
             self.database = json.load(file)
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:

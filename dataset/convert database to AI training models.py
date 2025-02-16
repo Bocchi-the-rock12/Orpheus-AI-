@@ -1,7 +1,7 @@
 import yaml
 import json
 
-with open('A:\College\Orpheus-AI-\dataset\Subtitle Database\personal database.json', 'r') as file:
+with open('/dataset/Database\personal database.json', 'r') as file:
     json_data = json.load(file)
 
 def generate_nlu_file(data):
