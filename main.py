@@ -8,8 +8,8 @@ AUTHORS IDENTIFICATION
   - Afonso Ferreira
 
 Comments:
-- The AI in this project was made using the chatterbot library, none of the AI code was designed by me nor do I own it.
-- The database comes from subtitles which are from existing movies and were used for educational purposes
+- The AI was purely programmed by AI (ironic) and I do not own that part of the project.
+- Some parts of the main code frame where also done with the assistance of AI
 ------------------------------------------------------
 
 ======================================================
@@ -24,9 +24,14 @@ CHANGELOG:
 """
 
 import time
-import random
 from datetime import date
+import random
+import json
+import subprocess
+from typing import Any, Text, Dict, List
 from rich.console import Console
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
 
 
 class Games:
@@ -289,6 +294,16 @@ class Games:
 
 
 class Chat:
+    def __init__(self):
+        with open("A:/College/Orpheus-AI-/dataset/Subtitle Database/personal database.json", "r") as file:
+            self.personal_database = json.load(file)
+
+        # Example pre-made Rasa database
+        self.pre_made_database = [
+            {"Input": "What is the capital of France?", "Output": "The capital of France is Paris."},
+            {"Input": "Who wrote 'To Kill a Mockingbird'?", "Output": "Harper Lee wrote 'To Kill a Mockingbird'."}
+        ]
+
     @staticmethod
     def typing_effect(text, delay=0.1):
         console = Console()
@@ -298,14 +313,68 @@ class Chat:
         console.print()
 
     @staticmethod
-    def daily_love_quotes():
-        """Display the daily love quote. """
-        pass
+    def daily_love_quotes(quotes: list[str]):
+        """Displays the daily love quote."""
+        if not Data.checked_daily_quote:
+            Data.checked_daily_quote = True  # Update the class variable
+            return Chat.typing_effect(f"{random.choice(quotes)}", delay=0.1 / 1.5)
+        else:
+            Chat.typing_effect("You already checked your daily love quote!", delay=0.1 / 1.5)
+
+    def respond(self, user_input):
+        response = self.get_response(user_input)
+        self.typing_effect(response)
+
+    def get_response(self, user_input):
+        # Check personal database first
+        response = self.find_response(user_input, self.personal_database)
+        if response:
+            return response
+
+        # Check pre-made Rasa database if not found in personal database
+        response = self.find_response(user_input, self.pre_made_database)
+        if response:
+            return response
+
+        return "I'm sorry, I don't have a response for that."
+
+    @staticmethod
+    def find_response(user_input, database):
+        for item in database:
+            if user_input.lower() == item["Input"].lower():
+                return item["Output"]
+        return None
+
+
+class Response(Action):
+    def name(self) -> Text:
+        return "action_respond_from_database"
+
+    def __init__(self):
+        with open("A:/College/Orpheus-AI-/dataset/Subtitle Database/personal database.json", "r") as file:
+            self.database = json.load(file)
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        user_message = tracker.latest_message.get('text')
+        response = self.get_response(user_message)
+
+        if response:
+            dispatcher.utter_message(text=response)
+        else:
+            dispatcher.utter_message(text="I'm sorry, I don't have a response for that.")
+        return []
+
+    def get_response(self, user_message: str):
+        for item in self.database:
+            if user_message.lower() == item["Input"].lower():
+                return item["Output"]
+        return None
 
 
 class Data:
     """ Manage program data (username, date, quotes, etc...) """
     # Variables shared by all methods
+    checked_daily_quote = False
     date = date.today()
     username = str
     quotes = ["I love you so much amor", "I'm so glad to have you", "I hope you enjoy this gift <3"]
@@ -474,8 +543,35 @@ class UI:
     def __init__(self):
         self.chat_instance = Chat()
         self.games = Games()
-        self.chat = Chat()
         self.data = Data()
+
+        # Train the Rasa model when initializing the UI
+        self.train_rasa_model()
+
+        # Start Rasa server and custom action server
+        self.start_rasa_server()
+        self.start_action_server()
+
+    @staticmethod
+    def train_rasa_model():
+        """Train the Rasa model by invoking the rasa train command."""
+        print("Training Rasa model...")
+        subprocess.run(["rasa", "train"])
+        print("Training complete.")
+
+    @staticmethod
+    def start_rasa_server():
+        """ Start the Rasa server."""
+        print("Starting Rasa server...")
+        subprocess.Popen(["rasa", "run"])
+        print("Rasa server started.")
+
+    @staticmethod
+    def start_action_server():
+        """Start the custom action server."""
+        print("Starting custom action server...")
+        subprocess.Popen(["rasa", "run", "actions"])
+        print("Custom action server started.")
 
     @staticmethod
     def game_replay():
@@ -528,14 +624,17 @@ class UI:
                 love_quiz = Games.LoveQuiz(self.games)
                 love_quiz.game()
 
-    @staticmethod
-    def chat_commands():
+    def chat_commands(self):
         """ AI chat commands """
-        pass
+        while True:
+            user_input = input("You: ").strip()
+            if user_input.lower() == "exit":
+                return
+            self.chat_instance.respond(user_input)
 
     @staticmethod
     def daily_quote_command():
-        Chat.daily_love_quotes()
+        Chat.daily_love_quotes(Data.quotes)
 
     @staticmethod
     def command_help():
@@ -548,26 +647,25 @@ class UI:
         Chat.typing_effect("- Exit, to leave the application", delay=0.1 / 1.5)
 
     def interpreter(self):
-        """ Command interpreter for controlling the flow of the app """
+        """ Command interpreter for controlling the app """
         while True:
             command = UI.input_command()
-            match command:
-                case "games":
-                    self.games_commands()
-                case "chat":
-                    self.chat_commands()
-                case "exit":
-                    Chat.typing_effect("Thanks for using our AI.", delay=0.1 / 1.5)
-                    break
-                case "help":
-                    self.command_help()
-                case "daily quote":
-                    if Data.is_wife(Data.username):
-                        Chat.daily_love_quotes()
-                    else:
-                        Chat.typing_effect("ERROR! Invalid credentials.", delay=0.1 / 1.5)
-                case _:
-                    Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
+            if command == "games":
+                self.games_commands()
+            elif command == "chat":
+                self.chat_commands()
+            elif command == "exit":
+                Chat.typing_effect("Thanks for using our AI.", delay=0.1 / 1.5)
+                break
+            elif command == "help":
+                self.command_help()
+            elif command == "daily quote":
+                if Data.is_wife(Data.username):
+                    Chat.daily_love_quotes(Data.quotes)
+                else:
+                    Chat.typing_effect("ERROR! Invalid credentials.", delay=0.1 / 1.5)
+            else:
+                Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
     @staticmethod
     def input_command():

@@ -1,0 +1,52 @@
+version: "2.0"
+
+stories:
+  - story: "Greet User"
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - story: "Educational Facts"
+    steps:
+      - intent: educational_facts
+      - action: utter_educational_facts
+
+  - story: "Questions About the Creator"
+    steps:
+      - intent: questions
+      - action: utter_questions
+
+  - story: "Love Confirmation"
+    steps:
+      - intent: love
+      - action: utter_love
+
+  - story: "Jokes"
+    steps:
+      - intent: jokes
+      - action: utter_jokes
+
+  - story: "Advice"
+    steps:
+      - intent: advice
+      - action: utter_advice
+
+  - story: "Sports Conversation"
+    steps:
+      - intent: sports
+      - action: utter_sports
+
+  - story: "Food Suggestions"
+    steps:
+      - intent: food
+      - action: utter_food
+
+  - story: "Anime Discussion"
+    steps:
+      - intent: anime
+      - action: utter_anime
+
+  - story: "Mathematics Facts"
+    steps:
+      - intent: mathematics
+      - action: utter_mathematics

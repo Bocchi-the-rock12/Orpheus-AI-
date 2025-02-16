@@ -1,0 +1,187 @@
+version: '2.0'
+nlu:
+  - intent: greet
+    examples: |
+      - Hi amor
+      - I love you so much <3
+      - I'm not feeling well, bae
+      - I'm really happy to have you
+      - How are you feeling today?
+      - What can I do for you?
+      - Is there anything you need help with?
+
+  - intent: educational_facts
+    examples: |
+      - What is gravity?
+      - Explain me integrals
+      - Explain me derivatives
+      - What is a black hole?
+      - What is the photoelectric effect?
+      - What is an electromagnetic wave?
+      - What color are giraffe tongues?
+      - Tell me about Ancient Egypt
+      - Tell me about Julius Caesar
+      - What was the Black Death?
+      - Where is the Eiffel Tower located?
+      - What is the capital of France?
+      - Tell me about the solar system
+      - What is the largest continent?
+      - What is the theory of relativity?
+      - Who was Socrates?
+      - What is existentialism?
+      - Tell me about the Industrial Revolution
+      - What is the theory of evolution?
+      - Who discovered America?
+      - What is the longest river in the world?
+      - Where is the Great Wall of China?
+      - Who was Alexander the Great?
+      - What are the Seven Wonders of the Ancient World?
+      - What was the French Revolution?
+      - Who invented the telephone?
+      - What is the meaning of life, according to philosophy?
+      - What is the largest ocean on Earth?
+      - What is the significance of the Renaissance?
+      - Who is Maguns Carlsen?
+      - What caused World War I?
+      - What is the Pythagorean theorem?
+      - What are the pyramids of Egypt made of?
+      - How does a volcano erupt?
+      - Who is the founder of Buddhism?
+      - How does photosynthesis work?
+      - Where is the Great Barrier Reef?
+
+  - intent: questions
+    examples: |
+      - Do you know Afonso Ferreira?
+      - Do you know who Shivali is?
+      - What can I do today?
+      - What is your favourite subject?
+      - What is your favourite color?
+      - Do you have any siblings?
+      - Would you like to play a game with me?
+      - Any advice for today?
+      - If you could visit any country, where would you travel first?
+      - What is your favourite animal?
+      - Who's your favourite human being?
+      - What's something only Afonso and I would know?
+      - What is a song which reminds Afonso about me?
+      - How is the weather today?
+      - What should I eat for lunch?
+      - What do you think is the most valuable aspect someone can have?
+      - What is your opinion on politics?
+      - What's your favourite Pokémon?
+      - What TV show would you recommend me?
+      - What is your favorite anime?
+      - What do you enjoy doing?
+      - Can you help me with my mathematics homework?
+      - I want to learn programming, where do you recommend me to start?
+      - What are you scared the most off?
+
+  - intent: love
+    examples: |
+      - Does Afonso love me?
+      - Why does Afonso loves me?
+      - Who's the best wife ever?
+
+  - intent: jokes
+    examples: |
+      - Tell me a joke
+      - Make me laugh
+      - I need a good joke
+      - Can you tell me something funny?
+      - What's a funny joke?
+      - Tell me a pun
+      - Give me a one-liner
+      - Do you know any jokes?
+      - Tell me a random joke
+
+  - intent: advice
+    examples: |
+      - Can you give me some advice?
+      - Could you help me? I'm going through a hard phase
+      - I am not feeling very well...
+      - I'm currently feeling sad
+      - I feel sad
+      - I feel angry
+      - I'm starting to wonder why I work so much, this isn't working at all :(
+      - I don't understand why this isn't working
+
+  - intent: sports
+    examples: |
+      - What sport can I practise?
+      - What is your favorite chess opening?
+      - What's your favorite sport?
+      - Would you rather watch a football or a tennis match?
+      - Is it football or soccer?
+      - Tell me a bit more about the history of football
+      - I would like to know about cricket please
+      - Could we talk about sports?
+      - What's Afonso favorite sport?
+
+  - intent: food
+    examples: |
+      - What is your favorite food?
+      - Teach me about italian cuisine
+      - Could you give me a recipe for me to try at home?
+      - Where can I eat today?
+      - How can I cook better?
+      - Tell me more about portuguese cuisine
+      - What are your favorite portuguese desserts?
+      - Can you describe me how to make pancakes please?
+      - What can I cook for my family tonight?
+      - My small kid doesn't eat many things, what can I give her?
+      - What can I feed a small child?
+      - What was Afonso favorite food when he was a kid?
+
+  - intent: anime
+    examples: |
+      - What's your favorite anime of 2023?
+      - Who's your favorite character from every anime?
+      - If you could transport yourself to any anime world, where would you go?
+      - Do you have a favorite Pokémon trainer?
+      - What was the best Pokémon anime season?
+      - Do you read manga?
+      - Recommend me mangas to read
+      - Do you enjoy manhwa?
+      - My {name} loves webtoons, do you enjoy them too?
+      - What is anime about?
+      - Tell me an anime good for beginners
+      - Give me a good anime video game to play
+      - What VGC tournament do you think was the best?
+      - What is your favorite Pokémon video game?
+
+  - intent: ask_name
+    examples: |
+      - What is your name?
+      - Could you tell me your name please?
+
+  - intent: mathematics
+    examples: |
+      - Can you help me with my math homework?
+      - Teach me how to calculate the area of a parametric curve
+      - I need help solving this really hard mathematics problem
+      - How do I calculate this integral?
+      - Could you graph this function for me?
+      - Why wasn't the Riemann hypothesis proved yet?
+      - What is the Zeta Riemann function?
+      - What's the difference between a Riemann integral and an improper integral?
+      - Could you teach me how to do the Gauss Jordan elimination in matrices?
+      - Who's your favorite mathematician?
+      - What is graph theory?
+      - What's the theorem of 'aperto de mão' in graph theory?
+      - Explain to me what discrete math is
+      - Why is math useful?
+      - Can you explain to me linear applications?
+      - Could you calculate some probabilities for me?
+      - Teach me the history of mathematics
+      - What are complex numbers?
+      - What is considered the most beautiful mathematical equation in the world?
+
+  - intent: fun_facts
+    examples: |
+      - Can you give me some fun facts?
+      - Tell me a fun fact.
+      - Do you have any fun facts?
+      - I'd like to hear a fun fact.
+      - Share a fun fact with me.
+      - What are some fun facts?
