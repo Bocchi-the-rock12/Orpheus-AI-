@@ -34,6 +34,7 @@ nlu:
       - Explain the photoelectric effect
       - What is the photoelectric effect in simple terms?
       - How do rockets fly? 
+      - What is the theory of relativity?
     entities:
       - gravity
       - black hole
@@ -41,6 +42,7 @@ nlu:
       - photoelectric effect
       - rocket launch
       - newtons laws
+      - relativity
 
   - intent: ask_mathematics
     examples: |
@@ -49,11 +51,22 @@ nlu:
       - What is the Pythagorean theorem?
       - Can you help me with my math homework?
       - How do I calculate this integral?
+      - What is a Riemann integral?
+      - Could you tell me about the Zeta Riemann function?
+      - Can you explain to me what is the handshaking lemma?
+      - Tell me more about improper integrals
+      - Tell me about complex numbers
     entities:
       - integrals
       - derivatives
       - Pythagorean theorem
       - math homework
+      - Custom integral
+      - Riemann integral
+      - Zeta Riemann function
+      - Handshaking lemma
+      - Improper integral
+      - complex numbers
 
   - intent: ask_history
     examples: |
@@ -63,6 +76,11 @@ nlu:
       - What was the French Revolution?
       - Who was Alexander the Great?
       - Who discovered America?
+      - What did Christopher Columbus do?
+      - Who discovered America?
+      - What are the Seven Wonders of the Ancient World?
+      - Who invented the telephone?
+      - What caused World War I?
     entities:
       - Julius Caesar
       - Black Death
@@ -70,6 +88,9 @@ nlu:
       - French Revolution
       - Alexander the Great
       - Discovery of America
+      - seven wonders
+      - telephone
+      - WWI
 
   - intent: ask_geography
     examples: |
@@ -77,11 +98,13 @@ nlu:
       - What is the longest river in the world?
       - Where is the Eiffel Tower located?
       - Where is the Great Barrier Reef?
+      - What is the largest ocean?
     entities:
       - largest continent
       - longest river
       - Eiffel Tower
       - Great Barrier Reef
+      - big ocean
 
   - intent: ask_philosophy
     examples: |
@@ -100,12 +123,18 @@ nlu:
       - Tell me about the solar system
       - How does a volcano erupt?
       - How does photosynthesis work?
-      - What are complex numbers?
+      - Why are giraffe tongues blue?
+      - What is the theory of evolution?
+      - What was the Renaissance?
+      - When did the industrial revolution start?
     entities:
       - solar system
       - volcano eruption
       - photosynthesis
-      - complex numbers
+      - giraffe
+      - theory of evo
+      - renaissance
+      - industrial revolution
 
   - intent: fun_facts
     examples: |
@@ -175,7 +204,7 @@ nlu:
       - How can I cook better?
       - Tell me more about Portuguese cuisine
       - What are your favorite Portuguese desserts?
-      - Can you describe me how to make pancakes please?
+      - Can you describe me how to make pancakes, please?
     entities:
       - favourite food
       - Italian cuisine
