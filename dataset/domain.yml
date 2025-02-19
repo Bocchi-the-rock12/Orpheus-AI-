@@ -163,11 +163,50 @@ responses:
     - text: "I love making quick, tasty meals! How about a homemade pizza?"
     - text: "A good and easy meal idea is avocado toast with a poached egg on top."
   
-actions: []
+actions:
+  - action_greet
+  - action_talk_sports
+  - action_mathematics
+  - action_joke
+  - action_cooker
+  - action_geography
+  - action_history
+  - action_philosophy
+  - action_love
+  - action_check_emotional_state
+  - action_provide_advice
+  - action_explain_science
+  
 
-entities: []
-
+entities:
+  - emotion
+  - physics_term
+  - math_term
+  - food_item
+  - geography_term
+  - history_term
+  - science_term
+  - love
+  - cooking
+  - anime 
+  - questions
+  
 slots:
   user_name:
-    type: text
-    influence_conversation: false
+    type: unfeaturized  
+    influence_conversation: true  
+  user_mood:
+    type: text  # 
+    influence_conversation: true  
+  preferred_topic:
+    type: text  
+    influence_conversation: true  
+  food_item:
+    type: text  
+    influence_conversation: true  
+  emotion:
+    type: text 
+    influence_conversation: true 
+
+
+
