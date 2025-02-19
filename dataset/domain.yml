@@ -183,7 +183,7 @@ actions:
   - action_provide_advice
   - action_explain_science
   - action_miscelaneous
-  
+  - action_question
 
 entities:
   - emotion
@@ -213,6 +213,9 @@ slots:
     influence_conversation: true  
   emotion:
     type: text 
+    influence_conversation: true 
+  typoe_of_question:
+    type: text
     influence_conversation: true 
 
 
