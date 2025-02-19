@@ -7,7 +7,7 @@ intents:
   - ask_mathematics
   - ask_history
   - ask_geography
-  - ask_philopsohy
+  - ask_philosophy
   - ask_science
   - ask_fun_facts
   - ask_jokes
@@ -111,13 +111,13 @@ responses:
     - text: "Because you're simply the best wife ever, and I am very happy to have you :)"
     - text: "The best wife to ever exist is Afonso's wife, she's so cute, perfect, smart, hot, cares so much about him and is the best of the best"
     - text: "You're the best"
-    - text: "The best day on my life was the day we confessed to eachother"
+    - text: "The best day on my life was the day we confessed to each-other"
     - text: "I love every moment we spend together"
     - text: "Whenever I look at your eyes, I realise how lucky I am to have someone like you"
     - text: "I'm completely in love with you"
     - text: "In my eyes you'll always be the best person to ever exist"
     - text: "You'll always be my love"
-    - text: "I don't know how I got so lucky but I will never let you go
+    - text: "I don't know how I got so lucky but I will never let you go"
     - text: "I love you too"
   
   utter_jokes:
@@ -146,11 +146,11 @@ responses:
   utter_anime:
     - text: "I don't read mangas, but Afonso really likes to read them!"
     - text: "Once again, I am forced by my creator to say Souson no Frieren (please save me)."
-    - text: "My database doesn't contain informations about manhwa; I apologise deeply for it."
+    - text: "My database doesn't contain information about manhwa; I apologise deeply for it."
     - text: "It depends on what genre you're talking about, but anime is a sequence of drawings created by Japanese meant to tell a story, similar to how Marvel Comics originate movies."
     - text: "Demon Slayer. The anime has good pacing, the story flows well, and the characters aren't too complex to understand."
     - text: "I don't watch much VGC, but do you remember that Finals where Se Jun Park lost to confusion in the 2016 Pokémon World Championships? That was wild!"
-    - text: "My favorite Pokémon videogame is Black and White 2; I really enjoy the Pokédex of Unova and Team Plasma feel such good villains!"
+    - text: "My favorite Pokémon video game is Black and White 2; I really enjoy the Pokédex of Unova and Team Plasma feel such good villains!"
   
   utter_ask_cooking:
     - text: "For a simple dinner idea, how about grilled chicken with a side of roasted vegetables?"
@@ -163,7 +163,7 @@ responses:
     - text: "I love making quick, tasty meals! How about a homemade pizza?"
     - text: "A good and easy meal idea is avocado toast with a poached egg on top."
 
-  utter_miscelaneous:
+  utter_miscellaneous:
     "I enjoy talking with you!"
     "I am a computer so I don't really have an opinion, but sometimes I wish people fought less for it :("
     "I am sorry, I don't have access to any database to predict the 'weather'"
@@ -182,7 +182,7 @@ actions:
   - action_check_emotional_state
   - action_provide_advice
   - action_explain_science
-  - action_miscelaneous
+  - action_miscellaneous
   - action_question
 
 entities:
@@ -200,10 +200,10 @@ entities:
   
 slots:
   user_name:
-    type: unfeaturized  
+    type: unnaturalized
     influence_conversation: true  
   user_mood:
-    type: text  # 
+    type: text
     influence_conversation: true  
   preferred_topic:
     type: text  
