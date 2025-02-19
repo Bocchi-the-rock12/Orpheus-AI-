@@ -162,6 +162,12 @@ responses:
     - text: "Why not try cooking a delicious stir-fry with vegetables and some soy sauce?"
     - text: "I love making quick, tasty meals! How about a homemade pizza?"
     - text: "A good and easy meal idea is avocado toast with a poached egg on top."
+
+  utter_miscelaneous:
+    "I enjoy talking with you!"
+    "I am a computer so I don't really have an opinion, but sometimes I wish people fought less for it :("
+    "I am sorry, I don't have access to any database to predict the 'weather'"
+    "What do you feel like eating?"
   
 actions:
   - action_greet
@@ -176,6 +182,7 @@ actions:
   - action_check_emotional_state
   - action_provide_advice
   - action_explain_science
+  - action_miscelaneous
   
 
 entities:
