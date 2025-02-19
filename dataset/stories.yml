@@ -1,3 +1,5 @@
+version: "3.1"
+
 version: "2.0"
 
 stories:
@@ -6,47 +8,75 @@ stories:
       - intent: greet
       - action: utter_greet
 
-  - story: "Educational Facts"
+  - story: "Educational Facts - Physics"
     steps:
-      - intent: educational_facts
-      - action: utter_educational_facts
+      - intent: ask_physics
+      - action: action_explain_science
 
-  - story: "Questions About the Creator"
+  - story: "Educational Facts - Mathematics"
     steps:
-      - intent: questions
-      - action: utter_questions
+      - intent: ask_mathematics
+      - action: action_mathematics
 
-  - story: "Love Confirmation"
+  - story: "Educational Facts - History"
     steps:
-      - intent: love
-      - action: utter_love
+      - intent: ask_history
+      - action: action_history
+
+  - story: "Educational Facts - Geography"
+    steps:
+      - intent: ask_geography
+      - action: action_geography
+
+  - story: "Educational Facts - Science"
+    steps:
+      - intent: ask_science
+      - action: action_explain_science
+
+  - story: "Fun Facts"
+    steps:
+      - intent: ask_fun_facts
+      - action: action_fun_facts
 
   - story: "Jokes"
     steps:
-      - intent: jokes
-      - action: utter_jokes
+      - intent: ask_jokes
+      - action: action_joke
 
-  - story: "Advice"
+  - story: "PQ (Personal Questions)"
     steps:
-      - intent: advice
-      - action: utter_advice
-
-  - story: "Sports Conversation"
-    steps:
-      - intent: sports
-      - action: utter_sports
-
-  - story: "Food Suggestions"
-    steps:
-      - intent: food
-      - action: utter_food
+      - intent: ask_PQ
+      - action: action_ask_personal_question
 
   - story: "Anime Discussion"
     steps:
-      - intent: anime
-      - action: utter_anime
+      - intent: ask_anime
+      - action: action_anime
 
-  - story: "Mathematics Facts"
+  - story: "Food Suggestions"
     steps:
-      - intent: mathematics
-      - action: utter_mathematics
+      - intent: ask_food
+      - action: action_cooker
+
+  - story: "Sports Conversation"
+    steps:
+      - intent: ask_sports
+      - action: action_talk_sports
+
+  - story: "Love Confirmation"
+    steps:
+      - intent: ask_love
+      - action: action_love
+
+  - story: "Advice"
+    steps:
+      - intent: ask_advice
+      - action: action_provide_advice
+
+  - story: "Miscellaneous Questions"
+    steps:
+      - intent: ask_misc
+      - action: action_miscellaneous
+
+
+
