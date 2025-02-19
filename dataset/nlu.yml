@@ -17,14 +17,30 @@ nlu:
       - I feel angry
       - I'm going through a hard phase
       - Could you help me? I'm struggling
+    entities:
+      - sad
+      - angry
+      - not feeling well
+      - struggling
+      - hard phase
 
   - intent: ask_physics
     examples: |
       - What is gravity?
       - What is a black hole?
-      - What is an electromagnetic wave?
-      - What is the photoelectric effect?
-      - Explain Newton's Laws
+      - Can you explain electromagnetic waves?
+      - Tell me about the photoelectric effect
+      - What happens in a rocket launch according to Newton’s laws?
+      - Explain the photoelectric effect
+      - What is the photoelectric effect in simple terms?
+      - How do rockets fly? 
+    entities:
+      - gravity
+      - black hole
+      - electromagnetic waves
+      - photoelectric effect
+      - rocket launch
+      - newtons laws
 
   - intent: ask_mathematics
     examples: |
@@ -33,6 +49,11 @@ nlu:
       - What is the Pythagorean theorem?
       - Can you help me with my math homework?
       - How do I calculate this integral?
+    entities:
+      - integrals
+      - derivatives
+      - Pythagorean theorem
+      - math homework
 
   - intent: ask_history
     examples: |
@@ -42,6 +63,13 @@ nlu:
       - What was the French Revolution?
       - Who was Alexander the Great?
       - Who discovered America?
+    entities:
+      - Julius Caesar
+      - Black Death
+      - Great Wall of China
+      - French Revolution
+      - Alexander the Great
+      - Discovery of America
 
   - intent: ask_geography
     examples: |
@@ -49,6 +77,11 @@ nlu:
       - What is the longest river in the world?
       - Where is the Eiffel Tower located?
       - Where is the Great Barrier Reef?
+    entities:
+      - largest continent
+      - longest river
+      - Eiffel Tower
+      - Great Barrier Reef
 
   - intent: ask_philosophy
     examples: |
@@ -56,6 +89,11 @@ nlu:
       - Who was Socrates?
       - What is the meaning of life, according to philosophy?
       - What is the theory of relativity?
+    entities:
+      - existentialism
+      - Socrates
+      - meaning of life
+      - theory of relativity
 
   - intent: ask_science
     examples: |
@@ -63,14 +101,20 @@ nlu:
       - How does a volcano erupt?
       - How does photosynthesis work?
       - What are complex numbers?
+    entities:
+      - solar system
+      - volcano eruption
+      - photosynthesis
+      - complex numbers
 
-  # Fun & Casual
   - intent: fun_facts
     examples: |
       - Can you give me some fun facts?
       - Tell me a fun fact.
       - Do you have any fun facts?
       - I'd like to hear a fun fact.
+    entities:
+      - fun fact
 
   - intent: jokes
     examples: |
@@ -78,6 +122,9 @@ nlu:
       - Make me laugh
       - Give me a one-liner
       - Do you know any jokes?
+    entities:
+      - joke
+      - one-liner
 
   - intent: personal_questions
     examples: |
@@ -90,8 +137,17 @@ nlu:
       - What is your favourite animal?
       - What is your favourite Pokémon?
       - What TV show would you recommend me?
+    entities:
+      - favourite subject
+      - favourite color
+      - siblings
+      - game
+      - advice
+      - country
+      - favourite animal
+      - favourite Pokémon
+      - TV show
 
-  # Entertainment & Pop Culture
   - intent: ask_anime
     examples: |
       - What's your favorite anime of 2023?
@@ -102,8 +158,14 @@ nlu:
       - What is anime about?
       - Tell me an anime good for beginners
       - What is your favorite Pokémon video game?
+    entities:
+      - anime
+      - anime world
+      - mangas
+      - manhwa
+      - beginners anime
+      - Pokémon video game
 
-  # Food & Cooking
   - intent: ask_food
     examples: |
       - What is your favorite food?
@@ -114,8 +176,14 @@ nlu:
       - Tell me more about Portuguese cuisine
       - What are your favorite Portuguese desserts?
       - Can you describe me how to make pancakes please?
+    entities:
+      - favourite food
+      - Italian cuisine
+      - recipe
+      - Portuguese cuisine
+      - Portuguese desserts
+      - pancakes
 
-  # Sports & Games
   - intent: ask_sports
     examples: |
       - What sport can I practice?
@@ -123,15 +191,22 @@ nlu:
       - What's your favorite sport?
       - Could we talk about sports?
       - What's Afonso's favorite sport?
+    entities:
+      - sport
+      - chess opening
+      - favourite sport
+      - Afonso's favourite sport
 
-  # Love & Relationships
   - intent: ask_love
     examples: |
       - Does Afonso love me?
       - Why does Afonso love me?
       - Who's the best wife ever?
+    entities:
+      - Afonso
+      - love
+      - wife
 
-  # General Advice
   - intent: ask_advice
     examples: |
       - Can you give me some advice?
@@ -139,11 +214,21 @@ nlu:
       - I feel angry
       - I don't understand why this isn't working
       - What do you think is the most valuable aspect someone can have?
+    entities:
+      - advice
+      - sad
+      - angry
+      - valuable aspect
 
-  # Miscellaneous
   - intent: ask_misc
     examples: |
       - What do you enjoy doing?
       - What is your opinion on politics?
       - How is the weather today?
       - What should I eat for lunch?
+    entities:
+      - enjoy doing
+      - opinion on politics
+      - weather
+      - lunch
+
