@@ -1,160 +1,148 @@
-- intent: greet
-  examples: |
-    - Hi [amor](person)
-    - I love you so much <3
-    - I'm really happy to have you
-    - How are you feeling today?
-    - What can I do for you?
-    - Is there anything you need help with?
+version: "3.1"
 
-- intent: emotional_state
-  examples: |
-    - I'm not feeling well, [bae](person)
-    - I'm currently feeling [sad](emotion)
-    - I feel [sad](emotion)
-    - I feel [angry](emotion)
-    - I'm going through a [hard phase](emotion)
-    - Could you help me? I'm [struggling](emotion)
+nlu:
+  - intent: greet
+    examples: |
+      - Hi [name](person)
+      - I love you so much <3
+      - I'm really happy to have you
+      - How are you feeling today?
+      - What can I do for you?
+      - Is there anything you need help with?
 
-- intent: ask_physics
-  examples: |
-    - What is [gravity](physics)?
-    - What is a [black hole](physics)?
-    - Can you explain [electromagnetic waves](physics)?
-    - Tell me about the [photoelectric effect](physics)
-    - What happens in a [rocket launch](physics) according to [Newton’s laws](physics)?
-    - Explain the [photoelectric effect](physics)
-    - What is the [photoelectric effect](physics) in simple terms?
-    - How do [rockets](physics) fly? 
-    - What is the theory of [relativity](physics)?
+  - intent: ask_physics
+    examples: |
+      - What is [gravity](physics)?
+      - What is a [black hole](physics)?
+      - Can you explain [electromagnetic waves](physics)?
+      - Tell me about the [photoelectric effect](physics)
+      - What happens in a [rocket launch](physics) according to [Newton's laws](physics)?
+      - Explain the [photoelectric effect](physics)
+      - What is the [photoelectric effect](physics) in simple terms?
+      - How do [rockets](physics) fly? 
+      - What is the theory of [relativity](physics)?
 
-- intent: ask_mathematics
-  examples: |
-    - Explain me [integrals](mathematics)
-    - Explain me [derivatives](mathematics)
-    - What is the [Pythagorean theorem](mathematics)?
-    - Can you help me with my [math homework](mathematics)?
-    - How do I calculate this [integral](mathematics)?
-    - What is a [Riemann integral](mathematics)?
-    - Could you tell me about the [Zeta Riemann function](mathematics)?
-    - Can you explain to me what is the [handshaking lemma](mathematics)?
-    - Tell me more about [improper integrals](mathematics)
-    - Tell me about [complex numbers](mathematics)
+  - intent: ask_mathematics
+    examples: |
+      - Explain me [integrals](mathematics)
+      - Explain me [derivatives](mathematics)
+      - What is the [Pythagorean theorem](mathematics)?
+      - Can you help me with my [math homework](mathematics)?
+      - How do I calculate this [integral](mathematics)?
+      - What is a [Riemann integral](mathematics)?
+      - Could you tell me about the [Zeta Riemann function](mathematics)?
+      - Can you explain to me what is the [handshaking lemma](mathematics)?
+      - Tell me more about [improper integrals](mathematics)
+      - Tell me about [complex numbers](mathematics)
 
-- intent: ask_history
-  examples: |
-    - Tell me about [Julius Caesar](history)
-    - What was the [Black Death](history)?
-    - Where is the [Great Wall of China](history)?
-    - What was the [French Revolution](history)?
-    - Who was [Alexander the Great](history)?
-    - Who discovered [America](history)?
-    - What did [Christopher Columbus](history) do?
-    - Who discovered [America](history)?
-    - What are the [Seven Wonders of the Ancient World](history)?
-    - Who invented the [telephone](history)?
-    - What caused [World War I](history)?
+  - intent: ask_history
+    examples: |
+      - Tell me about [Julius Caesar](history)
+      - What was the [Black Death](history)?
+      - Where is the [Great Wall of China](history)?
+      - What was the [French Revolution](history)?
+      - Who was [Alexander the Great](history)?
+      - Who discovered [America](history)?
+      - What did [Christopher Columbus](history) do?
+      - Who discovered [America](history)?
+      - What are the [Seven Wonders of the Ancient World](history)?
+      - Who invented the [telephone](history)?
+      - What caused [World War I](history)?
 
-- intent: ask_geography
-  examples: |
-    - What is the largest [continent](geography)?
-    - What is the longest [river](geography) in the world?
-    - Where is the [Eiffel Tower](geography) located?
-    - Where is the [Great Barrier Reef](geography)?
-    - What is the largest [ocean](geography)?
+  - intent: ask_geography
+    examples: |
+      - What is the largest [continent](geography)?
+      - What is the longest [river](geography) in the world?
+      - Where is the [Eiffel Tower](geography) located?
+      - Where is the [Great Barrier Reef](geography)?
+      - What is the largest [ocean](geography)?
 
-- intent: ask_philosophy
-  examples: |
-    - What is [existentialism](philosophy)?
-    - Who was [Socrates](philosophy)?
-    - What is the [meaning of life](philosophy), according to philosophy?
-    - What is the theory of [relativity](philosophy)?
+  - intent: ask_philosophy
+    examples: |
+      - What is [existentialism](philosophy)?
+      - Who was [Socrates](philosophy)?
+      - What is the [meaning of life](philosophy), according to philosophy?
 
-- intent: ask_science
-  examples: |
-    - Tell me about the [solar system](science)
-    - How does a [volcano eruption](science) happen?
-    - How does [photosynthesis](science) work?
-    - Why are [giraffe tongues](science) blue?
-    - What is the theory of [evolution](science)?
-    - What was the [Renaissance](science)?
-    - When did the [industrial revolution](science) start?
+  - intent: ask_science
+    examples: |
+      - Tell me about the [solar system](science)
+      - How does a [volcano eruption](science) happen?
+      - How does [photosynthesis](science) work?
+      - Why are [giraffe tongues](science) blue?
+      - What is the theory of [evolution](science)?
+      - What was the [Renaissance](science)?
+      - When did the [industrial revolution](science) start?
 
-- intent: fun_facts
-  examples: |
-    - Can you give me some [fun facts](fun fact)?
-    - Tell me a [fun fact](fun fact).
-    - Do you have any [fun facts](fun fact)?
-    - I'd like to hear a [fun fact](fun fact).
+  - intent: fun_facts
+    examples: |
+      - Can you give me some [fun facts](fun_fact)?
+      - Tell me a [fun fact](fun_fact).
+      - Do you have any [fun facts](fun_fact)?
+      - I'd like to hear a [fun fact](fun_fact).
 
-- intent: jokes
-  examples: |
-    - Tell me a [joke](joke)
-    - Make me laugh
-    - Give me a [one-liner](joke)
-    - Do you know any [jokes](joke)?
+  - intent: jokes
+    examples: |
+      - Tell me a [joke](joke)
+      - Make me laugh
+      - Give me a [one-liner](joke)
+      - Do you know any [jokes](joke)?
 
-- intent: personal_questions
-  examples: |
-    - What is your favourite [subject](personal)?
-    - What is your favourite [color](personal)?
-    - Do you have any [siblings](personal)?
-    - Would you like to play a [game](personal) with me?
-    - Any [advice](personal) for today?
-    - If you could visit any [country](personal), where would you travel first?
-    - What is your favourite [animal](personal)?
-    - What is your favourite [Pokémon](personal)?
-    - What [TV show](personal) would you recommend me?
+  - intent: ask_questions
+    examples: |
+      - What is your favourite [subject](personal)?
+      - What is your favourite [color](personal)?
+      - Do you have any [siblings](personal)?
+      - Would you like to play a [game](personal) with me?
+      - Any [advice](personal) for today?
+      - If you could visit any [country](personal), where would you travel first?
+      - What is your favourite [animal](personal)?
+      - What is your favourite [Pokémon](personal)?
+      - What [TV show](personal) would you recommend me?
 
-- intent: ask_anime
-  examples: |
-    - What's your favourite [anime of 2023](anime)?
-    - Who's your favourite [character](anime) from every [anime](anime)?
-    - If you could transport yourself to any [anime world](anime), where would you go?
-    - Recommend me [mangas](anime) to read
-    - Do you enjoy [manhwa](anime)?
-    - What is [anime](anime) about?
-    - Tell me an [anime good for beginners](anime)
-    - What is your favourite [Pokémon video game](anime)?
+  - intent: ask_anime
+    examples: |
+      - What's your favourite [anime of 2023](anime)?
+      - Who's your favourite [character](anime) from every [anime](anime)?
+      - If you could transport yourself to any [anime world](anime), where would you go?
+      - Recommend me [mangas](anime) to read
+      - Do you enjoy [manhwa](anime)?
+      - What is [anime](anime) about?
+      - Tell me an [anime good for beginners](anime)
+      - What is your favourite [Pokémon video game](anime)?
 
-- intent: ask_food
-  examples: |
-    - What is your favourite [food](food)?
-    - Teach me about [Italian cuisine](food)
-    - Could you give me a [recipe](food) for me to try at home?
-    - Where can I eat today?
-    - How can I cook better?
-    - Tell me more about [Portuguese cuisine](food)
-    - What are your favourite [Portuguese desserts](food)?
-    - Can you describe me how to make [pancakes](food), please?
+  - intent: ask_food
+    examples: |
+      - What is your favourite [food](food)?
+      - Teach me about [Italian cuisine](food)
+      - Could you give me a [recipe](food) for me to try at home?
+      - Where can I eat today?
+      - How can I cook better?
+      - Tell me more about [Portuguese cuisine](food)
+      - What are your favourite [Portuguese desserts](food)?
+      - Can you describe me how to make [pancakes](food), please?
 
-- intent: ask_sports
-  examples: |
-    - What [sport](sports) can I practice?
-    - What is your favourite [chess opening](sports)?
-    - What's your favourite [sport](sports)?
-    - Could we talk about [sports](sports)?
-    - What's [Afonso's](person) favourite [sport](sports)?
+  - intent: ask_sports
+    examples: |
+      - What [sport](sports) can I practice?
+      - What is your favourite [chess opening](sports)?
+      - What's your favourite [sport](sports)?
+      - Could we talk about [sports](sports)?
+      - What's [Afonso's](person) favourite [sport](sports)?
 
-- intent: ask_love
-  examples: |
-    - Does [Afonso](person) love me?
-    - Why does [Afonso](person) love me?
-    - Who's the best [wife](person) ever?
+  - intent: ask_love
+    examples: |
+      - Does [Afonso](person) love me?
+      - Why does [Afonso](person) love me?
+      - Who's the best [wife](person) ever?
 
-- intent: ask_advice
-  examples: |
-    - Can you give me some [advice](advice)?
-    - I feel [sad](emotion)
-    - I feel [angry](emotion)
-    - I don't understand why this isn't working
-    - What do you think is the most valuable aspect someone can have?
+  - intent: ask_advice
+    examples: |
+      - I don't understand why this isn't working
+      - What do you think is the most valuable aspect someone can have?
 
-- intent: ask_misc
-  examples: |
-    - What do you enjoy doing?
-    - What is your opinion on [politics](misc)?
-    - How is the [weather](misc) today?
-    - What should I eat for lunch?
-
-
+  - intent: ask_misc
+    examples: |
+      - What do you enjoy doing?
+      - What is your opinion on [politics](misc)?
+      - How is the [weather](misc) today?
+      - What should I eat for lunch?

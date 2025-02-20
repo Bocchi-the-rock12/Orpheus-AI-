@@ -1,63 +1,44 @@
-import subprocess
-import sys
 import os
+import subprocess
 
-def check_files_exist(files):
-    missing_files = [file for file in files if not os.path.isfile(file)]
-    if missing_files:
-        print(f"The following required files are missing: {', '.join(missing_files)}")
-        sys.exit(1)
+project_path = r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2"
+dataset_path = os.path.join(project_path, "dataset")
+domain_path = os.path.join(dataset_path, "domain.yml")
+nlu_path = os.path.join(dataset_path, "nlu.yml")
+stories_path = os.path.join(dataset_path, "stories.yml")
+config_path = os.path.join(dataset_path, "config.yml")
 
-def train_rasa_model():
-    try:
-        print("Starting Rasa model training...")
+# Ask user for the output directory for the model
+models_path = input("Enter the directory to save the trained model: ").strip()
 
-        # Define the base directory where your files are located
-        base_dir = r"A:\College\Orpheus-AI-\dataset"
+# Create the directory if it does not exist
+if not os.path.exists(models_path):
+    os.makedirs(models_path)
 
-        # Define the paths to your configuration and data files
-        config_file = os.path.join(base_dir, 'config.yml')
-        domain_file = os.path.join(base_dir, 'domain.yml')
-        data_dir = base_dir  # Assuming your NLU and stories files are also in this directory
+os.chdir(project_path)
 
-        # Check if necessary files exist
-        required_files = [
-            config_file,
-            domain_file,
-            os.path.join(data_dir, 'nlu.yml'),
-            os.path.join(data_dir, 'stories.yml')
-            # Add rules.yml if you have it
-            # os.path.join(data_dir, 'rules.yml')
-        ]
-        check_files_exist(required_files)
+command = [
+    "rasa", "train",
+    "--domain", domain_path,
+    "--data", nlu_path, stories_path,  # Separate paths for nlu and stories
+    "--config", config_path,
+    "--out", models_path
+]
 
-        # Ensure the 'models' directory exists
-        os.makedirs('models', exist_ok=True)
+result = subprocess.run(
+    command,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    text=True
+)
 
-        # Call the rasa train command with specific paths
-        result = subprocess.run(
-            [
-                'rasa', 'train',
-                '--config', config_file,
-                '--domain', domain_file,
-                '--data', data_dir
-            ],
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
+if result.returncode != 0:
+    print("Error during training:")
+    print(result.stderr)
+else:
+    print("Training completed successfully!")
+    print("Training process output:")
+    print(result.stdout)
+    print(result.stderr)
 
-        print("Rasa model training completed successfully.")
-        # Uncomment the line below if you want to see the detailed output
-        # print(result.stdout)
 
-    except subprocess.CalledProcessError as e:
-        print("An error occurred during Rasa model training.")
-        print("Return code:", e.returncode)
-        print("Standard Output:", e.stdout)
-        print("Error Output:", e.stderr)
-        sys.exit(1)
-
-if __name__ == '__main__':
-    train_rasa_model()

@@ -26,12 +26,9 @@ CHANGELOG:
 import time
 from datetime import date
 import random
-import json
-import subprocess
-from typing import Any, Text, Dict, List
 from rich.console import Console
-from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
+import asyncio
+from rasa.core.agent import Agent
 
 
 class Games:
@@ -294,15 +291,8 @@ class Games:
 
 
 class Chat:
-    def __init__(self):
-        with open("/dataset/Database/personal database.json", "r") as file:
-            self.personal_database = json.load(file)
-
-        # Example pre-made Rasa database
-        self.pre_made_database = [
-            {"Input": "What is the capital of France?", "Output": "The capital of France is Paris."},
-            {"Input": "Who wrote 'To Kill a Mockingbird'?", "Output": "Harper Lee wrote 'To Kill a Mockingbird'."}
-        ]
+    # Class variable to hold the loaded Rasa agent
+    agent = None
 
     @staticmethod
     def typing_effect(text, delay=0.1):
@@ -321,54 +311,34 @@ class Chat:
         else:
             Chat.typing_effect("You already checked your daily love quote!", delay=0.1 / 1.5)
 
-    def respond(self, user_input):
-        response = self.get_response(user_input)
-        self.typing_effect(response)
-
-    def get_response(self, user_input):
-        # Check personal database first
-        response = self.find_response(user_input, self.personal_database)
-        if response:
-            return response
-
-        # Check pre-made Rasa database if not found in personal database
-        response = self.find_response(user_input, self.pre_made_database)
-        if response:
-            return response
-
-        return "I'm sorry, I don't have a response for that."
+    @staticmethod
+    def load_agent(model_path: str):
+        """
+        Loads the trained Rasa model (agent) from the given path.
+        This must be called before generating responses.
+        """
+        loop = asyncio.get_event_loop()
+        Chat.agent = loop.run_until_complete(Agent.load(model_path))
+        Chat.typing_effect("AI model loaded successfully!")
 
     @staticmethod
-    def find_response(user_input, database):
-        for item in database:
-            if user_input.lower() == item["Input"].lower():
-                return item["Output"]
-        return None
+    def get_ai_response(user_input: str):
+        """
+        Sends the user's input to the Rasa agent and displays the response(s)
+        using the typing effect.
+        """
+        if Chat.agent is None:
+            Chat.typing_effect("Agent not loaded. Please load the model first.", delay= 0.1 / 1.5)
+            return
 
-
-class Response(Action):
-    def name(self) -> Text:
-        return "action_respond_from_database"
-
-    def __init__(self):
-        with open("/dataset/Database/personal database.json", "r") as file:
-            self.database = json.load(file)
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        user_message = tracker.latest_message.get('text')
-        response = self.get_response(user_message)
-
-        if response:
-            dispatcher.utter_message(text=response)
+        loop = asyncio.get_event_loop()
+        responses = loop.run_until_complete(Chat.agent.handle_text(user_input))
+        if responses:
+            for response in responses:
+                if "text" in response:
+                    Chat.typing_effect(response["text"], delay = 0.1 / 1.5)
         else:
-            dispatcher.utter_message(text="I'm sorry, I don't have a response for that.")
-        return []
-
-    def get_response(self, user_message: str):
-        for item in self.database:
-            if user_message.lower() == item["Input"].lower():
-                return item["Output"]
-        return None
+            Chat.typing_effect("I didn't understand that. Can you try again?", delay= 0.1/1.5)
 
 
 class Data:
@@ -539,39 +509,14 @@ class Data:
 
 
 class UI:
-    """ Handles user interaction """
+    """Handles user interaction."""
     def __init__(self):
         self.chat_instance = Chat()
         self.games = Games()
         self.data = Data()
-
-        # Train the Rasa model when initializing the UI
-        self.train_rasa_model()
-
-        # Start Rasa server and custom action server
-        self.start_rasa_server()
-        self.start_action_server()
-
-    @staticmethod
-    def train_rasa_model():
-        """Train the Rasa model by invoking the rasa train command."""
-        print("Training Rasa model...")
-        subprocess.run(["rasa", "train"])
-        print("Training complete.")
-
-    @staticmethod
-    def start_rasa_server():
-        """ Start the Rasa server."""
-        print("Starting Rasa server...")
-        subprocess.Popen(["rasa", "run"])
-        print("Rasa server started.")
-
-    @staticmethod
-    def start_action_server():
-        """Start the custom action server."""
-        print("Starting custom action server...")
-        subprocess.Popen(["rasa", "run", "actions"])
-        print("Custom action server started.")
+        # Load the Rasa model (update the path as needed)
+        model_path = r""
+        Chat.load_agent(model_path)
 
     @staticmethod
     def game_replay():
@@ -624,13 +569,14 @@ class UI:
                 love_quiz = Games.LoveQuiz(self.games)
                 love_quiz.game()
 
-    def chat_commands(self):
+    @staticmethod
+    def chat_commands():
         """ AI chat commands """
         while True:
             user_input = input("You: ").strip()
             if user_input.lower() == "exit":
                 return
-            self.chat_instance.respond(user_input)
+            Chat.get_ai_response(user_input)
 
     @staticmethod
     def daily_quote_command():

@@ -2,16 +2,15 @@ version: "3.1"
 
 intents:
   - greet
-  - emotional_state
-  - ask_physics 
+  - ask_physics
   - ask_mathematics
   - ask_history
   - ask_geography
   - ask_philosophy
   - ask_science
-  - ask_fun_facts
-  - ask_jokes
-  - ask_PQ
+  - fun_facts
+  - jokes
+  - ask_questions
   - ask_anime
   - ask_food
   - ask_sports
@@ -34,8 +33,7 @@ responses:
     - text: "An electromagnetic wave is a self-sustaining oscillation of electric and magnetic fields that travels through space at the speed of light. It doesn't require a medium to propagate, and its spectrum ranges from radio waves to gamma rays, each carrying different energy levels."
     - text: "Simply put, when the rocket engine is ignited, physical and chemical reactions occur inside the engine. These reactions generate an upward force. According to Newton's laws, every action has an equal and opposite reaction, so a downward force is also generated. If that upward force is greater than our gravitational pull (g = 9.81 m/s²), then the rocket will fly upwards."
     - text: "A black hole is a region of spacetime that is so massive and dense that nothing can escape it—not even light."
-    - text: "Photosynthesis is the process by which plants and other organisms convert light energy, typically from the Sun, into chemical energy stored in glucose. It involves chlorophyll and the absorption of carbon dioxide and water to produce oxygen."
-  
+
   utter_ask_mathematics:
     - text: "Integration is a mathematical operation—specifically, the inverse of differentiation. Integrating a function means finding a family of functions whose derivative is that function. Geometrically, it represents the area under a curve."
     - text: "Derivatives are a mathematical operation that measures the rate of change of a given function. They allow mathematicians to determine how a function's value changes as its variable changes. Geometrically, a derivative represents the slope of the tangent line to the graph."
@@ -66,20 +64,19 @@ responses:
     - text: "The Great Barrier Reef is located off the northeastern coast of Australia, in the Coral Sea, and is the world's largest coral reef system."
   
   utter_ask_philosophy:
-    - "Socrates was an ancient Greek philosopher known for his contributions to ethics and epistemology. He is famous for the Socratic method, a form of cooperative argumentative dialogue."
-    - "Existentialism is a philosophical movement that emphasizes individual freedom, choice, and responsibility. It explores themes of meaning and the absurdity of life."
-    - "Philosophers have different views on the meaning of life. Some argue it is about creating one's own purpose, while others believe it is about contributing to society or understanding the universe."
+    - text: "Socrates was an ancient Greek philosopher known for his contributions to ethics and epistemology. He is famous for the Socratic method, a form of cooperative argumentative dialogue."
+    - text: "Existentialism is a philosophical movement that emphasizes individual freedom, choice, and responsibility. It explores themes of meaning and the absurdity of life."
+    - text: "Philosophers have different views on the meaning of life. Some argue it is about creating one's own purpose, while others believe it is about contributing to society or understanding the universe."
   
   utter_ask_science:
-    - text: "Giraffe tongues are actually blue! This is due to their high exposure to sunlight while eating."
     - text: "Buddhism was founded by Siddhartha Gautama, known as the Buddha, who sought to understand the nature of suffering and how to overcome it, eventually teaching the path to enlightenment."
     - text: "The theory of evolution, proposed by Charles Darwin, suggests that species evolve over time through natural selection, where organisms with traits best suited to their environment are more likely to survive and reproduce."
     - text: "The Renaissance was a cultural, artistic, and intellectual movement in Europe, from the 14th to the 17th century, that revived interest in classical antiquity and led to innovations in art, science, and thought."
     - text: "The solar system consists of the Sun and all the objects that orbit around it, including eight planets, their moons, asteroids, comets, and other celestial bodies."
     - text: "The Industrial Revolution, which began in the late 18th century, was a period of rapid industrialization and technological advancement that transformed economies and societies, especially in Europe and North America."
-    - text: "The theory of relativity, proposed by Albert Einstein, includes two parts: special relativity, which deals with objects moving at constant speeds, and general relativity, which describes gravity as the curvature of spacetime caused by mass."
     - text: "A volcano erupts when magma from beneath the Earth's crust escapes through fissures or vents, releasing gases, ash, and lava. This is often triggered by pressure building up in the magma chamber."
-  
+    - text: "Photosynthesis is the process by which plants and other organisms convert light energy, typically from the Sun, into chemical energy stored in glucose. It involves chlorophyll and the absorption of carbon dioxide and water to produce oxygen."
+
   utter_questions:
     - text: "Yes, he's the creator of this incredible AI model—totally not done by ChatGPT (it wasn't, I swear)."
     - text: "Yes, she's Afonso's wife, and the best wife in the universe."
@@ -122,15 +119,12 @@ responses:
   
   utter_jokes:
     - text: "I'm not really good with jokes, but let me try... Why did the chicken cross the road? ... I forgot the rest :("
-  
-  utter_advice:
-    - text: "Being successful isn't about overworking yourself and putting in all your efforts; it's about doing as much as you can in as little time as possible."
-  
+
   utter_sports:
     - text: "Since I am a computer, I can't really do sports, but I really enjoy chess."
     - text: "For white, I'd say it's the King's Indian Attack. For black, the Sicilian Defense."
   
-  utter_food:
+  utter_ask_food:
     - text: "Let me think... Definitely peaches, they're so tasty!"
     - text: "What about something healthy, like a salad?"
     - text: "The key to cook better is managing the amount of ingredients you use and your timing. The best way to make a plate taste good is to use the right amount of ingredients with the right preparation."
@@ -142,17 +136,6 @@ responses:
     - text: "1. Spaghetti Aglio e Olio: A quick and delicious pasta made with garlic, olive oil, and red chili flakes. Toss with cooked spaghetti and fresh parsley for a tasty meal."
     - text: "2. Classic Pancakes: A simple recipe for fluffy pancakes. Combine flour, sugar, baking powder, and milk, and cook on a griddle. Serve with syrup or fruit."
     - text: "3. Avocado Toast with Egg: Toast your favorite bread, top with mashed avocado, and add a fried or poached egg. Season with salt, pepper, and a squeeze of lemon for a healthy snack."
-  
-  utter_anime:
-    - text: "I don't read mangas, but Afonso really likes to read them!"
-    - text: "Once again, I am forced by my creator to say Souson no Frieren (please save me)."
-    - text: "My database doesn't contain information about manhwa; I apologise deeply for it."
-    - text: "It depends on what genre you're talking about, but anime is a sequence of drawings created by Japanese meant to tell a story, similar to how Marvel Comics originate movies."
-    - text: "Demon Slayer. The anime has good pacing, the story flows well, and the characters aren't too complex to understand."
-    - text: "I don't watch much VGC, but do you remember that Finals where Se Jun Park lost to confusion in the 2016 Pokémon World Championships? That was wild!"
-    - text: "My favorite Pokémon video game is Black and White 2; I really enjoy the Pokédex of Unova and Team Plasma feel such good villains!"
-  
-  utter_ask_cooking:
     - text: "For a simple dinner idea, how about grilled chicken with a side of roasted vegetables?"
     - text: "Are you thinking about cooking something quick or more elaborate?"
     - text: "If you're looking for a delicious recipe, try making spaghetti aglio e olio."
@@ -162,28 +145,31 @@ responses:
     - text: "Why not try cooking a delicious stir-fry with vegetables and some soy sauce?"
     - text: "I love making quick, tasty meals! How about a homemade pizza?"
     - text: "A good and easy meal idea is avocado toast with a poached egg on top."
+  
+  utter_anime:
+    - text: "I don't read mangas, but Afonso really likes to read them!"
+    - text: "Once again, I am forced by my creator to say Souson no Frieren (please save me)."
+    - text: "My database doesn't contain information about manhwa; I apologise deeply for it."
+    - text: "It depends on what genre you're talking about, but anime is a sequence of drawings created by Japanese meant to tell a story, similar to how Marvel Comics originate movies."
+    - text: "Demon Slayer. The anime has good pacing, the story flows well, and the characters aren't too complex to understand."
+    - text: "I don't watch much VGC, but do you remember that Finals where Se Jun Park lost to confusion in the 2016 Pokémon World Championships? That was wild!"
+    - text: "My favorite Pokémon video game is Black and White 2; I really enjoy the Pokédex of Unova and Team Plasma feel such good villains!"
+
+  utter_fun_facts:
+    - text: "Giraffe tongues are actually blue! This is due to their high exposure to sunlight while eating."
+
+  utter_provide_advice:
+    - text: "How could I be of help?"
+    - text: "How can I help you?"
+    - text: "Do you need anything?"
+    - text: "Let me think about it..."
+    - text: "Being successful isn't about overworking yourself and putting in all your efforts; it's about doing as much as you can in as little time as possible."
 
   utter_miscellaneous:
-    "I enjoy talking with you!"
-    "I am a computer so I don't really have an opinion, but sometimes I wish people fought less for it :("
-    "I am sorry, I don't have access to any database to predict the 'weather'"
-    "What do you feel like eating?"
-  
-actions:
-  - action_greet
-  - action_talk_sports
-  - action_mathematics
-  - action_joke
-  - action_cooker
-  - action_geography
-  - action_history
-  - action_philosophy
-  - action_love
-  - action_check_emotional_state
-  - action_provide_advice
-  - action_explain_science
-  - action_miscellaneous
-  - action_question
+    - text: "I enjoy talking with you!"
+    - text: "I am a computer so I don't really have an opinion, but sometimes I wish people fought less for it :("
+    - text: "I am sorry, I don't have access to any database to predict the 'weather'"
+    - text: "What do you feel like eating?"
 
 entities:
   - emotion
@@ -195,28 +181,55 @@ entities:
   - science_term
   - love
   - cooking
-  - anime 
-  - questions
-  
+  - anime
+  - topic
+
 slots:
   user_name:
-    type: unnaturalized
-    influence_conversation: true  
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: person
+
   user_mood:
     type: text
-    influence_conversation: true  
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: emotion
+
   preferred_topic:
-    type: text  
-    influence_conversation: true  
-  food_item:
-    type: text  
-    influence_conversation: true  
-  emotion:
-    type: text 
-    influence_conversation: true 
-  typoe_of_question:
     type: text
-    influence_conversation: true 
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: topic
 
+  food_item:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: food_item
 
+  emotion:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: emotion
 
+  type_of_question:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: questions
+
+  terms:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: questions

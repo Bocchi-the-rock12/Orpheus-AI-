@@ -1,81 +1,81 @@
 version: "3.1"
 
-
 stories:
-  - story: "Greet User"
+  - story: greet_and_ask_physics
     steps:
       - intent: greet
       - action: utter_greet
-
-  - story: "Educational Facts - Physics"
-    steps:
       - intent: ask_physics
-      - action: action_explain_science
+      - action: utter_ask_physics
 
-  - story: "Educational Facts - Mathematics"
-    steps:
-      - intent: ask_mathematics
-      - action: action_mathematics
-
-  - story: "Educational Facts - History"
-    steps:
-      - intent: ask_history
-      - action: action_history
-
-  - story: "Educational Facts - Geography"
-    steps:
-      - intent: ask_geography
-      - action: action_geography
-
-  - story: "Educational Facts - Science"
-    steps:
-      - intent: ask_science
-      - action: action_explain_science
-
-  - story: "Fun Facts"
-    steps:
-      - intent: ask_fun_facts
-      - action: action_fun_facts
-
-  - story: "Jokes"
-    steps:
-      - intent: ask_jokes
-      - action: action_joke
-
-  - story: "PQ (Personal Questions)"
-    steps:
-      - intent: ask_PQ
-      - action: action_ask_personal_question
-
-  - story: "Anime Discussion"
-    steps:
-      - intent: ask_anime
-      - action: action_anime
-
-  - story: "Food Suggestions"
+  - story: ask_food_and_science
     steps:
       - intent: ask_food
-      - action: action_cooker
+      - action: utter_ask_food
+      - intent: ask_science
+      - action: utter_ask_science
 
-  - story: "Sports Conversation"
+  - story: ask_philosophy
     steps:
-      - intent: ask_sports
-      - action: action_talk_sports
+      - intent: ask_philosophy
+      - action: utter_ask_philosophy
 
-  - story: "Love Confirmation"
+  - story: ask_history
+    steps:
+      - intent: ask_history
+      - action: utter_ask_history
+
+  - story: ask_jokes
+    steps:
+      - intent: jokes
+      - action: utter_jokes
+
+  - story: ask_fun_facts
+    steps:
+      - intent: fun_facts
+      - action: utter_fun_facts
+
+  - story: ask_love
     steps:
       - intent: ask_love
-      - action: action_love
+      - action: utter_love
 
-  - story: "Advice"
+  - story: ask_science
     steps:
-      - intent: ask_advice
-      - action: action_provide_advice
+      - intent: ask_science
+      - action: utter_ask_science
 
-  - story: "Miscellaneous Questions"
+  - story: ask_sports
+    steps:
+      - intent: ask_sports
+      - action: utter_sports
+
+  - story: ask_geography
+    steps:
+      - intent: ask_geography
+      - action: utter_ask_geography
+
+  - story: ask_questions
+    steps:
+      - intent: ask_questions
+      - action: utter_questions
+
+  - story: anime_talk
+    steps:
+      - intent: ask_anime
+      - action: utter_anime
+
+  - story: random_talk
     steps:
       - intent: ask_misc
-      - action: action_miscellaneous
+      - action: utter_miscellaneous
 
+  - story: ask_math
+    steps:
+      - intent: ask_mathematics
+      - action: utter_ask_mathematics
 
-
+  - story: advise
+    steps:
+      - intent: ask_advice
+      - action: utter_provide_advice
