@@ -8,8 +8,8 @@ AUTHORS IDENTIFICATION
   - Afonso Ferreira
 
 Comments:
-- The AI was purely programmed by AI (ironic) and I do not own that part of the project.
 - Some parts of the main code frame where also done with the assistance of AI
+- the website was build with AI
 ------------------------------------------------------
 
 ======================================================
@@ -28,8 +28,28 @@ from datetime import date
 import random
 from rich.console import Console
 import json
-import difflib
-import re
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
+
+
+# Pre-requisites download
+nltk.download('punkt_tab', quiet=True)
+nltk.download('wordnet', quiet=True)
+nltk.download('stopwords', quiet=True)
+
+# Check for the standard punkt resource.
+try:
+    nltk.data.find('tokenizers/punkt/english.pickle')
+except LookupError:
+    nltk.download('punkt', quiet=True)
+
+# Check for the punkt_tab resource.
+try:
+    nltk.data.find('tokenizers/punkt_tab/english')
+except LookupError:
+    nltk.download('punkt_tab', quiet=True)
 
 
 class Games:
@@ -293,13 +313,19 @@ class Games:
 
 class Chat:
     """ Class to handle chat information and AI"""
+
+    # Initialize our lemmatizer and stopwords.
+    lemmatizer = WordNetLemmatizer()
+    stop_words = set(stopwords.words("english"))
+    save_new_questions = False
+
     @staticmethod
     def typing_effect(text: str, delay: float = 0.1):
         console = Console()
         for char in text:
             console.print(char, end="")
             time.sleep(delay)
-        console.print()  # Newline at the end
+        console.print()
 
     @staticmethod
     def daily_love_quotes(quotes: list[str]):
@@ -311,10 +337,23 @@ class Chat:
             Chat.typing_effect("You already checked your daily love quote!", delay=0.1 / 1.5)
 
     @staticmethod
+    def preprocess_text(text):
+        """
+        Tokenizes, removes stopwords, and lemmatizes the input text.
+        """
+        tokens = word_tokenize(text.lower())
+        filtered_tokens = [word for word in tokens if word not in Chat.stop_words]
+        lemmatized_tokens = [Chat.lemmatizer.lemmatize(token) for token in filtered_tokens]
+        return lemmatized_tokens
+
+    @staticmethod
     def get_bot_answers(file_path):
+        """
+        Loads the bot answers from the JSON file.
+        """
         bot_answers = []
         with open(file_path, "r", encoding="utf-8") as file:
-            data = json.load(file)  # Expect a list of dictionaries with "Input" and "Output"
+            data = json.load(file)
             for entry in data:
                 if "Output" in entry:
                     bot_answers.append(entry["Output"].strip())
@@ -322,6 +361,9 @@ class Chat:
 
     @staticmethod
     def possible_questions(file_path):
+        """
+        Loads the possible questions from the JSON file.
+        """
         questions = []
         with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
@@ -331,51 +373,72 @@ class Chat:
         return questions
 
     @staticmethod
-    def extract_keywords(text):
-        # Extracts words and converts them to lowercase.
-        return re.findall(r'\b\w+\b', text.lower())
+    def append_unknown_question(question, file_path, placeholder="ANSWER"):
+        """
+        Appends an unrecognized question to the JSON file with a placeholder answer.
+        """
+        try:
+            with open(file_path, "r", encoding="utf-8") as file:
+                data = json.load(file)
+        except Exception:
+            data = []
+
+        # Check if the question is already in the database.
+        for entry in data:
+            if entry.get("Input", "").strip().lower() == question.strip().lower():
+                return
+
+        # Append the new question.
+        data.append({"Input": question, "Output": placeholder})
+        with open(file_path, "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=2)
 
     @staticmethod
-    def get_ai_response(user_input):
-        file_path = r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\Database\personal database.json"
+    def get_ai_response(user_input, file_path):
+        """
+        Processes user input and provides an answer based on matching stored questions.
+        If no adequate match is found, responds with a default message and appends the unknown question.
+        """
+        # First, handle common greetings with a rule-based approach.
+        greetings = {"hi", "hello", "hey", "greetings"}
+        if user_input.strip().lower() in greetings:
+            Chat.typing_effect("Hello human, how can I be of service?", delay=0.1 / 1.5)
+            return
 
+        # Load questions and answers.
         possible_questions = Chat.possible_questions(file_path)
         bot_answers = Chat.get_bot_answers(file_path)
 
-        # Convert user input and questions to lowercase for fuzzy matching.
-        user_input_lower = user_input.lower()
-        questions_lower = [q.lower() for q in possible_questions]
+        # Preprocess user input.
+        user_tokens = Chat.preprocess_text(user_input)
 
-        # FIRST: Try fuzzy matching using difflib with a higher cutoff.
-        closest_matches = difflib.get_close_matches(user_input_lower, questions_lower, n=1, cutoff=0.6)
-        if closest_matches:
-            best_match = closest_matches[0]
-            index = questions_lower.index(best_match)
-            answer = bot_answers[index] if index < len(bot_answers) else "No answer available"
-            Chat.typing_effect(answer, delay=0.1 / 1.5)
-            return
-
-        # SECOND: Fallback to keyword-based matching.
-        user_keywords = set(Chat.extract_keywords(user_input))
         best_match_index = None
-        best_match_ratio = 0.0
+        best_match_score = 0.0
 
+        # Compare user input with each stored question.
         for index, question in enumerate(possible_questions):
-            q_keywords = set(Chat.extract_keywords(question))
-            if not q_keywords:
+            question_tokens = Chat.preprocess_text(question)
+            if not question_tokens:
                 continue
-            # Ratio of matching keywords.
-            ratio = len(user_keywords.intersection(q_keywords)) / len(q_keywords)
-            if ratio > best_match_ratio:
-                best_match_ratio = ratio
+            # Simple score: fraction of question tokens present in user input.
+            common_tokens = set(user_tokens).intersection(set(question_tokens))
+            score = len(common_tokens) / len(question_tokens)
+            if score > best_match_score:
+                best_match_score = score
                 best_match_index = index
 
-        threshold = 0.4  # Require at least 40% of the question's keywords to be present.
-        if best_match_index is not None and best_match_ratio >= threshold:
+        # Set a threshold for a valid match.
+        threshold = 0.4
+        if best_match_index is not None and best_match_score >= threshold:
             answer = bot_answers[best_match_index] if best_match_index < len(bot_answers) else "No answer available"
             Chat.typing_effect(answer, delay=0.1 / 1.5)
         else:
-            Chat.typing_effect("We're sorry, our bot can't answer that question yet.", delay=0.1 / 1.5)
+            default_msg = "We're sorry, our bot can't answer that question yet."
+            Chat.typing_effect(default_msg, delay=0.1 / 1.5)
+
+            # Save new questions to be answered later
+            if Chat.save_new_questions:
+                Chat.append_unknown_question(user_input, file_path)
 
 
 class Data:
@@ -612,7 +675,7 @@ class UI:
             if user_input.lower() in ["exit", "quit"]:
                 Chat.typing_effect("Exiting...", delay = 0.1 / 1.5)
                 break
-            Chat.get_ai_response(user_input)
+            Chat.get_ai_response(user_input, r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\Database\personal database.json")
 
     @staticmethod
     def daily_quote_command():

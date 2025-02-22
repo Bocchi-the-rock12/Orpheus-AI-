@@ -2,9 +2,159 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orpheus AI</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { background: #444; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; }
+        nav a:hover { text-decoration: underline; }
+        .section { display: none; margin-top: 20px; }
+        #chat-box, #game-box { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; }
+        .message { margin: 5px 0; }
+        .user { color: blue; }
+        .ai { color: green; }
+    </style>
 </head>
 <body>
 
+    <nav>
+        <a href="#" onclick="showSection('home')">Home</a> |
+        <a href="#" onclick="showSection('chat')">Chat</a> |
+        <a href="#" onclick="showSection('games')">Games</a> |
+        <a href="#" onclick="showSection('quote')">Daily Quote</a>
+    </nav>
+
+    <div id="home" class="section" style="display: block;">
+        <h1>Welcome to Orpheus AI</h1>
+        <form action="/set-username" method="post">
+            <label for="username">Enter your name:</label>
+            <input type="text" id="username" name="username" required>
+            <button type="submit">Set Username</button>
+        </form>
+    </div>
+
+    <div id="chat" class="section">
+        <h1>Chat with Orpheus AI</h1>
+        <div id="chat-box">
+            <div id="chat-messages"></div>
+        </div>
+        <form id="chat-form">
+            <input type="text" name="message" id="message" placeholder="Enter your message" autocomplete="off" style="width:80%;">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <div id="games" class="section">
+        <h1>Games</h1>
+        <button onclick="showSection('rps')">Rock, Paper, Scissors</button>
+        <button onclick="showSection('hilo')">High-Low</button>
+        <button onclick="showSection('hangman')">Hangman</button>
+        <button onclick="showSection('lovequiz')">Love Quiz</button>
+    </div>
+
+    <div id="rps" class="section">
+        <h2>Rock, Paper, Scissors</h2>
+        <form id="rps-form">
+            <input type="text" id="rps-move" name="move" placeholder="Enter rock, paper, or scissors">
+            <button type="submit">Play</button>
+        </form>
+        <div id="rps-result"></div>
+    </div>
+
+    <div id="hilo" class="section">
+        <h2>High-Low Game</h2>
+        <form id="hilo-form">
+            <input type="number" id="hilo-guess" name="guess" placeholder="Enter your guess">
+            <button type="submit">Guess</button>
+        </form>
+        <div id="hilo-result"></div>
+    </div>
+
+    <div id="hangman" class="section">
+        <h2>Hangman</h2>
+        <form id="hangman-form">
+            <input type="text" id="hangman-letter" name="letter" maxlength="1" placeholder="Enter a letter">
+            <button type="submit">Guess</button>
+        </form>
+        <div id="hangman-result"></div>
+    </div>
+
+    <div id="lovequiz" class="section">
+        <h2>Love Quiz</h2>
+        <form id="lovequiz-form">
+            <p id="lovequiz-question">Question will appear here</p>
+            <div id="lovequiz-options"></div>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="lovequiz-result"></div>
+    </div>
+
+    <div id="quote" class="section">
+        <h1>Daily Love Quote</h1>
+        <p id="daily-quote">Loading...</p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        $(document).ready(function(){
+            $("#chat-form").submit(function(e){
+                e.preventDefault();
+                var message = $("#message").val();
+                if(message.trim() === "") return;
+                $("#chat-messages").append("<div class='message user'><strong>You:</strong> " + message + "</div>");
+                $.post("/chat", { message: message }, function(data){
+                    $("#chat-messages").append("<div class='message ai'><strong>AI:</strong> " + data.response.replace(/\n/g, "<br>") + "</div>");
+                    $("#message").val("");
+                    $("#chat-messages").scrollTop($("#chat-messages")[0].scrollHeight);
+                });
+            });
+
+            $("#rps-form").submit(function(e){
+                e.preventDefault();
+                var move = $("#rps-move").val();
+                $.post("/games/rps", { move: move }, function(data){
+                    $("#rps-result").html("<p>You played: " + data.user_move + "</p><p>AI played: " + data.ai_move + "</p><p>Result: " + data.result + "</p>");
+                });
+            });
+
+            $("#hilo-form").submit(function(e){
+                e.preventDefault();
+                var guess = $("#hilo-guess").val();
+                $.post("/games/hilo", { guess: guess }, function(data){
+                    $("#hilo-result").html("<p>" + data.message + "</p>");
+                });
+            });
+
+            $("#hangman-form").submit(function(e){
+                e.preventDefault();
+                var letter = $("#hangman-letter").val();
+                $.post("/games/hangman", { letter: letter }, function(data){
+                    $("#hangman-result").html("<p>" + data.message + "</p><p>Word: " + data.visible + "</p>");
+                });
+            });
+
+            $("#lovequiz-form").submit(function(e){
+                e.preventDefault();
+                var selected = $("input[name='lovequiz-option']:checked").val();
+                $.post("/games/lovequiz", { answer: selected }, function(data){
+                    $("#lovequiz-result").html("<p>" + data.result + "</p>");
+                });
+            });
+
+            $.get("/daily-quote", function(data){
+                $("#daily-quote").html(data);
+            });
+        });
+    </script>
+
 </body>
 </html>
+

@@ -1,4 +1,4 @@
 rich
 flask
-rasa
+nltk
 
