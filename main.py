@@ -27,8 +27,9 @@ import time
 from datetime import date
 import random
 from rich.console import Console
-import asyncio
-from rasa.core.agent import Agent
+import json
+import difflib
+import re
 
 
 class Games:
@@ -291,54 +292,90 @@ class Games:
 
 
 class Chat:
-    # Class variable to hold the loaded Rasa agent
-    agent = None
-
+    """ Class to handle chat information and AI"""
     @staticmethod
-    def typing_effect(text, delay=0.1):
+    def typing_effect(text: str, delay: float = 0.1):
         console = Console()
         for char in text:
             console.print(char, end="")
             time.sleep(delay)
-        console.print()
+        console.print()  # Newline at the end
 
     @staticmethod
     def daily_love_quotes(quotes: list[str]):
         """Displays the daily love quote."""
         if not Data.checked_daily_quote:
-            Data.checked_daily_quote = True  # Update the class variable
-            return Chat.typing_effect(f"{random.choice(quotes)}", delay=0.1 / 1.5)
+            Data.checked_daily_quote = True
+            Chat.typing_effect(random.choice(quotes), delay=0.1 / 1.5)
         else:
             Chat.typing_effect("You already checked your daily love quote!", delay=0.1 / 1.5)
 
     @staticmethod
-    def load_agent(model_path: str):
-        """
-        Loads the trained Rasa model (agent) from the given path.
-        This must be called before generating responses.
-        """
-        loop = asyncio.get_event_loop()
-        Chat.agent = loop.run_until_complete(Agent.load(model_path))
-        Chat.typing_effect("AI model loaded successfully!")
+    def get_bot_answers(file_path):
+        bot_answers = []
+        with open(file_path, "r", encoding="utf-8") as file:
+            data = json.load(file)  # Expect a list of dictionaries with "Input" and "Output"
+            for entry in data:
+                if "Output" in entry:
+                    bot_answers.append(entry["Output"].strip())
+        return bot_answers
 
     @staticmethod
-    def get_ai_response(user_input: str):
-        """
-        Sends the user's input to the Rasa agent and displays the response(s)
-        using the typing effect.
-        """
-        if Chat.agent is None:
-            Chat.typing_effect("Agent not loaded. Please load the model first.", delay= 0.1 / 1.5)
+    def possible_questions(file_path):
+        questions = []
+        with open(file_path, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            for entry in data:
+                if "Input" in entry:
+                    questions.append(entry["Input"].strip())
+        return questions
+
+    @staticmethod
+    def extract_keywords(text):
+        # Extracts words and converts them to lowercase.
+        return re.findall(r'\b\w+\b', text.lower())
+
+    @staticmethod
+    def get_ai_response(user_input):
+        file_path = r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\Database\personal database.json"
+
+        possible_questions = Chat.possible_questions(file_path)
+        bot_answers = Chat.get_bot_answers(file_path)
+
+        # Convert user input and questions to lowercase for fuzzy matching.
+        user_input_lower = user_input.lower()
+        questions_lower = [q.lower() for q in possible_questions]
+
+        # FIRST: Try fuzzy matching using difflib with a higher cutoff.
+        closest_matches = difflib.get_close_matches(user_input_lower, questions_lower, n=1, cutoff=0.6)
+        if closest_matches:
+            best_match = closest_matches[0]
+            index = questions_lower.index(best_match)
+            answer = bot_answers[index] if index < len(bot_answers) else "No answer available"
+            Chat.typing_effect(answer, delay=0.1 / 1.5)
             return
 
-        loop = asyncio.get_event_loop()
-        responses = loop.run_until_complete(Chat.agent.handle_text(user_input))
-        if responses:
-            for response in responses:
-                if "text" in response:
-                    Chat.typing_effect(response["text"], delay = 0.1 / 1.5)
+        # SECOND: Fallback to keyword-based matching.
+        user_keywords = set(Chat.extract_keywords(user_input))
+        best_match_index = None
+        best_match_ratio = 0.0
+
+        for index, question in enumerate(possible_questions):
+            q_keywords = set(Chat.extract_keywords(question))
+            if not q_keywords:
+                continue
+            # Ratio of matching keywords.
+            ratio = len(user_keywords.intersection(q_keywords)) / len(q_keywords)
+            if ratio > best_match_ratio:
+                best_match_ratio = ratio
+                best_match_index = index
+
+        threshold = 0.4  # Require at least 40% of the question's keywords to be present.
+        if best_match_index is not None and best_match_ratio >= threshold:
+            answer = bot_answers[best_match_index] if best_match_index < len(bot_answers) else "No answer available"
+            Chat.typing_effect(answer, delay=0.1 / 1.5)
         else:
-            Chat.typing_effect("I didn't understand that. Can you try again?", delay= 0.1/1.5)
+            Chat.typing_effect("We're sorry, our bot can't answer that question yet.", delay=0.1 / 1.5)
 
 
 class Data:
@@ -509,14 +546,12 @@ class Data:
 
 
 class UI:
-    """Handles user interaction."""
     def __init__(self):
+        """Initializes the UI and loads the chatbot model."""
+        # Although Chat methods are static, we create an instance in case we extend functionality.
         self.chat_instance = Chat()
         self.games = Games()
         self.data = Data()
-        # Load the Rasa model (update the path as needed)
-        model_path = r""
-        Chat.load_agent(model_path)
 
     @staticmethod
     def game_replay():
@@ -571,11 +606,12 @@ class UI:
 
     @staticmethod
     def chat_commands():
-        """ AI chat commands """
+        """Runs a simple interactive chat loop."""
         while True:
-            user_input = input("You: ").strip()
-            if user_input.lower() == "exit":
-                return
+            user_input = UI.input_command()
+            if user_input.lower() in ["exit", "quit"]:
+                Chat.typing_effect("Exiting...", delay = 0.1 / 1.5)
+                break
             Chat.get_ai_response(user_input)
 
     @staticmethod
