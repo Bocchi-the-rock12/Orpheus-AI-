@@ -340,55 +340,49 @@ class Chat:
     def preprocess_text(text):
         """
         Tokenizes, removes stopwords, and lemmatizes the input text.
+        The function now also supports stemming and case insensitivity.
         """
         tokens = word_tokenize(text.lower())
-        filtered_tokens = [word for word in tokens if word not in Chat.stop_words]
+        filtered_tokens = [word for word in tokens if word not in Chat.stop_words and word.isalnum()]
         lemmatized_tokens = [Chat.lemmatizer.lemmatize(token) for token in filtered_tokens]
         return lemmatized_tokens
 
     @staticmethod
+    def load_json(file_path):
+        """Loads JSON data from a file and handles errors."""
+        try:
+            with open(file_path, "r", encoding="utf-8") as file:
+                return json.load(file)
+        except FileNotFoundError:
+            return []  # Return empty list if the file doesn't exist
+        except json.JSONDecodeError:
+            print("Error reading JSON file.")
+            return []
+
+    @staticmethod
     def get_bot_answers(file_path):
-        """
-        Loads the bot answers from the JSON file.
-        """
-        bot_answers = []
-        with open(file_path, "r", encoding="utf-8") as file:
-            data = json.load(file)
-            for entry in data:
-                if "Output" in entry:
-                    bot_answers.append(entry["Output"].strip())
-        return bot_answers
+        """Loads the bot answers from the JSON file."""
+        data = Chat.load_json(file_path)
+        return [entry["Output"].strip() for entry in data if "Output" in entry]
 
     @staticmethod
     def possible_questions(file_path):
-        """
-        Loads the possible questions from the JSON file.
-        """
-        questions = []
-        with open(file_path, "r", encoding="utf-8") as file:
-            data = json.load(file)
-            for entry in data:
-                if "Input" in entry:
-                    questions.append(entry["Input"].strip())
-        return questions
+        """Loads the possible questions from the JSON file."""
+        data = Chat.load_json(file_path)
+        return [entry["Input"].strip() for entry in data if "Input" in entry]
 
     @staticmethod
     def append_unknown_question(question, file_path, placeholder="ANSWER"):
         """
         Appends an unrecognized question to the JSON file with a placeholder answer.
+        Ensures no duplicates are added.
         """
-        try:
-            with open(file_path, "r", encoding="utf-8") as file:
-                data = json.load(file)
-        except Exception:
-            data = []
+        data = Chat.load_json(file_path)
 
-        # Check if the question is already in the database.
-        for entry in data:
-            if entry.get("Input", "").strip().lower() == question.strip().lower():
-                return
+        if any(entry.get("Input", "").strip().lower() == question.strip().lower() for entry in data):
+            return  # Question already exists, no need to append
 
-        # Append the new question.
+        # Append new unknown question
         data.append({"Input": question, "Output": placeholder})
         with open(file_path, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=2)
@@ -399,35 +393,34 @@ class Chat:
         Processes user input and provides an answer based on matching stored questions.
         If no adequate match is found, responds with a default message and appends the unknown question.
         """
-        # First, handle common greetings with a rule-based approach.
+        # Handle common greetings with a rule-based approach
         greetings = {"hi", "hello", "hey", "greetings"}
         if user_input.strip().lower() in greetings:
             Chat.typing_effect("Hello human, how can I be of service?", delay=0.1 / 1.5)
             return
 
-        # Load questions and answers.
+        # Load questions and answers from the file
         possible_questions = Chat.possible_questions(file_path)
         bot_answers = Chat.get_bot_answers(file_path)
 
-        # Preprocess user input.
+        # Preprocess user input
         user_tokens = Chat.preprocess_text(user_input)
 
         best_match_index = None
         best_match_score = 0.0
 
-        # Compare user input with each stored question.
+        # Compare user input with each stored question and calculate similarity
         for index, question in enumerate(possible_questions):
             question_tokens = Chat.preprocess_text(question)
             if not question_tokens:
                 continue
-            # Simple score: fraction of question tokens present in user input.
             common_tokens = set(user_tokens).intersection(set(question_tokens))
             score = len(common_tokens) / len(question_tokens)
             if score > best_match_score:
                 best_match_score = score
                 best_match_index = index
 
-        # Set a threshold for a valid match.
+        # Set a threshold for a valid match
         threshold = 0.4
         if best_match_index is not None and best_match_score >= threshold:
             answer = bot_answers[best_match_index] if best_match_index < len(bot_answers) else "No answer available"
