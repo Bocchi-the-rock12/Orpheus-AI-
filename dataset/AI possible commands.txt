@@ -1,0 +1,101 @@
+Possible AI commands
+
+Disclaimer: The AI reacts to commands written in similar ways (example: What is an electromagnetic wave? can be written as could you teach me more about electromagnetic waves), however I strongly recommend to write similarly inputs for more precision
+
+Hello
+I love you so much <3
+I'm not feeling well, bae
+I'm really happy to have you
+Do you know Afonso Ferreira?
+Do you know who Shivali is?
+What can I do today?
+What is your favourite subject?
+What is your favourite color?
+Do you have any siblings?
+Would you like to play a game with me?
+Any advice for today?
+Tell me a joke
+If you could visit any country, where would you travel first?
+What is your favourite animal?
+Sing me a song
+Who's your favourite human being?
+Tell me a fun fact
+What's something only Afonso and I would know?
+What is a song which reminds Afonso about me?
+How are you?
+How is the weather today?
+What should I eat for lunch?
+Tell me more about Afonso
+What do you think is the most valuable aspect someone can have?
+What is your opinion on politics?
+Give me advice to be successful
+What's your favourite Pokémon?
+What TV show would you recommend me?
+How does a rocket work?
+What is gravity?
+Explain me integrals
+Explain me derivatives
+What is a black hole?
+What is the photoelectric effect?
+What is an electromagnetic wave?
+What color are giraffe tongues?
+Do you like to do sports?
+What is your favorite chess opening?
+What do you think about our planet?
+Do you like nature?
+Tell me a random fact about yourself
+Tell me about Ancient Egypt
+Tell me about Julius Caesar
+What was the Black Death?
+Do you know any languages other than English?
+Can you say something in French?
+Tell me more about Afonso's work
+Bye
+What is your favorite anime?
+I don't understand
+What do you enjoy doing?
+Can you help me with my mathematics homework?
+I want to learn programming, where do you recommend me to start?
+Tell me a random fact
+What are you scared the most off?
+Do you have any siblings?
+Does Afonso love me?
+Why does Afonso loves me?
+Who's the best wife ever?
+What is your favorite food?
+Could you give me a recipe for me to try at home?
+Where can I eat today?
+How can I cook better?
+What are your favorite portuguese desserts?
+What can I cook for my family tonight?
+My small kid doesn't eat many things, what can I give her?
+What was Afonso's favorite food when he was a kid?
+Do you read manga?
+Recommend me mangas to read
+Do you enjoy manhwa?
+What is anime about?
+Tell me an anime good for beginners
+What VGC tournament do you think was the best?
+What is your favorite Pokemon videogame?
+What is the Zeta Riemann function?
+What's the difference between a Riemann integral and an improper integral?
+Could you teach me how to do the Gauss Jordan elimination in matrices?
+Who's your favorite mathematician?
+What's the theorem of 'aperto de mao' in graph theory?
+Explain to me what discrete math is
+Why is math useful?
+Can you explain to me linear applications?
+Could you calculate some probabilities for me?
+Teach me the history of mathematics
+What are complex numbers?
+What is considered the most beautiful mathematical equation in the world?
+What's up?
+Hi
+What?
+no, I asked how you are
+what is the theory of relativity
+yo!
+who is your creator
+How are you?
+how are you feeling
+Who are you

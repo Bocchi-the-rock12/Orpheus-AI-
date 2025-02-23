@@ -30,8 +30,8 @@ from rich.console import Console
 import json
 import nltk
 from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 
 # Pre-requisites download
@@ -317,7 +317,7 @@ class Chat:
     # Initialize our lemmatizer and stopwords.
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words("english"))
-    save_new_questions = False
+    save_new_questions = True
 
     @staticmethod
     def typing_effect(text: str, delay: float = 0.1):
@@ -340,7 +340,7 @@ class Chat:
     def preprocess_text(text):
         """
         Tokenizes, removes stopwords, and lemmatizes the input text.
-        The function now also supports stemming and case insensitivity.
+        Filters out non-alphanumeric tokens for cleaner processing.
         """
         tokens = word_tokenize(text.lower())
         filtered_tokens = [word for word in tokens if word not in Chat.stop_words and word.isalnum()]
@@ -349,68 +349,39 @@ class Chat:
 
     @staticmethod
     def load_json(file_path):
-        """Loads JSON data from a file and handles errors."""
+        """Loads JSON data from a file with error handling."""
         try:
             with open(file_path, "r", encoding="utf-8") as file:
                 return json.load(file)
         except FileNotFoundError:
-            return []  # Return empty list if the file doesn't exist
+            return []
         except json.JSONDecodeError:
             print("Error reading JSON file.")
             return []
 
     @staticmethod
-    def get_bot_answers(file_path):
-        """Loads the bot answers from the JSON file."""
-        data = Chat.load_json(file_path)
-        return [entry["Output"].strip() for entry in data if "Output" in entry]
-
-    @staticmethod
-    def possible_questions(file_path):
-        """Loads the possible questions from the JSON file."""
-        data = Chat.load_json(file_path)
-        return [entry["Input"].strip() for entry in data if "Input" in entry]
-
-    @staticmethod
-    def append_unknown_question(question, file_path, placeholder="ANSWER"):
+    def process_single_query(query: str, file_path: str) -> str:
         """
-        Appends an unrecognized question to the JSON file with a placeholder answer.
-        Ensures no duplicates are added.
+        Processes a single query using a single JSON file for both predefined and dynamic Q&A.
+        It first checks for an exact match; if none is found, it uses fuzzy matching.
         """
+        # Load responses from the file
         data = Chat.load_json(file_path)
 
-        if any(entry.get("Input", "").strip().lower() == question.strip().lower() for entry in data):
-            return  # Question already exists, no need to append
+        # Try to find a direct (exact) match first.
+        for entry in data:
+            if 'Input' in entry and entry['Input'].strip().lower() == query.strip().lower():
+                return entry['Output']
 
-        # Append new unknown question
-        data.append({"Input": question, "Output": placeholder})
-        with open(file_path, "w", encoding="utf-8") as file:
-            json.dump(data, file, indent=2)
-
-    @staticmethod
-    def get_ai_response(user_input, file_path):
-        """
-        Processes user input and provides an answer based on matching stored questions.
-        If no adequate match is found, responds with a default message and appends the unknown question.
-        """
-        # Handle common greetings with a rule-based approach
-        greetings = {"hi", "hello", "hey", "greetings"}
-        if user_input.strip().lower() in greetings:
-            Chat.typing_effect("Hello human, how can I be of service?", delay=0.1 / 1.5)
-            return
-
-        # Load questions and answers from the file
-        possible_questions = Chat.possible_questions(file_path)
-        bot_answers = Chat.get_bot_answers(file_path)
-
-        # Preprocess user input
-        user_tokens = Chat.preprocess_text(user_input)
-
+        # If no direct match is found, use fuzzy matching.
+        user_tokens = Chat.preprocess_text(query)
         best_match_index = None
         best_match_score = 0.0
 
-        # Compare user input with each stored question and calculate similarity
-        for index, question in enumerate(possible_questions):
+        for index, entry in enumerate(data):
+            question = entry.get("Input", "").strip()
+            if not question:
+                continue
             question_tokens = Chat.preprocess_text(question)
             if not question_tokens:
                 continue
@@ -420,18 +391,43 @@ class Chat:
                 best_match_score = score
                 best_match_index = index
 
-        # Set a threshold for a valid match
-        threshold = 0.4
+        threshold = 0.4  # Adjust this threshold as needed.
         if best_match_index is not None and best_match_score >= threshold:
-            answer = bot_answers[best_match_index] if best_match_index < len(bot_answers) else "No answer available"
-            Chat.typing_effect(answer, delay=0.1 / 1.5)
+            return data[best_match_index]["Output"]
         else:
-            default_msg = "We're sorry, our bot can't answer that question yet."
-            Chat.typing_effect(default_msg, delay=0.1 / 1.5)
-
-            # Save new questions to be answered later
             if Chat.save_new_questions:
-                Chat.append_unknown_question(user_input, file_path)
+                Chat.append_unknown_question(query, file_path)
+            return "We're sorry, our bot can't answer that question yet."
+
+    @staticmethod
+    def get_ai_response(user_input: str, file_path: str):
+        """
+        Processes user input—splitting multi-part queries if needed—and provides a response
+        using a single JSON file for all responses.
+        """
+        lower_input = user_input.strip().lower()
+
+        # Handle multi-part queries separated by " and "
+        if " and " in lower_input:
+            parts = [part.strip() for part in lower_input.split(" and ")]
+            responses = [Chat.process_single_query(part, file_path) for part in parts]
+            final_response = "\n".join(responses)
+        else:
+            final_response = Chat.process_single_query(lower_input, file_path)
+        Chat.typing_effect(final_response, delay=0.1 / 1.5)
+
+    @staticmethod
+    def append_unknown_question(question, file_path, placeholder="ANSWER"):
+        """
+        Appends an unrecognized question to the JSON file with a placeholder answer,
+        ensuring no duplicates.
+        """
+        data = Chat.load_json(file_path)
+        if any(entry.get("Input", "").strip().lower() == question.strip().lower() for entry in data):
+            return
+        data.append({"Input": question, "Output": placeholder})
+        with open(file_path, "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=2)
 
 
 class Data:
@@ -720,5 +716,7 @@ class UI:
         self.interpreter()
 
 if __name__ == "__main__":
+    create_input(r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\Database\personal database.json",
+                 r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\bot inputs.txt")
     ui_instance = UI()
     ui_instance.main()
