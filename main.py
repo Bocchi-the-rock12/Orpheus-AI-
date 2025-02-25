@@ -9,7 +9,7 @@ AUTHORS IDENTIFICATION
 
 Comments:
 - Some parts of the main code frame where also done with the assistance of AI
-- the website was build with AI
+- the website was built with AI
 ------------------------------------------------------
 
 ======================================================
@@ -33,23 +33,22 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-
 # Pre-requisites download
-nltk.download('punkt_tab', quiet=True)
-nltk.download('wordnet', quiet=True)
-nltk.download('stopwords', quiet=True)
+nltk.download("punkt_tab", quiet=True)
+nltk.download("wordnet", quiet=True)
+nltk.download("stopwords", quiet=True)
 
-# Check for the standard punkt resource.
+# Check for the standard punkt
 try:
-    nltk.data.find('tokenizers/punkt/english.pickle')
+    nltk.data.find("tokenizers/punkt/english.pickle")
 except LookupError:
-    nltk.download('punkt', quiet=True)
+    nltk.download("punkt", quiet=True)
 
-# Check for the punkt_tab resource.
+# Check for the punkt_tab
 try:
-    nltk.data.find('tokenizers/punkt_tab/english')
+    nltk.data.find("tokenizers/punkt_tab/english")
 except LookupError:
-    nltk.download('punkt_tab', quiet=True)
+    nltk.download("punkt_tab", quiet=True)
 
 
 class Games:
@@ -118,7 +117,7 @@ class Games:
                     Chat.typing_effect("You're a cheater!", delay=0.2)
                     self.games.player_score -= 1
                     Chat.typing_effect(f"Your score: {self.games.player_score}", delay=0.2)
-                    return # Exit the game if cheating is detected
+                    return
 
 
     class LoveQuiz:
@@ -160,8 +159,7 @@ class Games:
             Chat.typing_effect("Welcome to the ultimate love quiz!", delay=0.1 / 1.5)
             Chat.typing_effect(
                 "This game was designed entirely by Afonso, and serves as a gift for his beautiful wife.",
-                delay=0.1 / 1.5
-            )
+                delay=0.1 / 1.5)
             Chat.typing_effect("Let the game begin...", delay=0.1 / 1.5)
 
             while True:
@@ -187,7 +185,6 @@ class Games:
                         else:
                             Chat.typing_effect(f"Sorry, the correct answer was {correct_answer}", delay=0.1 / 1.5)
                         break
-
                 # Checks if user wants to play again
                 if not UI.game_replay():
                     return
@@ -199,13 +196,13 @@ class Games:
             self.games = games
 
         @staticmethod
-        def choose_word():
-            """ Get a random word from the word file """
+        def choose_word(file_path) -> str:
+            """ Get a random word from the Word file """
             words = []
-            with open("dataset/English Dictionary/words.txt", mode="r", encoding="utf-8") as f:
-                content = f.readlines()
+            file = open(file_path, "r", encoding="utf-8")
+            content = file.readlines()
             for line in content:
-                words.append(line.strip())
+                words.append(line)
             return random.choice(words)
 
         @staticmethod
@@ -248,7 +245,7 @@ class Games:
 
                 # Checks if the letter was already guessed
                 if letter in guessed_letters:
-                    Chat.typing_effect(f"You already guessed the letter {letter}!", delay=0.1 / 1.5)
+                    Chat.typing_effect(f"You already guessed the letter {letter}.", delay=0.1 / 1.5)
                     continue
 
                 guessed_letters.append(letter)
@@ -265,15 +262,15 @@ class Games:
 
                 Games.Hangman.print_visible(visible)
 
-                if Games.Hangman.got_it_right(visible, secret):  # If the word is fully revealed
+                if Games.Hangman.got_it_right(visible, secret):
                     break
 
-            Games.Hangman.end_game(visible, secret, attempts_used)  # End the game with a result
+            Games.Hangman.end_game(visible, secret, attempts_used)
 
         @staticmethod
         def play_hangman():
-            MAX_ATTEMPTS = 10
-            Games.Hangman.interaction(Games.Hangman.choose_word(), MAX_ATTEMPTS)
+            max_attempts = 10
+            Games.Hangman.interaction(Games.Hangman.choose_word(r"/home/afonso/PycharmProjects/Orpheus-AI-/dataset/English Dictionary/words.txt"), max_attempts)
 
     class RPS:
         """ Class to manage the game rock paper and scissors """
@@ -291,9 +288,9 @@ class Games:
                 play = input("Rock, paper or scissors? ").strip().lower()
                 if play not in Games.RPS.moves:
                     Chat.typing_effect("Invalid move!", delay=0.2)
-                    continue  # Ask again for a valid move
+                    continue
                 else:
-                    ai = Games.RPS.move().lower()  # Ensure AI's move is lowercase
+                    ai = Games.RPS.move().lower()
                     Chat.typing_effect(f"AI played: {ai}", delay=0.2)
 
                     if ai == play:
@@ -317,7 +314,7 @@ class Chat:
     # Initialize our lemmatizer and stopwords.
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words("english"))
-    save_new_questions = True
+    save_new_questions = False
 
     @staticmethod
     def typing_effect(text: str, delay: float = 0.1):
@@ -337,7 +334,7 @@ class Chat:
             Chat.typing_effect("You already checked your daily love quote!", delay=0.1 / 1.5)
 
     @staticmethod
-    def preprocess_text(text):
+    def preprocess_text(text: str):
         """
         Tokenizes, removes stopwords, and lemmatizes the input text.
         Filters out non-alphanumeric tokens for cleaner processing.
@@ -348,7 +345,7 @@ class Chat:
         return lemmatized_tokens
 
     @staticmethod
-    def load_json(file_path):
+    def load_json(file_path: str) -> list:
         """Loads JSON data from a file with error handling."""
         try:
             with open(file_path, "r", encoding="utf-8") as file:
@@ -363,8 +360,18 @@ class Chat:
     def process_single_query(query: str, file_path: str) -> str:
         """
         Processes a single query using a single JSON file for both predefined and dynamic Q&A.
-        It first checks for an exact match; if none is found, it uses fuzzy matching.
+        It first checks for greetings, then an exact match, and finally uses fuzzy matching.
         """
+        # Define common greetings
+        greetings = {
+            "hello", "hi", "hey", "good morning", "good afternoon", "good evening",
+            "howdy", "what's up", "yo", "greetings"
+        }
+
+        # Check if the input is a greeting
+        if query.strip().lower() in greetings:
+            return "Hello kind human, how can I be of service to you?"
+
         # Load responses from the file
         data = Chat.load_json(file_path)
 
@@ -391,7 +398,7 @@ class Chat:
                 best_match_score = score
                 best_match_index = index
 
-        threshold = 0.4  # Adjust this threshold as needed.
+        threshold = 0.4
         if best_match_index is not None and best_match_score >= threshold:
             return data[best_match_index]["Output"]
         else:
@@ -402,12 +409,12 @@ class Chat:
     @staticmethod
     def get_ai_response(user_input: str, file_path: str):
         """
-        Processes user input—splitting multi-part queries if needed—and provides a response
+        Processes user input—splitting multipart queries if needed—and provides a response
         using a single JSON file for all responses.
         """
         lower_input = user_input.strip().lower()
 
-        # Handle multi-part queries separated by " and "
+        # Handle multipart queries separated by " and "
         if " and " in lower_input:
             parts = [part.strip() for part in lower_input.split(" and ")]
             responses = [Chat.process_single_query(part, file_path) for part in parts]
@@ -417,12 +424,10 @@ class Chat:
         Chat.typing_effect(final_response, delay=0.1 / 1.5)
 
     @staticmethod
-    def append_unknown_question(question, file_path, placeholder="ANSWER"):
-        """
-        Appends an unrecognized question to the JSON file with a placeholder answer,
-        ensuring no duplicates.
-        """
+    def append_unknown_question(question: str, file_path: str, placeholder="ANSWER"):
+        """Appends an unrecognized question to the JSON file with a placeholder answer."""
         data = Chat.load_json(file_path)
+        # Check if the question already exists (exact match)
         if any(entry.get("Input", "").strip().lower() == question.strip().lower() for entry in data):
             return
         data.append({"Input": question, "Output": placeholder})
@@ -436,7 +441,10 @@ class Data:
     checked_daily_quote = False
     date = date.today()
     username = str
-    quotes = ["I love you so much amor", "I'm so glad to have you", "I hope you enjoy this gift <3"]
+    quotes = ["I hope you enjoy this gift <3", "I am so glad to have you",
+              "I hope you know how much you mean to me", "I love you so much", "You're the best", "I have the best wife ever",
+              "This gift is for the best person in the universe :3", "You're simply amazing", "I hope we can be together one day",
+              "You're like a blackhole, you suck all my attention", "I don't know what I'd do without you"]
     last_checked_date = None
     last_quote = None
     welcoming_message = "Hi baby, if you’re reading this then it means you already received the gift. I just want to say that I love you a lot, and I did this with the best of intentions and love for you. Amo-te muito amor <3"
@@ -583,10 +591,6 @@ class Data:
         "Which part of the human body contains the most bones?": {
             "options": ["Legs", "Arms", "Hands", "Feet"],
             "answer": "Hands"
-        },
-        "What is the unit for how?": {
-            "options": ["Legs", "Arms", "Hands", "Feet"],
-            "answer": "Hands"
         },    "What is the unit of specific heat capacity in the SI system?": {
         "options": ["J/kg·°C", "J/g·°C", "J/mol·°C", "J/m²·°C"],
         "answer": "J/kg·°C"}
@@ -608,7 +612,7 @@ class UI:
     @staticmethod
     def game_replay():
         while True:
-            message = input("Would you like to continue playing? Y/N ").strip().lower()
+            message = input("Would you like to continue playing? y/n ").strip().lower()
             if message == "y":
                 return True
             elif message == "n":
@@ -618,7 +622,7 @@ class UI:
 
     def games_commands(self):
         """ This handles game command choices """
-        while True:  # This keeps the game selection menu looping
+        while True:
             Chat.typing_effect("Open a game:", delay=0.1 / 1.5)
             Chat.typing_effect("- High-low", delay=0.1 / 1.5)
             Chat.typing_effect("- Hangman", delay=0.1 / 1.5)
@@ -658,13 +662,13 @@ class UI:
 
     @staticmethod
     def chat_commands():
-        """Runs a simple interactive chat loop."""
+        """Runs the chat loop """
         while True:
             user_input = UI.input_command()
             if user_input.lower() in ["exit", "quit"]:
                 Chat.typing_effect("Exiting...", delay = 0.1 / 1.5)
-                break
-            Chat.get_ai_response(user_input, r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\Database\personal database.json")
+                return
+            Chat.get_ai_response(user_input, r"/home/afonso/PycharmProjects/Orpheus-AI-/dataset/Database/personal database.json")
 
     @staticmethod
     def daily_quote_command():
@@ -684,22 +688,23 @@ class UI:
         """ Command interpreter for controlling the app """
         while True:
             command = UI.input_command()
-            if command == "games":
-                self.games_commands()
-            elif command == "chat":
-                self.chat_commands()
-            elif command == "exit":
-                Chat.typing_effect("Thanks for using our AI.", delay=0.1 / 1.5)
-                break
-            elif command == "help":
-                self.command_help()
-            elif command == "daily quote":
-                if Data.is_wife(Data.username):
-                    Chat.daily_love_quotes(Data.quotes)
-                else:
-                    Chat.typing_effect("ERROR! Invalid credentials.", delay=0.1 / 1.5)
-            else:
-                Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
+            match command:
+                case "games":
+                    self.games_commands()
+                case "chat":
+                    self.chat_commands()
+                case "exit":
+                    Chat.typing_effect("Thanks for using our AI.", delay=0.1 / 1.5)
+                    break
+                case "help":
+                    self.command_help()
+                case "daily quote":
+                    if Data.is_wife(Data.username):
+                        Chat.daily_love_quotes(Data.quotes)
+                    else:
+                        Chat.typing_effect("ERROR! Invalid credentials.", delay=0.1 / 1.5)
+                case _:
+                    Chat.typing_effect("Unknown command.", delay=0.1 / 1.5)
 
     @staticmethod
     def input_command():
@@ -715,8 +720,6 @@ class UI:
         Chat.typing_effect("Type Help for command list.", delay=0.1 / 1.5)
         self.interpreter()
 
-if __name__ == "__main__":
-    create_input(r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\Database\personal database.json",
-                 r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\bot inputs.txt")
-    ui_instance = UI()
-    ui_instance.main()
+# Run the app
+ui_instance = UI()
+ui_instance.main()
