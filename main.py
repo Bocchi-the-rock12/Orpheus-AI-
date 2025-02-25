@@ -265,10 +265,10 @@ class Games:
 
                 Games.Hangman.print_visible(visible)
 
-                if Games.Hangman.got_it_right(visible, secret):  # If the word is fully revealed
+                if Games.Hangman.got_it_right(visible, secret):
                     break
 
-            Games.Hangman.end_game(visible, secret, attempts_used)  # End the game with a result
+            Games.Hangman.end_game(visible, secret, attempts_used)
 
         @staticmethod
         def play_hangman():
@@ -716,7 +716,5 @@ class UI:
         self.interpreter()
 
 if __name__ == "__main__":
-    create_input(r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\Database\personal database.json",
-                 r"C:\Users\irmao\PycharmProjects\Orpheus-AI-2\dataset\bot inputs.txt")
     ui_instance = UI()
     ui_instance.main()
