@@ -668,7 +668,7 @@ class UI:
             if user_input.lower() in ["exit", "quit"]:
                 Chat.typing_effect("Exiting...", delay = 0.1 / 1.5)
                 return
-            Chat.get_ai_response(user_input, r"/home/afonso/PycharmProjects/Orpheus-AI-/dataset/Database/personal database.json")
+            Chat.get_ai_response(user_input, r"A:\College\Orpheus-AI-\dataset\Database\personal database.json")
 
     @staticmethod
     def daily_quote_command():
@@ -712,6 +712,11 @@ class UI:
         command = input("> ").lower().strip()
         return command
 
+    @staticmethod
+    def username():
+        username = input(" ").lower().strip()
+        return username
+
     def main(self):
         """ Main entry point for starting the app """
         Data.username = input("Insert your name: ").lower().strip()
@@ -720,6 +725,6 @@ class UI:
         Chat.typing_effect("Type Help for command list.", delay=0.1 / 1.5)
         self.interpreter()
 
-# Run the app
-ui_instance = UI()
-ui_instance.main()
+if __name__ == "__main__":
+    ui_instance = UI()
+    ui_instance.main()
